@@ -235,6 +235,9 @@ class GameScene: SKScene {
         // Create background stars
         createStarBackground()
         
+        // Add map-specific planet backgrounds
+        addMapSpecificBackground()
+        
         // Add galaxy plasma effects for certain maps
         addGalaxyPlasmaEffects()
         
