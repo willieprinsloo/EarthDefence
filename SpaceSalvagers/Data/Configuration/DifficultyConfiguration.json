@@ -1,0 +1,271 @@
+{
+  "difficulty_levels": {
+    "easy": {
+      "name": "Recruit",
+      "enemy_health_multiplier": 0.8,
+      "enemy_speed_multiplier": 0.9,
+      "enemy_count_multiplier": 0.8,
+      "enemy_spawn_rate": 2.0,
+      "starting_resources": 400,
+      "starting_lives": 5,
+      "resource_per_kill_multiplier": 1.2,
+      "wave_bonus_multiplier": 1.2
+    },
+    "normal": {
+      "name": "Soldier",
+      "enemy_health_multiplier": 1.0,
+      "enemy_speed_multiplier": 1.0,
+      "enemy_count_multiplier": 1.0,
+      "enemy_spawn_rate": 1.5,
+      "starting_resources": 300,
+      "starting_lives": 5,
+      "resource_per_kill_multiplier": 1.0,
+      "wave_bonus_multiplier": 1.0
+    },
+    "hard": {
+      "name": "Veteran",
+      "enemy_health_multiplier": 1.3,
+      "enemy_speed_multiplier": 1.2,
+      "enemy_count_multiplier": 1.3,
+      "enemy_spawn_rate": 1.2,
+      "starting_resources": 250,
+      "starting_lives": 5,
+      "resource_per_kill_multiplier": 0.9,
+      "wave_bonus_multiplier": 0.9,
+      "special_modifiers": {
+        "armor_bonus": 10,
+        "shield_enemies": true,
+        "elite_spawn_chance": 0.15
+      }
+    },
+    "nightmare": {
+      "name": "Commander",
+      "enemy_health_multiplier": 1.8,
+      "enemy_speed_multiplier": 1.4,
+      "enemy_count_multiplier": 1.6,
+      "enemy_spawn_rate": 1.0,
+      "starting_resources": 200,
+      "starting_lives": 5,
+      "resource_per_kill_multiplier": 0.8,
+      "wave_bonus_multiplier": 0.8,
+      "special_modifiers": {
+        "armor_bonus": 20,
+        "shield_enemies": true,
+        "elite_spawn_chance": 0.25,
+        "boss_health_multiplier": 1.5,
+        "tower_cost_multiplier": 1.2,
+        "power_consumption_multiplier": 1.3
+      }
+    },
+    "impossible": {
+      "name": "Legend",
+      "enemy_health_multiplier": 2.5,
+      "enemy_speed_multiplier": 1.6,
+      "enemy_count_multiplier": 2.0,
+      "enemy_spawn_rate": 0.8,
+      "starting_resources": 150,
+      "starting_lives": 5,
+      "resource_per_kill_multiplier": 0.7,
+      "wave_bonus_multiplier": 0.7,
+      "special_modifiers": {
+        "armor_bonus": 30,
+        "shield_enemies": true,
+        "elite_spawn_chance": 0.35,
+        "boss_health_multiplier": 2.0,
+        "tower_cost_multiplier": 1.5,
+        "power_consumption_multiplier": 1.5,
+        "enemy_regen": 2,
+        "disable_selling": true,
+        "random_path_switching": true
+      }
+    }
+  },
+  "wave_scaling": {
+    "base_enemy_count": 10,
+    "count_increase_per_wave": 2,
+    "health_increase_per_wave": 1.08,
+    "speed_increase_per_wave": 1.02,
+    "boss_wave_interval": 5,
+    "elite_wave_start": 3,
+    "special_wave_modifiers": [
+      {
+        "wave": 10,
+        "modifier": "speed_burst",
+        "description": "All enemies move 50% faster"
+      },
+      {
+        "wave": 15,
+        "modifier": "armor_surge",
+        "description": "All enemies gain +20 armor"
+      },
+      {
+        "wave": 20,
+        "modifier": "swarm",
+        "description": "Double enemy count, half health"
+      },
+      {
+        "wave": 25,
+        "modifier": "regeneration",
+        "description": "Enemies regenerate 5 HP/s"
+      },
+      {
+        "wave": 30,
+        "modifier": "shield_wall",
+        "description": "All enemies have shields"
+      }
+    ]
+  },
+  "enemy_composition": {
+    "wave_1_5": {
+      "alienSwarmer": 0.8,
+      "rogueRobot": 0.2
+    },
+    "wave_6_10": {
+      "alienSwarmer": 0.5,
+      "rogueRobot": 0.3,
+      "aiDrone": 0.2
+    },
+    "wave_11_15": {
+      "alienSwarmer": 0.3,
+      "rogueRobot": 0.3,
+      "aiDrone": 0.25,
+      "corruptedMech": 0.15
+    },
+    "wave_16_20": {
+      "alienSwarmer": 0.2,
+      "rogueRobot": 0.25,
+      "aiDrone": 0.25,
+      "corruptedMech": 0.2,
+      "plasmaWraith": 0.1
+    },
+    "wave_21_plus": {
+      "rogueRobot": 0.2,
+      "aiDrone": 0.2,
+      "corruptedMech": 0.25,
+      "plasmaWraith": 0.15,
+      "nanoSwarm": 0.1,
+      "voidReaper": 0.1
+    }
+  },
+  "boss_waves": {
+    "5": {
+      "boss": "bioTitan",
+      "minions": ["alienSwarmer"],
+      "minion_count": 10
+    },
+    "10": {
+      "boss": "corruptedMech",
+      "elite": true,
+      "minions": ["rogueRobot", "aiDrone"],
+      "minion_count": 15
+    },
+    "15": {
+      "boss": "voidReaper",
+      "elite": true,
+      "minions": ["plasmaWraith", "nanoSwarm"],
+      "minion_count": 20
+    },
+    "20": {
+      "boss": "bioTitan",
+      "count": 2,
+      "elite": true,
+      "minions": "all",
+      "minion_count": 25
+    },
+    "25": {
+      "boss": "megaTitan",
+      "health_multiplier": 3,
+      "minions": "continuous",
+      "special": "splits_on_death"
+    }
+  },
+  "challenge_modifiers": {
+    "no_selling": {
+      "name": "Commitment",
+      "description": "Towers cannot be sold",
+      "score_multiplier": 1.2
+    },
+    "expensive_towers": {
+      "name": "Economic Crisis",
+      "description": "Towers cost 50% more",
+      "tower_cost_multiplier": 1.5,
+      "score_multiplier": 1.3
+    },
+    "power_shortage": {
+      "name": "Power Grid Failure",
+      "description": "50% less power available",
+      "power_multiplier": 0.5,
+      "score_multiplier": 1.4
+    },
+    "fog_of_war": {
+      "name": "Sensor Malfunction",
+      "description": "Tower range reduced by 25%",
+      "range_multiplier": 0.75,
+      "score_multiplier": 1.25
+    },
+    "elite_forces": {
+      "name": "Elite Invasion",
+      "description": "All enemies are elite variants",
+      "elite_only": true,
+      "score_multiplier": 1.5
+    },
+    "speed_run": {
+      "name": "Blitzkrieg",
+      "description": "Enemies move 100% faster",
+      "speed_multiplier": 2.0,
+      "score_multiplier": 1.6
+    },
+    "ironman": {
+      "name": "Ironman Mode",
+      "description": "1 life only, no continues",
+      "lives": 1,
+      "score_multiplier": 2.0
+    }
+  },
+  "balance_changes_for_harder_game": {
+    "enemy_buffs": {
+      "base_health_increase": 25,
+      "base_speed_increase": 10,
+      "armor_scaling": 2,
+      "spawn_rate_decrease": 0.2,
+      "path_speed_variance": true
+    },
+    "tower_nerfs": {
+      "damage_reduction": 0.9,
+      "fire_rate_reduction": 0.95,
+      "range_reduction": 0.95,
+      "upgrade_cost_increase": 1.3
+    },
+    "economy_adjustments": {
+      "starting_resources": 250,
+      "kill_reward_reduction": 0.8,
+      "wave_bonus_reduction": 0.7,
+      "no_interest_on_saved_resources": true
+    },
+    "special_enemy_abilities": {
+      "alienSwarmer": {
+        "dodge_chance": 0.1,
+        "speed_boost_when_hurt": 1.2
+      },
+      "rogueRobot": {
+        "armor_increase": 15,
+        "emp_resistance": 0.5
+      },
+      "aiDrone": {
+        "shield_regeneration": 5,
+        "teleport_chance": 0.05
+      },
+      "bioTitan": {
+        "spawn_minions_on_damage": true,
+        "rage_mode_at_half_health": true
+      }
+    }
+  },
+  "recommended_difficulty": "hard",
+  "auto_scaling": {
+    "enabled": true,
+    "player_skill_tracking": true,
+    "adjust_after_waves": 5,
+    "max_adjustment": 0.2
+  }
+}

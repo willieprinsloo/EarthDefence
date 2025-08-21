@@ -1,0 +1,43 @@
+name: SpaceSalvagers
+options:
+  bundleIdPrefix: com.spacesalvagers
+  deploymentTarget:
+    iOS: 15.0
+targets:
+  SpaceSalvagers:
+    type: application
+    platform: iOS
+    sources: 
+      - path: SpaceSalvagers
+        excludes:
+          - "**/*.build"
+          - "**/Package.swift"
+          - "**/Tests"
+          - "**/.DS_Store"
+          - "**/output-file-map.json"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.spacesalvagers.game
+        TARGETED_DEVICE_FAMILY: 1,2
+        SWIFT_VERSION: 5.9
+      configs:
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+        Release:
+          SWIFT_OPTIMIZATION_LEVEL: "-O"
+    dependencies:
+      - sdk: SpriteKit.framework
+      - sdk: GameplayKit.framework
+      - sdk: AVFoundation.framework
+      - sdk: StoreKit.framework
+      - sdk: CloudKit.framework
+    info:
+      path: SpaceSalvagers/Info.plist
+      properties:
+        CFBundleDisplayName: Space Salvagers
+        UILaunchStoryboardName: LaunchScreen
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIRequiresFullScreen: true
+        UIStatusBarHidden: true

@@ -1,0 +1,338 @@
+{
+  "" : {
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SpaceSalvagers-master.dia",
+    "emit-module-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SpaceSalvagers-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SpaceSalvagers-master-emit-module.dia",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SpaceSalvagers-master.swiftdeps"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/App/AppDelegate.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AppDelegate.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AppDelegate.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AppDelegate.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AppDelegate.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AppDelegate.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AppDelegate.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AppDelegate.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AppDelegate~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/App/GameViewController.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameViewController.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameViewController.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameViewController.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameViewController.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameViewController.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameViewController.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameViewController.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameViewController~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/App/SceneDelegate.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SceneDelegate.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SceneDelegate.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SceneDelegate.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SceneDelegate.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SceneDelegate.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SceneDelegate.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SceneDelegate.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SceneDelegate~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/AudioKitSoundGenerator.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AudioKitSoundGenerator.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AudioKitSoundGenerator.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AudioKitSoundGenerator.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AudioKitSoundGenerator.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AudioKitSoundGenerator.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AudioKitSoundGenerator.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AudioKitSoundGenerator.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AudioKitSoundGenerator~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Bot/GameTestBot.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameTestBot.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameTestBot.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameTestBot.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameTestBot.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameTestBot.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameTestBot.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameTestBot.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameTestBot~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Core/Engine/EntityComponentSystem.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EntityComponentSystem.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EntityComponentSystem.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EntityComponentSystem.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EntityComponentSystem.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EntityComponentSystem.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EntityComponentSystem.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EntityComponentSystem.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EntityComponentSystem~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Core/Engine/GameEngine.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameEngine.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameEngine.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameEngine.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameEngine.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameEngine.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameEngine.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameEngine.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameEngine~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Core/Utilities/SeededRandom.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SeededRandom.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SeededRandom.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SeededRandom.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SeededRandom.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SeededRandom.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SeededRandom.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SeededRandom.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SeededRandom~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Data/GameConfiguration.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameConfiguration.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameConfiguration.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameConfiguration.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameConfiguration.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameConfiguration.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameConfiguration.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameConfiguration.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameConfiguration~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Data/GameStateManager.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameStateManager.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameStateManager.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameStateManager.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameStateManager.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameStateManager.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameStateManager.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameStateManager.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameStateManager~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/AssetManager.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AssetManager.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AssetManager.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AssetManager.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AssetManager.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AssetManager.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AssetManager.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AssetManager.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/AssetManager~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/HealthComponent.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/HealthComponent.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/HealthComponent.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/HealthComponent.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/HealthComponent.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/HealthComponent.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/HealthComponent.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/HealthComponent.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/HealthComponent~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/MovementComponent.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MovementComponent.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MovementComponent.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MovementComponent.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MovementComponent.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MovementComponent.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MovementComponent.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MovementComponent.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MovementComponent~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/PathFollowComponent.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/PathFollowComponent.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/PathFollowComponent.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/PathFollowComponent.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/PathFollowComponent.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/PathFollowComponent.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/PathFollowComponent.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/PathFollowComponent.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/PathFollowComponent~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/TargetingComponent.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TargetingComponent.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TargetingComponent.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TargetingComponent.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TargetingComponent.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TargetingComponent.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TargetingComponent.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TargetingComponent.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TargetingComponent~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/TransformComponent.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TransformComponent.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TransformComponent.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TransformComponent.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TransformComponent.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TransformComponent.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TransformComponent.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TransformComponent.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TransformComponent~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Entities/Enemy/Enemy.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Enemy.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Enemy.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Enemy.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Enemy.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Enemy.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Enemy.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Enemy.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Enemy~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Entities/Projectile/Projectile.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Projectile.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Projectile.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Projectile.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Projectile.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Projectile.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Projectile.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Projectile.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Projectile~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Entities/Tower/Tower.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Tower.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Tower.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Tower.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Tower.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Tower.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Tower.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Tower.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/Tower~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Managers/SimpleVectorMapLoader.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SimpleVectorMapLoader-cf1eca766d6f710142b4546abb2971c5.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SimpleVectorMapLoader-cf1eca766d6f710142b4546abb2971c5.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SimpleVectorMapLoader-cf1eca766d6f710142b4546abb2971c5.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SimpleVectorMapLoader-cf1eca766d6f710142b4546abb2971c5.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SimpleVectorMapLoader-cf1eca766d6f710142b4546abb2971c5.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SimpleVectorMapLoader-cf1eca766d6f710142b4546abb2971c5.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SimpleVectorMapLoader-cf1eca766d6f710142b4546abb2971c5.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SimpleVectorMapLoader-cf1eca766d6f710142b4546abb2971c5~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Managers/SoundManager.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SoundManager.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SoundManager.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SoundManager.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SoundManager.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SoundManager.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SoundManager.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SoundManager.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SoundManager~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/ParticleEffectsManager.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ParticleEffectsManager.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ParticleEffectsManager.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ParticleEffectsManager.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ParticleEffectsManager.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ParticleEffectsManager.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ParticleEffectsManager.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ParticleEffectsManager.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ParticleEffectsManager~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Scenes/GameScene.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameScene.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameScene.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameScene.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameScene.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameScene.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameScene.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameScene.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GameScene~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Scenes/MainMenuScene.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MainMenuScene.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MainMenuScene.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MainMenuScene.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MainMenuScene.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MainMenuScene.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MainMenuScene.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MainMenuScene.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MainMenuScene~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Scenes/MapSelectionScene.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MapSelectionScene.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MapSelectionScene.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MapSelectionScene.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MapSelectionScene.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MapSelectionScene.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MapSelectionScene.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MapSelectionScene.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/MapSelectionScene~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Scenes/SettingsScene.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SettingsScene.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SettingsScene.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SettingsScene.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SettingsScene.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SettingsScene.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SettingsScene.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SettingsScene.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/SettingsScene~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/StationCore.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/StationCore.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/StationCore.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/StationCore.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/StationCore.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/StationCore.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/StationCore.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/StationCore.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/StationCore~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Systems/CombatSystem.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/CombatSystem.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/CombatSystem.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/CombatSystem.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/CombatSystem.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/CombatSystem.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/CombatSystem.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/CombatSystem.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/CombatSystem~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Systems/EconomySystem.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EconomySystem.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EconomySystem.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EconomySystem.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EconomySystem.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EconomySystem.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EconomySystem.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EconomySystem.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/EconomySystem~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Systems/TowerSystem.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TowerSystem.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TowerSystem.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TowerSystem.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TowerSystem.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TowerSystem.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TowerSystem.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TowerSystem.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/TowerSystem~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Systems/WaveSystem.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/WaveSystem.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/WaveSystem.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/WaveSystem.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/WaveSystem.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/WaveSystem.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/WaveSystem.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/WaveSystem.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/WaveSystem~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/ProceduralSoundGenerator.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ProceduralSoundGenerator.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ProceduralSoundGenerator.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ProceduralSoundGenerator.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ProceduralSoundGenerator.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ProceduralSoundGenerator.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ProceduralSoundGenerator.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ProceduralSoundGenerator.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/ProceduralSoundGenerator~partial.swiftmodule"
+  },
+  "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

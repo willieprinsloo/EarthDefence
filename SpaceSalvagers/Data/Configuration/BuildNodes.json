@@ -1,0 +1,178 @@
+{
+  "buildNodeConfigurations": {
+    "map1": {
+      "name": "S-Curve Station",
+      "description": "Basic defensive positions along the S-curve path",
+      "nodes": [
+        {"id": 1, "x": 340, "y": 0, "type": "standard", "bonus": "none"},
+        {"id": 2, "x": 280, "y": 90, "type": "standard", "bonus": "none"},
+        {"id": 3, "x": 150, "y": 120, "type": "elevated", "bonus": "range"},
+        {"id": 4, "x": 0, "y": 110, "type": "standard", "bonus": "none"},
+        {"id": 5, "x": -150, "y": 120, "type": "elevated", "bonus": "range"},
+        {"id": 6, "x": -280, "y": 0, "type": "fortified", "bonus": "damage"},
+        {"id": 7, "x": -150, "y": -140, "type": "standard", "bonus": "none"},
+        {"id": 8, "x": 0, "y": -150, "type": "standard", "bonus": "none"},
+        {"id": 9, "x": 150, "y": -140, "type": "standard", "bonus": "none"},
+        {"id": 10, "x": 100, "y": 0, "type": "strategic", "bonus": "attackSpeed"},
+        {"id": 11, "x": -100, "y": 0, "type": "strategic", "bonus": "attackSpeed"},
+        {"id": 12, "x": 50, "y": -50, "type": "standard", "bonus": "none"}
+      ]
+    },
+    "map2": {
+      "name": "Figure-8 Outpost",
+      "description": "Complex crossover paths requiring strategic placement",
+      "nodes": [
+        {"id": 1, "x": 350, "y": 50, "type": "standard", "bonus": "none"},
+        {"id": 2, "x": 350, "y": -50, "type": "standard", "bonus": "none"},
+        {"id": 3, "x": 200, "y": 150, "type": "elevated", "bonus": "range"},
+        {"id": 4, "x": 200, "y": -150, "type": "elevated", "bonus": "range"},
+        {"id": 5, "x": 0, "y": 0, "type": "crossroads", "bonus": "multiTarget"},
+        {"id": 6, "x": -200, "y": 100, "type": "standard", "bonus": "none"},
+        {"id": 7, "x": -200, "y": -100, "type": "standard", "bonus": "none"},
+        {"id": 8, "x": -350, "y": 0, "type": "fortified", "bonus": "damage"},
+        {"id": 9, "x": 100, "y": 80, "type": "standard", "bonus": "none"},
+        {"id": 10, "x": -100, "y": -80, "type": "standard", "bonus": "none"}
+      ]
+    },
+    "map3": {
+      "name": "Spiral Fortress",
+      "description": "Inward spiral requiring layered defense",
+      "nodes": [
+        {"id": 1, "x": 300, "y": 0, "type": "standard", "bonus": "none"},
+        {"id": 2, "x": 212, "y": 212, "type": "elevated", "bonus": "range"},
+        {"id": 3, "x": 0, "y": 300, "type": "standard", "bonus": "none"},
+        {"id": 4, "x": -212, "y": 212, "type": "elevated", "bonus": "range"},
+        {"id": 5, "x": -300, "y": 0, "type": "standard", "bonus": "none"},
+        {"id": 6, "x": -212, "y": -212, "type": "elevated", "bonus": "range"},
+        {"id": 7, "x": 0, "y": -300, "type": "standard", "bonus": "none"},
+        {"id": 8, "x": 212, "y": -212, "type": "elevated", "bonus": "range"},
+        {"id": 9, "x": 100, "y": 100, "type": "inner", "bonus": "damage"},
+        {"id": 10, "x": -100, "y": 100, "type": "inner", "bonus": "damage"},
+        {"id": 11, "x": -100, "y": -100, "type": "inner", "bonus": "damage"},
+        {"id": 12, "x": 100, "y": -100, "type": "inner", "bonus": "damage"},
+        {"id": 13, "x": 0, "y": 0, "type": "core", "bonus": "ultimate"}
+      ]
+    },
+    "map4": {
+      "name": "Diamond Defense",
+      "description": "Diamond-shaped path with corner strongholds",
+      "nodes": [
+        {"id": 1, "x": 350, "y": 0, "type": "entry", "bonus": "none"},
+        {"id": 2, "x": 250, "y": 100, "type": "standard", "bonus": "none"},
+        {"id": 3, "x": 250, "y": -100, "type": "standard", "bonus": "none"},
+        {"id": 4, "x": 150, "y": 200, "type": "corner", "bonus": "splash"},
+        {"id": 5, "x": 150, "y": -200, "type": "corner", "bonus": "splash"},
+        {"id": 6, "x": 0, "y": 280, "type": "fortified", "bonus": "damage"},
+        {"id": 7, "x": 0, "y": -280, "type": "fortified", "bonus": "damage"},
+        {"id": 8, "x": -150, "y": 200, "type": "corner", "bonus": "splash"},
+        {"id": 9, "x": -150, "y": -200, "type": "corner", "bonus": "splash"},
+        {"id": 10, "x": -250, "y": 100, "type": "standard", "bonus": "none"},
+        {"id": 11, "x": -250, "y": -100, "type": "standard", "bonus": "none"},
+        {"id": 12, "x": -350, "y": 0, "type": "exit", "bonus": "lastStand"}
+      ]
+    },
+    "map5": {
+      "name": "Maze Runner",
+      "description": "Complex maze with multiple choke points",
+      "nodes": [
+        {"id": 1, "x": 320, "y": 150, "type": "standard", "bonus": "none"},
+        {"id": 2, "x": 320, "y": -150, "type": "standard", "bonus": "none"},
+        {"id": 3, "x": 200, "y": 0, "type": "choke", "bonus": "slow"},
+        {"id": 4, "x": 100, "y": 150, "type": "standard", "bonus": "none"},
+        {"id": 5, "x": 100, "y": -150, "type": "standard", "bonus": "none"},
+        {"id": 6, "x": 0, "y": 200, "type": "elevated", "bonus": "range"},
+        {"id": 7, "x": 0, "y": -200, "type": "elevated", "bonus": "range"},
+        {"id": 8, "x": 0, "y": 0, "type": "central", "bonus": "multiTarget"},
+        {"id": 9, "x": -100, "y": 100, "type": "choke", "bonus": "slow"},
+        {"id": 10, "x": -100, "y": -100, "type": "choke", "bonus": "slow"},
+        {"id": 11, "x": -200, "y": 0, "type": "standard", "bonus": "none"},
+        {"id": 12, "x": -300, "y": 150, "type": "standard", "bonus": "none"},
+        {"id": 13, "x": -300, "y": -150, "type": "standard", "bonus": "none"},
+        {"id": 14, "x": -350, "y": 0, "type": "fortified", "bonus": "damage"}
+      ]
+    }
+  },
+  "nodeTypes": {
+    "standard": {
+      "color": {"r": 0.2, "g": 0.8, "b": 1.0, "a": 0.8},
+      "radius": 20,
+      "glowWidth": 3
+    },
+    "elevated": {
+      "color": {"r": 0.2, "g": 1.0, "b": 0.4, "a": 0.8},
+      "radius": 22,
+      "glowWidth": 4,
+      "rangeBonus": 1.2
+    },
+    "fortified": {
+      "color": {"r": 1.0, "g": 0.4, "b": 0.2, "a": 0.8},
+      "radius": 24,
+      "glowWidth": 5,
+      "damageBonus": 1.25
+    },
+    "strategic": {
+      "color": {"r": 0.8, "g": 0.2, "b": 1.0, "a": 0.8},
+      "radius": 21,
+      "glowWidth": 4,
+      "attackSpeedBonus": 1.15
+    },
+    "crossroads": {
+      "color": {"r": 1.0, "g": 0.9, "b": 0.2, "a": 0.8},
+      "radius": 25,
+      "glowWidth": 6,
+      "multiTargetBonus": true
+    },
+    "choke": {
+      "color": {"r": 0.5, "g": 0.8, "b": 1.0, "a": 0.9},
+      "radius": 23,
+      "glowWidth": 5,
+      "slowBonus": 1.3
+    },
+    "corner": {
+      "color": {"r": 1.0, "g": 0.6, "b": 0.2, "a": 0.8},
+      "radius": 22,
+      "glowWidth": 4,
+      "splashBonus": 1.2
+    },
+    "inner": {
+      "color": {"r": 0.7, "g": 0.3, "b": 0.9, "a": 0.8},
+      "radius": 19,
+      "glowWidth": 3,
+      "damageBonus": 1.15
+    },
+    "core": {
+      "color": {"r": 1.0, "g": 0.2, "b": 0.8, "a": 1.0},
+      "radius": 26,
+      "glowWidth": 8,
+      "ultimateBonus": true
+    },
+    "entry": {
+      "color": {"r": 0.2, "g": 1.0, "b": 0.2, "a": 0.8},
+      "radius": 21,
+      "glowWidth": 4
+    },
+    "exit": {
+      "color": {"r": 1.0, "g": 0.2, "b": 0.2, "a": 0.8},
+      "radius": 21,
+      "glowWidth": 4,
+      "lastStandBonus": 1.5
+    },
+    "central": {
+      "color": {"r": 1.0, "g": 1.0, "b": 1.0, "a": 0.9},
+      "radius": 24,
+      "glowWidth": 6,
+      "allBonus": 1.1
+    }
+  },
+  "bonusDescriptions": {
+    "none": "Standard build position",
+    "range": "+20% attack range",
+    "damage": "+25% damage output",
+    "attackSpeed": "+15% fire rate",
+    "multiTarget": "Towers can target 2 enemies",
+    "slow": "+30% slow effect",
+    "splash": "+20% splash damage radius",
+    "ultimate": "All bonuses +10%",
+    "lastStand": "+50% damage when core < 25% HP"
+  }
+}

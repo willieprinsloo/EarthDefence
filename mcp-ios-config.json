@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "ios-simulator": {
+      "command": "node",
+      "args": ["/Users/wlprinsloo/Documents/Projects/Tower-game/mcp-server-ios-simulator/dist/index.js"],
+      "env": {}
+    }
+  }
+}

@@ -8837,7 +8837,7 @@ class GameScene: SKScene {
         let earthContainer = SKNode()
         earthContainer.name = "mapPlanet"
         earthContainer.position = CGPoint(x: 0, y: 0)  // Center it on screen
-        earthContainer.zPosition = -10  // Far behind everything else
+        earthContainer.zPosition = 5  // Above starfield but below gameplay
         
         // Earth sphere - large and beautiful
         let earth = SKShapeNode(circleOfRadius: 150)  // Bigger than before
@@ -8967,7 +8967,7 @@ class GameScene: SKScene {
         let marsContainer = SKNode()
         marsContainer.name = "mapPlanet"
         marsContainer.position = CGPoint(x: -150, y: 50)
-        marsContainer.zPosition = -10  // Far behind everything else
+        marsContainer.zPosition = 5  // Above starfield but below gameplay
         
         // Mars sphere - bigger and more realistic color
         let mars = SKShapeNode(circleOfRadius: 100)
@@ -9109,7 +9109,7 @@ class GameScene: SKScene {
         let moonContainer = SKNode()
         moonContainer.name = "mapPlanet"
         moonContainer.position = CGPoint(x: 180, y: 100)
-        moonContainer.zPosition = -10  // Far behind everything else
+        moonContainer.zPosition = 5  // Above starfield but below gameplay
         
         // Moon sphere - bigger and more realistic
         let moon = SKShapeNode(circleOfRadius: 110)
@@ -11467,17 +11467,17 @@ class GameScene: SKScene {
         createBasicStarfield(200)
         
         // Create map-specific planetary scenes
+        // NOTE: Maps 5-10 have custom planet backgrounds added by addMapSpecificBackground()
+        // So we skip creating duplicate planets for those maps
         switch currentMap {
-        case 8: // Saturn
-            createAnimatedSaturn()
-        case 9: // Jupiter  
-            createAnimatedJupiter()
-        case 10: // Mars
-            createAnimatedMars()
-        case 11: // Moon
+        case 5, 6, 7, 8, 9, 10:
+            // These maps have custom planets added by addMapSpecificBackground()
+            // Don't create duplicate planets here
+            break
+        case 11: // Moon (if not handled by addMapSpecificBackground)
             createAnimatedMoon()
-        case 12: // Earth
-            createAnimatedEarth()
+        case 12: // Mars (if not handled by addMapSpecificBackground)
+            createAnimatedMars()
         default:
             // Generic outer planet
             createGenericOuterPlanet()

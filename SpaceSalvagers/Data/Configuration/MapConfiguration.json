@@ -1,0 +1,489 @@
+{
+  "map_templates": {
+    "tutorial_station": {
+      "id": "tutorial_station",
+      "name": "Training Deck",
+      "description": "A small station section perfect for learning the basics",
+      "difficulty": 1,
+      "station_health": 30,
+      "starting_cr": 300,
+      "starting_power": 5.0,
+      "grid_size": {
+        "width": 15,
+        "height": 10
+      },
+      "paths": [
+        {
+          "id": "main_path",
+          "waypoints": [
+            {"x": 0, "y": 5},
+            {"x": 3, "y": 5},
+            {"x": 3, "y": 7},
+            {"x": 7, "y": 7},
+            {"x": 7, "y": 3},
+            {"x": 11, "y": 3},
+            {"x": 11, "y": 5},
+            {"x": 14, "y": 5}
+          ]
+        }
+      ],
+      "build_nodes": [
+        {"x": 2, "y": 4, "type": "standard"},
+        {"x": 4, "y": 6, "type": "standard"},
+        {"x": 4, "y": 8, "type": "standard"},
+        {"x": 6, "y": 6, "type": "power"},
+        {"x": 6, "y": 4, "type": "standard"},
+        {"x": 8, "y": 2, "type": "standard"},
+        {"x": 8, "y": 4, "type": "standard"},
+        {"x": 10, "y": 4, "type": "standard"},
+        {"x": 10, "y": 6, "type": "standard"},
+        {"x": 12, "y": 4, "type": "power"}
+      ],
+      "spawn_points": [
+        {"x": 0, "y": 5, "path": "main_path"}
+      ],
+      "core_position": {
+        "x": 14,
+        "y": 5
+      },
+      "waves": 5,
+      "environment_hazards": [],
+      "power_nodes": [
+        {"x": 6, "y": 6, "bonus_power": 1.0},
+        {"x": 12, "y": 4, "bonus_power": 1.0}
+      ]
+    },
+    "engineering_bay": {
+      "id": "engineering_bay",
+      "name": "Engineering Bay",
+      "description": "Multiple entry points require strategic tower placement",
+      "difficulty": 2,
+      "station_health": 25,
+      "starting_cr": 250,
+      "starting_power": 4.5,
+      "grid_size": {
+        "width": 18,
+        "height": 12
+      },
+      "paths": [
+        {
+          "id": "upper_path",
+          "waypoints": [
+            {"x": 0, "y": 3},
+            {"x": 4, "y": 3},
+            {"x": 4, "y": 5},
+            {"x": 8, "y": 5},
+            {"x": 8, "y": 6},
+            {"x": 17, "y": 6}
+          ]
+        },
+        {
+          "id": "lower_path",
+          "waypoints": [
+            {"x": 0, "y": 9},
+            {"x": 3, "y": 9},
+            {"x": 3, "y": 7},
+            {"x": 6, "y": 7},
+            {"x": 6, "y": 6},
+            {"x": 17, "y": 6}
+          ]
+        }
+      ],
+      "build_nodes": [
+        {"x": 2, "y": 2, "type": "standard"},
+        {"x": 2, "y": 4, "type": "standard"},
+        {"x": 5, "y": 3, "type": "standard"},
+        {"x": 5, "y": 5, "type": "power"},
+        {"x": 5, "y": 7, "type": "standard"},
+        {"x": 7, "y": 4, "type": "standard"},
+        {"x": 7, "y": 8, "type": "standard"},
+        {"x": 9, "y": 5, "type": "heavy"},
+        {"x": 9, "y": 7, "type": "standard"},
+        {"x": 11, "y": 6, "type": "standard"},
+        {"x": 13, "y": 5, "type": "standard"},
+        {"x": 13, "y": 7, "type": "standard"},
+        {"x": 15, "y": 6, "type": "power"}
+      ],
+      "spawn_points": [
+        {"x": 0, "y": 3, "path": "upper_path"},
+        {"x": 0, "y": 9, "path": "lower_path"}
+      ],
+      "core_position": {
+        "x": 17,
+        "y": 6
+      },
+      "waves": 8,
+      "environment_hazards": [
+        {
+          "type": "steam_vent",
+          "position": {"x": 10, "y": 3},
+          "interval": 10,
+          "duration": 3,
+          "damage": 5
+        }
+      ],
+      "power_nodes": [
+        {"x": 5, "y": 5, "bonus_power": 1.2},
+        {"x": 15, "y": 6, "bonus_power": 0.8}
+      ]
+    },
+    "cargo_hold": {
+      "id": "cargo_hold",
+      "name": "Cargo Hold Omega",
+      "description": "A massive cargo bay with long winding paths",
+      "difficulty": 3,
+      "station_health": 20,
+      "starting_cr": 200,
+      "starting_power": 4.0,
+      "grid_size": {
+        "width": 20,
+        "height": 14
+      },
+      "paths": [
+        {
+          "id": "snake_path",
+          "waypoints": [
+            {"x": 0, "y": 7},
+            {"x": 3, "y": 7},
+            {"x": 3, "y": 11},
+            {"x": 7, "y": 11},
+            {"x": 7, "y": 3},
+            {"x": 11, "y": 3},
+            {"x": 11, "y": 11},
+            {"x": 15, "y": 11},
+            {"x": 15, "y": 7},
+            {"x": 19, "y": 7}
+          ]
+        }
+      ],
+      "build_nodes": [
+        {"x": 2, "y": 6, "type": "standard"},
+        {"x": 2, "y": 8, "type": "standard"},
+        {"x": 4, "y": 10, "type": "standard"},
+        {"x": 4, "y": 12, "type": "standard"},
+        {"x": 6, "y": 10, "type": "power"},
+        {"x": 6, "y": 4, "type": "standard"},
+        {"x": 8, "y": 2, "type": "standard"},
+        {"x": 8, "y": 4, "type": "standard"},
+        {"x": 10, "y": 4, "type": "heavy"},
+        {"x": 10, "y": 10, "type": "standard"},
+        {"x": 12, "y": 10, "type": "standard"},
+        {"x": 12, "y": 12, "type": "standard"},
+        {"x": 14, "y": 10, "type": "power"},
+        {"x": 14, "y": 8, "type": "standard"},
+        {"x": 16, "y": 6, "type": "standard"},
+        {"x": 16, "y": 8, "type": "standard"},
+        {"x": 18, "y": 7, "type": "heavy"}
+      ],
+      "spawn_points": [
+        {"x": 0, "y": 7, "path": "snake_path"}
+      ],
+      "core_position": {
+        "x": 19,
+        "y": 7
+      },
+      "waves": 10,
+      "environment_hazards": [
+        {
+          "type": "cargo_debris",
+          "positions": [
+            {"x": 5, "y": 7},
+            {"x": 9, "y": 7},
+            {"x": 13, "y": 7}
+          ],
+          "blocks_path": false,
+          "blocks_building": true
+        }
+      ],
+      "power_nodes": [
+        {"x": 6, "y": 10, "bonus_power": 1.0},
+        {"x": 14, "y": 10, "bonus_power": 1.0}
+      ]
+    },
+    "reactor_core": {
+      "id": "reactor_core",
+      "name": "Reactor Core Alpha",
+      "description": "Defend the main reactor from all directions",
+      "difficulty": 4,
+      "station_health": 15,
+      "starting_cr": 350,
+      "starting_power": 3.5,
+      "grid_size": {
+        "width": 16,
+        "height": 16
+      },
+      "paths": [
+        {
+          "id": "north_path",
+          "waypoints": [
+            {"x": 8, "y": 0},
+            {"x": 8, "y": 4},
+            {"x": 8, "y": 8}
+          ]
+        },
+        {
+          "id": "south_path",
+          "waypoints": [
+            {"x": 8, "y": 15},
+            {"x": 8, "y": 11},
+            {"x": 8, "y": 8}
+          ]
+        },
+        {
+          "id": "east_path",
+          "waypoints": [
+            {"x": 15, "y": 8},
+            {"x": 11, "y": 8},
+            {"x": 8, "y": 8}
+          ]
+        },
+        {
+          "id": "west_path",
+          "waypoints": [
+            {"x": 0, "y": 8},
+            {"x": 4, "y": 8},
+            {"x": 8, "y": 8}
+          ]
+        }
+      ],
+      "build_nodes": [
+        {"x": 6, "y": 2, "type": "standard"},
+        {"x": 10, "y": 2, "type": "standard"},
+        {"x": 6, "y": 4, "type": "standard"},
+        {"x": 10, "y": 4, "type": "standard"},
+        {"x": 4, "y": 6, "type": "standard"},
+        {"x": 12, "y": 6, "type": "standard"},
+        {"x": 2, "y": 8, "type": "power"},
+        {"x": 14, "y": 8, "type": "power"},
+        {"x": 4, "y": 10, "type": "standard"},
+        {"x": 12, "y": 10, "type": "standard"},
+        {"x": 6, "y": 12, "type": "standard"},
+        {"x": 10, "y": 12, "type": "standard"},
+        {"x": 6, "y": 14, "type": "standard"},
+        {"x": 10, "y": 14, "type": "standard"},
+        {"x": 8, "y": 6, "type": "ultimate"},
+        {"x": 8, "y": 10, "type": "ultimate"}
+      ],
+      "spawn_points": [
+        {"x": 8, "y": 0, "path": "north_path"},
+        {"x": 8, "y": 15, "path": "south_path"},
+        {"x": 15, "y": 8, "path": "east_path"},
+        {"x": 0, "y": 8, "path": "west_path"}
+      ],
+      "core_position": {
+        "x": 8,
+        "y": 8
+      },
+      "waves": 12,
+      "environment_hazards": [
+        {
+          "type": "radiation_leak",
+          "position": {"x": 8, "y": 8},
+          "radius": 3,
+          "damage_per_second": 2,
+          "affects_enemies": false,
+          "affects_towers": true
+        }
+      ],
+      "power_nodes": [
+        {"x": 2, "y": 8, "bonus_power": 1.5},
+        {"x": 14, "y": 8, "bonus_power": 1.5}
+      ]
+    },
+    "bridge_command": {
+      "id": "bridge_command",
+      "name": "Bridge Command",
+      "description": "The final stand at the command bridge",
+      "difficulty": 5,
+      "station_health": 10,
+      "starting_cr": 400,
+      "starting_power": 3.0,
+      "grid_size": {
+        "width": 22,
+        "height": 16
+      },
+      "paths": [
+        {
+          "id": "upper_assault",
+          "waypoints": [
+            {"x": 0, "y": 4},
+            {"x": 5, "y": 4},
+            {"x": 5, "y": 6},
+            {"x": 11, "y": 6},
+            {"x": 11, "y": 8},
+            {"x": 21, "y": 8}
+          ]
+        },
+        {
+          "id": "lower_assault",
+          "waypoints": [
+            {"x": 0, "y": 12},
+            {"x": 5, "y": 12},
+            {"x": 5, "y": 10},
+            {"x": 11, "y": 10},
+            {"x": 11, "y": 8},
+            {"x": 21, "y": 8}
+          ]
+        },
+        {
+          "id": "center_rush",
+          "waypoints": [
+            {"x": 0, "y": 8},
+            {"x": 21, "y": 8}
+          ]
+        }
+      ],
+      "build_nodes": [
+        {"x": 3, "y": 3, "type": "standard"},
+        {"x": 3, "y": 5, "type": "standard"},
+        {"x": 3, "y": 11, "type": "standard"},
+        {"x": 3, "y": 13, "type": "standard"},
+        {"x": 6, "y": 5, "type": "power"},
+        {"x": 6, "y": 11, "type": "power"},
+        {"x": 7, "y": 7, "type": "heavy"},
+        {"x": 7, "y": 9, "type": "heavy"},
+        {"x": 9, "y": 6, "type": "standard"},
+        {"x": 9, "y": 10, "type": "standard"},
+        {"x": 11, "y": 7, "type": "ultimate"},
+        {"x": 11, "y": 9, "type": "ultimate"},
+        {"x": 13, "y": 6, "type": "standard"},
+        {"x": 13, "y": 10, "type": "standard"},
+        {"x": 15, "y": 7, "type": "heavy"},
+        {"x": 15, "y": 9, "type": "heavy"},
+        {"x": 17, "y": 6, "type": "standard"},
+        {"x": 17, "y": 10, "type": "standard"},
+        {"x": 19, "y": 7, "type": "power"},
+        {"x": 19, "y": 9, "type": "power"}
+      ],
+      "spawn_points": [
+        {"x": 0, "y": 4, "path": "upper_assault"},
+        {"x": 0, "y": 12, "path": "lower_assault"},
+        {"x": 0, "y": 8, "path": "center_rush", "wave_requirement": 5}
+      ],
+      "core_position": {
+        "x": 21,
+        "y": 8
+      },
+      "waves": 15,
+      "environment_hazards": [
+        {
+          "type": "console_explosion",
+          "positions": [
+            {"x": 10, "y": 4},
+            {"x": 10, "y": 12}
+          ],
+          "trigger_wave": 8,
+          "damage": 50,
+          "radius": 2
+        },
+        {
+          "type": "emergency_lockdown",
+          "trigger_wave": 12,
+          "effect": "blocks_random_build_nodes",
+          "count": 3
+        }
+      ],
+      "power_nodes": [
+        {"x": 6, "y": 5, "bonus_power": 1.0},
+        {"x": 6, "y": 11, "bonus_power": 1.0},
+        {"x": 19, "y": 7, "bonus_power": 1.2},
+        {"x": 19, "y": 9, "bonus_power": 1.2}
+      ],
+      "boss_waves": [15]
+    }
+  },
+  "node_types": {
+    "standard": {
+      "name": "Standard Node",
+      "tower_restrictions": [],
+      "cost_multiplier": 1.0,
+      "power_multiplier": 1.0
+    },
+    "power": {
+      "name": "Power Node",
+      "tower_restrictions": [],
+      "cost_multiplier": 1.2,
+      "power_multiplier": 0.8,
+      "bonus_power_generation": true
+    },
+    "heavy": {
+      "name": "Heavy Platform",
+      "tower_restrictions": ["ultimate"],
+      "cost_multiplier": 0.9,
+      "power_multiplier": 1.0,
+      "reinforced": true
+    },
+    "ultimate": {
+      "name": "Ultimate Platform",
+      "tower_restrictions": [],
+      "allows_ultimate": true,
+      "cost_multiplier": 1.5,
+      "power_multiplier": 1.0,
+      "limit_per_map": 2
+    }
+  },
+  "environment_hazard_types": {
+    "steam_vent": {
+      "name": "Steam Vent",
+      "description": "Periodically releases damaging steam",
+      "visual": "steam_burst",
+      "affects_area": true
+    },
+    "cargo_debris": {
+      "name": "Cargo Debris",
+      "description": "Blocks tower placement",
+      "visual": "debris_pile",
+      "permanent": true
+    },
+    "radiation_leak": {
+      "name": "Radiation Leak",
+      "description": "Damages towers in area",
+      "visual": "green_glow",
+      "persistent": true
+    },
+    "console_explosion": {
+      "name": "Console Explosion",
+      "description": "One-time explosion at specific wave",
+      "visual": "explosion",
+      "triggered": true
+    },
+    "emergency_lockdown": {
+      "name": "Emergency Lockdown",
+      "description": "Locks down random build nodes",
+      "visual": "red_barrier",
+      "triggered": true
+    }
+  },
+  "difficulty_modifiers": {
+    "1": {
+      "enemy_health": 1.0,
+      "enemy_speed": 1.0,
+      "enemy_count": 1.0,
+      "reward_multiplier": 1.0
+    },
+    "2": {
+      "enemy_health": 1.2,
+      "enemy_speed": 1.1,
+      "enemy_count": 1.1,
+      "reward_multiplier": 1.1
+    },
+    "3": {
+      "enemy_health": 1.4,
+      "enemy_speed": 1.2,
+      "enemy_count": 1.2,
+      "reward_multiplier": 1.2
+    },
+    "4": {
+      "enemy_health": 1.6,
+      "enemy_speed": 1.3,
+      "enemy_count": 1.3,
+      "reward_multiplier": 1.3
+    },
+    "5": {
+      "enemy_health": 2.0,
+      "enemy_speed": 1.4,
+      "enemy_count": 1.5,
+      "reward_multiplier": 1.5
+    }
+  }
+}

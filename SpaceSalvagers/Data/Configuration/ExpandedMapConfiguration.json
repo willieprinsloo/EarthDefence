@@ -1,0 +1,406 @@
+{
+  "maps": [
+    {
+      "id": "tutorial_station",
+      "name": "Training Deck",
+      "description": "A small station section perfect for learning the basics",
+      "difficulty": 1,
+      "unlocked": true,
+      "requiredLevel": 0,
+      "gridSize": { "width": 15, "height": 10 },
+      "stationHealth": 30,
+      "startingResources": 400,
+      "startingPower": 5.0,
+      "waves": 5
+    },
+    {
+      "id": "cargo_bay",
+      "name": "Cargo Bay Alpha",
+      "description": "Defend the cargo bay from invading aliens",
+      "difficulty": 1,
+      "unlocked": true,
+      "requiredLevel": 0,
+      "gridSize": { "width": 18, "height": 12 },
+      "stationHealth": 25,
+      "startingResources": 350,
+      "startingPower": 4.5,
+      "waves": 8
+    },
+    {
+      "id": "maintenance_tunnels",
+      "name": "Maintenance Tunnels",
+      "description": "Tight corridors make tower placement crucial",
+      "difficulty": 2,
+      "unlocked": false,
+      "requiredLevel": 2,
+      "gridSize": { "width": 20, "height": 10 },
+      "stationHealth": 20,
+      "startingResources": 450,
+      "startingPower": 5.5,
+      "waves": 10
+    },
+    {
+      "id": "engine_room",
+      "name": "Engine Room",
+      "description": "Multiple paths converge on the station's power core",
+      "difficulty": 2,
+      "unlocked": false,
+      "requiredLevel": 3,
+      "gridSize": { "width": 16, "height": 14 },
+      "stationHealth": 22,
+      "startingResources": 400,
+      "startingPower": 6.0,
+      "waves": 12
+    },
+    {
+      "id": "research_lab",
+      "name": "Research Laboratory",
+      "description": "Experimental hazards add complexity to defense",
+      "difficulty": 3,
+      "unlocked": false,
+      "requiredLevel": 5,
+      "gridSize": { "width": 18, "height": 13 },
+      "stationHealth": 20,
+      "startingResources": 500,
+      "startingPower": 6.5,
+      "waves": 15
+    },
+    {
+      "id": "hangar_bay",
+      "name": "Hangar Bay",
+      "description": "Wide open spaces with multiple entry points",
+      "difficulty": 3,
+      "unlocked": false,
+      "requiredLevel": 6,
+      "gridSize": { "width": 22, "height": 15 },
+      "stationHealth": 18,
+      "startingResources": 550,
+      "startingPower": 7.0,
+      "waves": 15
+    },
+    {
+      "id": "medical_wing",
+      "name": "Medical Wing",
+      "description": "Defend the medical facilities from contamination",
+      "difficulty": 3,
+      "unlocked": false,
+      "requiredLevel": 7,
+      "gridSize": { "width": 17, "height": 11 },
+      "stationHealth": 20,
+      "startingResources": 450,
+      "startingPower": 5.5,
+      "waves": 14
+    },
+    {
+      "id": "command_bridge",
+      "name": "Command Bridge",
+      "description": "The station's nerve center must not fall",
+      "difficulty": 4,
+      "unlocked": false,
+      "requiredLevel": 9,
+      "gridSize": { "width": 19, "height": 13 },
+      "stationHealth": 15,
+      "startingResources": 600,
+      "startingPower": 8.0,
+      "waves": 18
+    },
+    {
+      "id": "reactor_core",
+      "name": "Reactor Core",
+      "description": "Power nodes provide bonus energy but are vulnerable",
+      "difficulty": 4,
+      "unlocked": false,
+      "requiredLevel": 10,
+      "gridSize": { "width": 16, "height": 16 },
+      "stationHealth": 15,
+      "startingResources": 550,
+      "startingPower": 10.0,
+      "waves": 20
+    },
+    {
+      "id": "outer_hull",
+      "name": "Outer Hull Breach",
+      "description": "Environmental hazards and multiple breach points",
+      "difficulty": 4,
+      "unlocked": false,
+      "requiredLevel": 11,
+      "gridSize": { "width": 24, "height": 14 },
+      "stationHealth": 12,
+      "startingResources": 650,
+      "startingPower": 7.5,
+      "waves": 20
+    },
+    {
+      "id": "weapons_deck",
+      "name": "Weapons Deck",
+      "description": "Defend the armory from being overrun",
+      "difficulty": 5,
+      "unlocked": false,
+      "requiredLevel": 13,
+      "gridSize": { "width": 20, "height": 12 },
+      "stationHealth": 10,
+      "startingResources": 700,
+      "startingPower": 8.5,
+      "waves": 22
+    },
+    {
+      "id": "cryo_storage",
+      "name": "Cryo Storage",
+      "description": "Frozen passages slow enemies but limit build spots",
+      "difficulty": 5,
+      "unlocked": false,
+      "requiredLevel": 14,
+      "gridSize": { "width": 18, "height": 15 },
+      "stationHealth": 10,
+      "startingResources": 650,
+      "startingPower": 7.0,
+      "waves": 23
+    },
+    {
+      "id": "communication_array",
+      "name": "Communication Array",
+      "description": "Protect the station's link to the fleet",
+      "difficulty": 5,
+      "unlocked": false,
+      "requiredLevel": 15,
+      "gridSize": { "width": 21, "height": 13 },
+      "stationHealth": 8,
+      "startingResources": 750,
+      "startingPower": 9.0,
+      "waves": 25
+    },
+    {
+      "id": "mining_shaft",
+      "name": "Mining Shaft Delta",
+      "description": "Deep in the asteroid, paths split and merge unpredictably",
+      "difficulty": 6,
+      "unlocked": false,
+      "requiredLevel": 17,
+      "gridSize": { "width": 25, "height": 16 },
+      "stationHealth": 8,
+      "startingResources": 800,
+      "startingPower": 9.5,
+      "waves": 27
+    },
+    {
+      "id": "quantum_lab",
+      "name": "Quantum Research Lab",
+      "description": "Teleporting enemies and shifting paths",
+      "difficulty": 6,
+      "unlocked": false,
+      "requiredLevel": 18,
+      "gridSize": { "width": 19, "height": 14 },
+      "stationHealth": 7,
+      "startingResources": 850,
+      "startingPower": 10.0,
+      "waves": 28
+    },
+    {
+      "id": "shield_generator",
+      "name": "Shield Generator Room",
+      "description": "Protect the station's defensive systems",
+      "difficulty": 6,
+      "unlocked": false,
+      "requiredLevel": 19,
+      "gridSize": { "width": 17, "height": 17 },
+      "stationHealth": 6,
+      "startingResources": 900,
+      "startingPower": 11.0,
+      "waves": 30
+    },
+    {
+      "id": "alien_sector",
+      "name": "Alien Infested Sector",
+      "description": "Overrun section with continuous spawns",
+      "difficulty": 7,
+      "unlocked": false,
+      "requiredLevel": 21,
+      "gridSize": { "width": 23, "height": 15 },
+      "stationHealth": 5,
+      "startingResources": 950,
+      "startingPower": 11.5,
+      "waves": 32
+    },
+    {
+      "id": "evacuation_corridor",
+      "name": "Evacuation Corridor",
+      "description": "Final stand before civilian evacuation",
+      "difficulty": 7,
+      "unlocked": false,
+      "requiredLevel": 22,
+      "gridSize": { "width": 26, "height": 12 },
+      "stationHealth": 5,
+      "startingResources": 1000,
+      "startingPower": 12.0,
+      "waves": 33
+    },
+    {
+      "id": "dimensional_rift",
+      "name": "Dimensional Rift",
+      "description": "Reality warps, creating unpredictable challenges",
+      "difficulty": 8,
+      "unlocked": false,
+      "requiredLevel": 24,
+      "gridSize": { "width": 20, "height": 20 },
+      "stationHealth": 4,
+      "startingResources": 1100,
+      "startingPower": 13.0,
+      "waves": 35
+    },
+    {
+      "id": "core_meltdown",
+      "name": "Core Meltdown",
+      "description": "Race against time in a deteriorating station",
+      "difficulty": 8,
+      "unlocked": false,
+      "requiredLevel": 25,
+      "gridSize": { "width": 22, "height": 18 },
+      "stationHealth": 3,
+      "startingResources": 1200,
+      "startingPower": 14.0,
+      "waves": 37
+    },
+    {
+      "id": "void_station",
+      "name": "Void Station",
+      "description": "At the edge of known space, facing the unknown",
+      "difficulty": 9,
+      "unlocked": false,
+      "requiredLevel": 27,
+      "gridSize": { "width": 24, "height": 20 },
+      "stationHealth": 3,
+      "startingResources": 1300,
+      "startingPower": 15.0,
+      "waves": 40
+    },
+    {
+      "id": "nexus_prime",
+      "name": "Nexus Prime",
+      "description": "The central hub under massive assault",
+      "difficulty": 9,
+      "unlocked": false,
+      "requiredLevel": 28,
+      "gridSize": { "width": 28, "height": 18 },
+      "stationHealth": 2,
+      "startingResources": 1400,
+      "startingPower": 16.0,
+      "waves": 42
+    },
+    {
+      "id": "omega_fortress",
+      "name": "Omega Fortress",
+      "description": "The ultimate challenge - survive the impossible",
+      "difficulty": 10,
+      "unlocked": false,
+      "requiredLevel": 30,
+      "gridSize": { "width": 30, "height": 22 },
+      "stationHealth": 1,
+      "startingResources": 1500,
+      "startingPower": 20.0,
+      "waves": 50
+    },
+    {
+      "id": "endless_abyss",
+      "name": "Endless Abyss",
+      "description": "Infinite waves mode - how long can you survive?",
+      "difficulty": 10,
+      "unlocked": false,
+      "requiredLevel": 30,
+      "gridSize": { "width": 25, "height": 25 },
+      "stationHealth": 10,
+      "startingResources": 2000,
+      "startingPower": 25.0,
+      "waves": -1
+    }
+  ],
+  "mapFeatures": {
+    "pathTypes": [
+      {
+        "id": "standard",
+        "speedModifier": 1.0,
+        "description": "Normal path"
+      },
+      {
+        "id": "fast",
+        "speedModifier": 1.5,
+        "description": "Express corridor - enemies move faster"
+      },
+      {
+        "id": "slow",
+        "speedModifier": 0.7,
+        "description": "Damaged section - enemies move slower"
+      },
+      {
+        "id": "teleport",
+        "speedModifier": 0,
+        "description": "Quantum tunnel - instant travel"
+      }
+    ],
+    "nodeTypes": [
+      {
+        "id": "standard",
+        "powerCost": 1.0,
+        "buildCostModifier": 1.0,
+        "description": "Standard build location"
+      },
+      {
+        "id": "power",
+        "powerCost": 0.5,
+        "buildCostModifier": 1.2,
+        "description": "Power node - reduced power consumption"
+      },
+      {
+        "id": "fortified",
+        "powerCost": 1.0,
+        "buildCostModifier": 0.8,
+        "description": "Fortified position - cheaper building"
+      },
+      {
+        "id": "unstable",
+        "powerCost": 1.5,
+        "buildCostModifier": 1.5,
+        "description": "Unstable area - increased costs"
+      }
+    ],
+    "environmentalHazards": [
+      {
+        "id": "radiation",
+        "effect": "Towers take damage over time",
+        "damagePerSecond": 1
+      },
+      {
+        "id": "emp_field",
+        "effect": "Towers fire 50% slower",
+        "fireRateModifier": 0.5
+      },
+      {
+        "id": "gravity_well",
+        "effect": "Projectiles move 30% slower",
+        "projectileSpeedModifier": 0.7
+      },
+      {
+        "id": "nebula",
+        "effect": "Tower range reduced by 25%",
+        "rangeModifier": 0.75
+      },
+      {
+        "id": "solar_flare",
+        "effect": "Power generation reduced by 40%",
+        "powerModifier": 0.6
+      }
+    ]
+  },
+  "progression": {
+    "unlockSystem": "linear",
+    "starsRequired": {
+      "1_star": "Complete map",
+      "2_stars": "Complete with 50% health remaining",
+      "3_stars": "Complete on hard difficulty or above"
+    },
+    "rewards": {
+      "perStar": 100,
+      "firstCompletion": 500,
+      "perfectRun": 1000
+    }
+  }
+}
