@@ -285,7 +285,7 @@ class SimpleVectorMapLoader {
         
         // Create the cool neon paths with round borders
         for (index, path) in map.paths.enumerated() {
-            createNeonPath(path: path, map: map, pathIndex: index, in: parent)
+            createNeonPath(path: path, map: map, pathIndex: index, in: parent, mapNumber: mapNumber)
         }
         
         // Create tower zones with cool hexagonal design
@@ -310,7 +310,7 @@ class SimpleVectorMapLoader {
         return true
     }
     
-    private func createNeonPath(path: VectorPath, map: VectorMap, pathIndex: Int, in parent: SKNode) {
+    private func createNeonPath(path: VectorPath, map: VectorMap, pathIndex: Int, in parent: SKNode, mapNumber: Int = 0) {
         guard path.points.count > 1 else { return }
         
         // Create smooth bezier path with rounded corners and curves
@@ -324,11 +324,19 @@ class SimpleVectorMapLoader {
         
         // Outer border (creates the road width visual)
         let outerBorder = SKShapeNode(path: smoothPath)
-        outerBorder.strokeColor = SKColor(red: 0.8, green: 0.2, blue: 1.0, alpha: 0.8) // Purple like original
-        outerBorder.lineWidth = 40 // Road width
+        
+        // Special handling for Earth map - more transparent to show planet
+        if mapNumber == 10 {
+            outerBorder.strokeColor = SKColor(red: 0.8, green: 0.2, blue: 1.0, alpha: 0.5) // Transparent purple
+            outerBorder.blendMode = .add  // Additive blending for glow effect
+        } else {
+            outerBorder.strokeColor = SKColor(red: 0.8, green: 0.2, blue: 1.0, alpha: 0.9) // Normal purple
+        }
+        
+        outerBorder.lineWidth = 44 // Slightly wider for border effect
         outerBorder.lineCap = .round
         outerBorder.fillColor = .clear
-        outerBorder.zPosition = 5  // Above paths for proper road appearance
+        outerBorder.zPosition = 2  // Bottom layer
         parent.addChild(outerBorder)
         
         // Inner clear space - REMOVED: This was blocking planet backgrounds
@@ -341,7 +349,7 @@ class SimpleVectorMapLoader {
         glow.lineCap = .round
         glow.fillColor = .clear
         glow.glowWidth = 8
-        glow.zPosition = 4.5  // Just below outer border
+        glow.zPosition = 1.5  // Below main track
         
         // Add funky pulsing glow effect
         let glowPulse = SKAction.sequence([
@@ -372,7 +380,7 @@ class SimpleVectorMapLoader {
         parent.addChild(glow)
         
         // Create cool plasma wave effect running through the path
-        createPlasmaWaveEffect(path: smoothPath, pathIndex: pathIndex, in: parent)
+        createPlasmaWaveEffect(path: smoothPath, pathIndex: pathIndex, in: parent, mapNumber: mapNumber)
         
         // Invisible center path for enemy movement
         let enemyPath = SKShapeNode(path: smoothPath)
@@ -428,17 +436,26 @@ class SimpleVectorMapLoader {
         return path
     }
     
-    private func createPlasmaWaveEffect(path: CGPath, pathIndex: Int, in parent: SKNode) {
-        // Create semi-transparent dark track (allows planets to show through)
+    private func createPlasmaWaveEffect(path: CGPath, pathIndex: Int, in parent: SKNode, mapNumber: Int = 0) {
+        // Create dark track center with visible borders
         let blackTrack = SKShapeNode(path: path)
-        blackTrack.strokeColor = SKColor.black.withAlphaComponent(0.3)  // Much more transparent
-        blackTrack.lineWidth = 36  // Slightly narrower to show borders better
+        
+        // Special handling for Earth map (map 10) - make track transparent to show Earth
+        if mapNumber == 10 {
+            // For Earth map, use very transparent black to allow planet to show through
+            blackTrack.strokeColor = SKColor.black.withAlphaComponent(0.3)
+            blackTrack.blendMode = .multiply
+        } else {
+            // Normal maps get solid black track with visible borders
+            blackTrack.strokeColor = SKColor.black.withAlphaComponent(0.85)
+        }
+        
+        blackTrack.lineWidth = 38  // Narrower than outer border to show purple edges
         blackTrack.lineCap = .round
         blackTrack.fillColor = .clear
         blackTrack.glowWidth = 0
-        blackTrack.zPosition = 3  // Middle layer for black track
+        blackTrack.zPosition = 3  // Above borders
         blackTrack.name = "blackTrack_\(pathIndex)"
-        blackTrack.blendMode = .multiply  // Blend mode to allow background to show through
         parent.addChild(blackTrack)
         
         // Create thin neon border lines (two thin lines on the edges)
@@ -449,7 +466,7 @@ class SimpleVectorMapLoader {
         leftBorder.lineCap = .round
         leftBorder.fillColor = .clear
         leftBorder.glowWidth = 4  // Small glow
-        leftBorder.zPosition = 6  // Above outer border for edge visibility
+        leftBorder.zPosition = 4  // Above black track for edge visibility
         leftBorder.name = "leftBorder_\(pathIndex)"
         parent.addChild(leftBorder)
         
@@ -472,7 +489,7 @@ class SimpleVectorMapLoader {
             particle.strokeColor = .clear
             particle.fillColor = SKColor(red: 0.8, green: 1.0, blue: 1.0, alpha: 0.3)  // More visible on black
             particle.glowWidth = 2  // Small glow
-            particle.zPosition = 7  // Above borders for particle visibility
+            particle.zPosition = 5  // Above everything for particle visibility
             particle.name = "plasmaParticle_\(pathIndex)_\(i)"
             
             // Individual particle pulsing
@@ -542,7 +559,7 @@ class SimpleVectorMapLoader {
             arc.lineCap = .round
             arc.fillColor = .clear
             arc.glowWidth = 0
-            arc.zPosition = 6.5  // Above borders for arc visibility
+            arc.zPosition = 4.5  // Above track for arc visibility
             arc.name = "plasmaArc_\(pathIndex)_\(i)"
             
             // Crackling animation - appear and disappear randomly
