@@ -482,18 +482,21 @@ class GameScene: SKScene {
         earth.zPosition = 1001
         overlay.addChild(earth)
         
-        // Add continents to Earth
-        let continent1 = SKShapeNode(ellipseOf: CGSize(width: 60, height: 40))
-        continent1.fillColor = SKColor(red: 0.2, green: 0.6, blue: 0.2, alpha: 1.0)
-        continent1.strokeColor = .clear
-        continent1.position = CGPoint(x: -20, y: 20)
-        earth.addChild(continent1)
-        
-        let continent2 = SKShapeNode(ellipseOf: CGSize(width: 50, height: 35))
-        continent2.fillColor = SKColor(red: 0.2, green: 0.6, blue: 0.2, alpha: 1.0)
-        continent2.strokeColor = .clear
-        continent2.position = CGPoint(x: 25, y: -15)
-        earth.addChild(continent2)
+        // Add clouds to Earth for consistency
+        for _ in 0..<4 {
+            let cloud = SKShapeNode(ellipseOf: CGSize(width: CGFloat.random(in: 20...35), height: CGFloat.random(in: 15...25)))
+            let angle = CGFloat.random(in: 0...(CGFloat.pi * 2))
+            let distance = CGFloat.random(in: 0...70) // Within earth radius of 100
+            cloud.position = CGPoint(
+                x: cos(angle) * distance,
+                y: sin(angle) * distance
+            )
+            cloud.fillColor = SKColor.white.withAlphaComponent(0.8)
+            cloud.strokeColor = .clear
+            cloud.alpha = CGFloat.random(in: 0.6...0.9)
+            cloud.blendMode = .alpha
+            earth.addChild(cloud)
+        }
         
         // Rotate Earth
         earth.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 60)))
@@ -8850,35 +8853,8 @@ class GameScene: SKScene {
         earth.glowWidth = 20
         earthContainer.addChild(earth)
         
-        // Add realistic continents with proper shapes
+        // Add realistic cloud formations
         createEarthClouds(on: earth)
-        
-        // Antarctica (ice)
-        let antarctica = SKShapeNode(ellipseOf: CGSize(width: 110, height: 25))
-        antarctica.position = CGPoint(x: 0, y: -125)
-        antarctica.fillColor = SKColor(red: 0.95, green: 0.95, blue: 0.98, alpha: 0.7)
-        antarctica.strokeColor = SKColor.white.withAlphaComponent(0.3)
-        antarctica.lineWidth = 1
-        earth.addChild(antarctica)
-        
-        // Cloud layer - swirling white clouds
-        for _ in 0..<8 {
-            let cloud = SKShapeNode(ellipseOf: CGSize(
-                width: CGFloat.random(in: 30...50),
-                height: CGFloat.random(in: 20...30)
-            ))
-            let angle = CGFloat.random(in: 0...CGFloat.pi * 2)
-            let distance = CGFloat.random(in: 40...120)
-            cloud.position = CGPoint(
-                x: cos(angle) * distance,
-                y: sin(angle) * distance
-            )
-            cloud.fillColor = SKColor.white.withAlphaComponent(0.25)
-            cloud.strokeColor = .clear
-            cloud.zRotation = CGFloat.random(in: 0...CGFloat.pi * 2)
-            cloud.blendMode = .screen
-            earth.addChild(cloud)
-        }
         
         // Atmosphere glow - beautiful blue halo
         let atmosphere = SKShapeNode(circleOfRadius: 160)
@@ -11738,40 +11714,23 @@ class GameScene: SKScene {
     }
     
     private func createEarthContinents(on planet: SKShapeNode) {
-        // North America
-        let northAmerica = SKShapeNode(ellipseOf: CGSize(width: 15, height: 20))
-        northAmerica.position = CGPoint(x: -8, y: 12)
-        northAmerica.fillColor = SKColor(red: 0.3, green: 0.6, blue: 0.2, alpha: 0.8)
-        northAmerica.strokeColor = .clear
-        planet.addChild(northAmerica)
-        
-        // South America
-        let southAmerica = SKShapeNode(ellipseOf: CGSize(width: 8, height: 18))
-        southAmerica.position = CGPoint(x: -5, y: -8)
-        southAmerica.fillColor = SKColor(red: 0.3, green: 0.6, blue: 0.2, alpha: 0.8)
-        southAmerica.strokeColor = .clear
-        planet.addChild(southAmerica)
-        
-        // Africa
-        let africa = SKShapeNode(ellipseOf: CGSize(width: 12, height: 22))
-        africa.position = CGPoint(x: 8, y: 0)
-        africa.fillColor = SKColor(red: 0.4, green: 0.5, blue: 0.2, alpha: 0.8)
-        africa.strokeColor = .clear
-        planet.addChild(africa)
-        
-        // Europe/Asia
-        let eurasia = SKShapeNode(ellipseOf: CGSize(width: 20, height: 10))
-        eurasia.position = CGPoint(x: 12, y: 18)
-        eurasia.fillColor = SKColor(red: 0.3, green: 0.5, blue: 0.3, alpha: 0.8)
-        eurasia.strokeColor = .clear
-        planet.addChild(eurasia)
-        
-        // Australia
-        let australia = SKShapeNode(ellipseOf: CGSize(width: 6, height: 4))
-        australia.position = CGPoint(x: 18, y: -15)
-        australia.fillColor = SKColor(red: 0.4, green: 0.4, blue: 0.2, alpha: 0.8)
-        australia.strokeColor = .clear
-        planet.addChild(australia)
+        // Replace continents with clouds for consistency
+        // Planet radius is 45, so keep clouds well within bounds
+        for _ in 0..<6 {
+            let cloud = SKShapeNode(ellipseOf: CGSize(width: CGFloat.random(in: 8...15), height: CGFloat.random(in: 6...12)))
+            let angle = CGFloat.random(in: 0...(CGFloat.pi * 2))
+            let distance = CGFloat.random(in: 0...30) // Well within planet radius of 45
+            cloud.position = CGPoint(
+                x: cos(angle) * distance,
+                y: sin(angle) * distance
+            )
+            cloud.fillColor = SKColor.white.withAlphaComponent(0.7)
+            cloud.strokeColor = .clear
+            cloud.alpha = CGFloat.random(in: 0.5...0.8)
+            cloud.blendMode = .alpha
+            cloud.zRotation = CGFloat.random(in: 0...CGFloat.pi)
+            planet.addChild(cloud)
+        }
     }
     
     // Helper functions for creating background elements
