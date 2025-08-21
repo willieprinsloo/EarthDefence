@@ -8850,40 +8850,8 @@ class GameScene: SKScene {
         earth.glowWidth = 20
         earthContainer.addChild(earth)
         
-        // Add realistic continents - more visible green landmasses
-        // Africa/Europe
-        let africa = SKShapeNode(ellipseOf: CGSize(width: 70, height: 90))
-        africa.position = CGPoint(x: 20, y: -10)
-        africa.fillColor = SKColor(red: 0.2, green: 0.6, blue: 0.3, alpha: 0.9)  // Rich green
-        africa.strokeColor = SKColor(red: 0.15, green: 0.5, blue: 0.25, alpha: 0.5)
-        africa.lineWidth = 1
-        africa.zRotation = 0.2
-        earth.addChild(africa)
-        
-        // Americas
-        let americas = SKShapeNode(ellipseOf: CGSize(width: 50, height: 100))
-        americas.position = CGPoint(x: -70, y: 0)
-        americas.fillColor = SKColor(red: 0.25, green: 0.65, blue: 0.35, alpha: 0.85)
-        americas.strokeColor = SKColor(red: 0.2, green: 0.55, blue: 0.3, alpha: 0.4)
-        americas.lineWidth = 1
-        americas.zRotation = -0.3
-        earth.addChild(americas)
-        
-        // Asia
-        let asia = SKShapeNode(ellipseOf: CGSize(width: 85, height: 60))
-        asia.position = CGPoint(x: 60, y: 50)
-        asia.fillColor = SKColor(red: 0.22, green: 0.62, blue: 0.32, alpha: 0.87)
-        asia.strokeColor = SKColor(red: 0.18, green: 0.52, blue: 0.28, alpha: 0.45)
-        asia.lineWidth = 1
-        asia.zRotation = 0.5
-        earth.addChild(asia)
-        
-        // Australia
-        let australia = SKShapeNode(ellipseOf: CGSize(width: 35, height: 25))
-        australia.position = CGPoint(x: 70, y: -70)
-        australia.fillColor = SKColor(red: 0.24, green: 0.58, blue: 0.34, alpha: 0.8)
-        australia.strokeColor = .clear
-        earth.addChild(australia)
+        // Add realistic continents with proper shapes
+        createRealisticContinents(on: earth)
         
         // Antarctica (ice)
         let antarctica = SKShapeNode(ellipseOf: CGSize(width: 110, height: 25))
@@ -8961,6 +8929,199 @@ class GameScene: SKScene {
         
         backgroundLayer.addChild(earthContainer)  // Add to background layer for proper visibility
         print("✅ Earth background added to backgroundLayer at position \(earthContainer.position) with z-position \(earthContainer.zPosition)")
+    }
+    
+    private func createRealisticContinents(on earth: SKNode) {
+        // NORTH AMERICA - More accurate shape
+        let northAmerica = createNorthAmericaPath()
+        let northAmericaNode = SKShapeNode(path: northAmerica)
+        northAmericaNode.fillColor = SKColor(red: 0.25, green: 0.65, blue: 0.35, alpha: 0.9)
+        northAmericaNode.strokeColor = SKColor(red: 0.2, green: 0.55, blue: 0.3, alpha: 0.6)
+        northAmericaNode.lineWidth = 1
+        northAmericaNode.position = CGPoint(x: -85, y: 25)
+        earth.addChild(northAmericaNode)
+        
+        // SOUTH AMERICA - Distinctive triangular shape
+        let southAmerica = createSouthAmericaPath()
+        let southAmericaNode = SKShapeNode(path: southAmerica)
+        southAmericaNode.fillColor = SKColor(red: 0.28, green: 0.68, blue: 0.38, alpha: 0.9)
+        southAmericaNode.strokeColor = SKColor(red: 0.23, green: 0.58, blue: 0.33, alpha: 0.6)
+        southAmericaNode.lineWidth = 1
+        southAmericaNode.position = CGPoint(x: -75, y: -45)
+        earth.addChild(southAmericaNode)
+        
+        // AFRICA - Distinctive boot shape
+        let africa = createAfricaPath()
+        let africaNode = SKShapeNode(path: africa)
+        africaNode.fillColor = SKColor(red: 0.22, green: 0.62, blue: 0.32, alpha: 0.9)
+        africaNode.strokeColor = SKColor(red: 0.17, green: 0.52, blue: 0.27, alpha: 0.6)
+        africaNode.lineWidth = 1
+        africaNode.position = CGPoint(x: 15, y: -20)
+        earth.addChild(africaNode)
+        
+        // EUROPE - Separate from Africa
+        let europe = createEuropePath()
+        let europeNode = SKShapeNode(path: europe)
+        europeNode.fillColor = SKColor(red: 0.26, green: 0.66, blue: 0.36, alpha: 0.9)
+        europeNode.strokeColor = SKColor(red: 0.21, green: 0.56, blue: 0.31, alpha: 0.6)
+        europeNode.lineWidth = 1
+        europeNode.position = CGPoint(x: 25, y: 45)
+        earth.addChild(europeNode)
+        
+        // ASIA - Large landmass with distinctive shape
+        let asia = createAsiaPath()
+        let asiaNode = SKShapeNode(path: asia)
+        asiaNode.fillColor = SKColor(red: 0.24, green: 0.64, blue: 0.34, alpha: 0.9)
+        asiaNode.strokeColor = SKColor(red: 0.19, green: 0.54, blue: 0.29, alpha: 0.6)
+        asiaNode.lineWidth = 1
+        asiaNode.position = CGPoint(x: 65, y: 30)
+        earth.addChild(asiaNode)
+        
+        // AUSTRALIA - Distinctive island shape
+        let australia = createAustraliaPath()
+        let australiaNode = SKShapeNode(path: australia)
+        australiaNode.fillColor = SKColor(red: 0.27, green: 0.60, blue: 0.37, alpha: 0.9)
+        australiaNode.strokeColor = SKColor(red: 0.22, green: 0.50, blue: 0.32, alpha: 0.6)
+        australiaNode.lineWidth = 1
+        australiaNode.position = CGPoint(x: 85, y: -65)
+        earth.addChild(australiaNode)
+        
+        // GREENLAND - Large northern island
+        let greenland = createGreenlandPath()
+        let greenlandNode = SKShapeNode(path: greenland)
+        greenlandNode.fillColor = SKColor(red: 0.85, green: 0.90, blue: 0.95, alpha: 0.8)  // Icy
+        greenlandNode.strokeColor = SKColor.white.withAlphaComponent(0.4)
+        greenlandNode.lineWidth = 1
+        greenlandNode.position = CGPoint(x: -45, y: 75)
+        earth.addChild(greenlandNode)
+    }
+    
+    private func createNorthAmericaPath() -> CGPath {
+        let path = CGMutablePath()
+        // North America with distinctive shape including Great Lakes region
+        path.move(to: CGPoint(x: 0, y: 40))      // Northern Canada
+        path.addLine(to: CGPoint(x: -15, y: 35)) // Hudson Bay
+        path.addLine(to: CGPoint(x: -25, y: 25)) // Great Lakes
+        path.addLine(to: CGPoint(x: -20, y: 15)) // Eastern US
+        path.addLine(to: CGPoint(x: -10, y: 5))  // Florida
+        path.addLine(to: CGPoint(x: 0, y: 8))    // Gulf Coast
+        path.addLine(to: CGPoint(x: 15, y: 12))  // Texas
+        path.addLine(to: CGPoint(x: 20, y: 18))  // West Coast
+        path.addLine(to: CGPoint(x: 25, y: 25))  // California
+        path.addLine(to: CGPoint(x: 22, y: 35))  // Pacific Northwest
+        path.addLine(to: CGPoint(x: 15, y: 42))  // Alaska connection
+        path.addLine(to: CGPoint(x: 8, y: 45))   // Northern Canada
+        path.closeSubpath()
+        return path
+    }
+    
+    private func createSouthAmericaPath() -> CGPath {
+        let path = CGMutablePath()
+        // South America with distinctive triangular/teardrop shape
+        path.move(to: CGPoint(x: 0, y: 25))      // Northern coast
+        path.addLine(to: CGPoint(x: 12, y: 20))  // Venezuela/Guyana
+        path.addLine(to: CGPoint(x: 15, y: 10))  // Brazil bulge
+        path.addLine(to: CGPoint(x: 18, y: 0))   // Eastern Brazil
+        path.addLine(to: CGPoint(x: 12, y: -15)) // Southern Brazil
+        path.addLine(to: CGPoint(x: 5, y: -25))  // Argentina
+        path.addLine(to: CGPoint(x: 0, y: -30))  // Chile narrow
+        path.addLine(to: CGPoint(x: -8, y: -28)) // Chile coast
+        path.addLine(to: CGPoint(x: -12, y: -20)) // Peru
+        path.addLine(to: CGPoint(x: -15, y: -10)) // Ecuador
+        path.addLine(to: CGPoint(x: -12, y: 0))   // Colombia
+        path.addLine(to: CGPoint(x: -8, y: 15))   // Colombia/Venezuela
+        path.closeSubpath()
+        return path
+    }
+    
+    private func createAfricaPath() -> CGPath {
+        let path = CGMutablePath()
+        // Africa with distinctive shape including horn of Africa
+        path.move(to: CGPoint(x: -8, y: 30))     // Morocco
+        path.addLine(to: CGPoint(x: 0, y: 32))   // Algeria
+        path.addLine(to: CGPoint(x: 15, y: 28))  // Libya/Egypt
+        path.addLine(to: CGPoint(x: 20, y: 20))  // Sudan
+        path.addLine(to: CGPoint(x: 25, y: 15))  // Horn of Africa
+        path.addLine(to: CGPoint(x: 20, y: 5))   // Kenya
+        path.addLine(to: CGPoint(x: 15, y: -10)) // Tanzania
+        path.addLine(to: CGPoint(x: 10, y: -25)) // Southern Africa
+        path.addLine(to: CGPoint(x: 5, y: -35))  // South Africa
+        path.addLine(to: CGPoint(x: -5, y: -32)) // Namibia
+        path.addLine(to: CGPoint(x: -12, y: -25)) // Angola
+        path.addLine(to: CGPoint(x: -15, y: -10)) // DRC
+        path.addLine(to: CGPoint(x: -18, y: 5))   // Cameroon
+        path.addLine(to: CGPoint(x: -15, y: 20))  // Nigeria
+        path.addLine(to: CGPoint(x: -12, y: 28))  // West Africa
+        path.closeSubpath()
+        return path
+    }
+    
+    private func createEuropePath() -> CGPath {
+        let path = CGMutablePath()
+        // Europe with Scandinavia and Mediterranean
+        path.move(to: CGPoint(x: -5, y: 25))     // Norway
+        path.addLine(to: CGPoint(x: 0, y: 28))   // Northern Scandinavia
+        path.addLine(to: CGPoint(x: 8, y: 25))   // Finland/Russia
+        path.addLine(to: CGPoint(x: 15, y: 20))  // Western Russia
+        path.addLine(to: CGPoint(x: 12, y: 15))  // Ukraine
+        path.addLine(to: CGPoint(x: 8, y: 12))   // Balkans
+        path.addLine(to: CGPoint(x: 5, y: 8))    // Greece/Turkey
+        path.addLine(to: CGPoint(x: 0, y: 10))   // Italy
+        path.addLine(to: CGPoint(x: -8, y: 12))  // Spain
+        path.addLine(to: CGPoint(x: -12, y: 15)) // France
+        path.addLine(to: CGPoint(x: -10, y: 18)) // UK area
+        path.addLine(to: CGPoint(x: -8, y: 22))  // Western Europe
+        path.closeSubpath()
+        return path
+    }
+    
+    private func createAsiaPath() -> CGPath {
+        let path = CGMutablePath()
+        // Asia including Siberia, China, India, and Southeast Asia
+        path.move(to: CGPoint(x: -20, y: 35))    // Western Siberia
+        path.addLine(to: CGPoint(x: 15, y: 38))  // Eastern Siberia
+        path.addLine(to: CGPoint(x: 25, y: 30))  // Far East Russia
+        path.addLine(to: CGPoint(x: 22, y: 20))  // China coast
+        path.addLine(to: CGPoint(x: 18, y: 10))  // Southeast Asia
+        path.addLine(to: CGPoint(x: 12, y: 0))   // Indonesia area
+        path.addLine(to: CGPoint(x: 5, y: -5))   // Southern India
+        path.addLine(to: CGPoint(x: 0, y: 0))    // Western India
+        path.addLine(to: CGPoint(x: -5, y: 8))   // Pakistan/Afghanistan
+        path.addLine(to: CGPoint(x: -10, y: 15)) // Central Asia
+        path.addLine(to: CGPoint(x: -15, y: 25)) // Kazakhstan
+        path.addLine(to: CGPoint(x: -18, y: 30)) // Western Siberia
+        path.closeSubpath()
+        return path
+    }
+    
+    private func createAustraliaPath() -> CGPath {
+        let path = CGMutablePath()
+        // Australia with distinctive shape
+        path.move(to: CGPoint(x: -8, y: 5))      // Western Australia
+        path.addLine(to: CGPoint(x: 0, y: 8))    // Northern Territory
+        path.addLine(to: CGPoint(x: 12, y: 6))   // Queensland
+        path.addLine(to: CGPoint(x: 15, y: 0))   // New South Wales
+        path.addLine(to: CGPoint(x: 12, y: -8))  // Victoria
+        path.addLine(to: CGPoint(x: 5, y: -10))  // South Australia
+        path.addLine(to: CGPoint(x: -5, y: -8))  // Western Australia south
+        path.addLine(to: CGPoint(x: -10, y: -2)) // Western Australia coast
+        path.closeSubpath()
+        return path
+    }
+    
+    private func createGreenlandPath() -> CGPath {
+        let path = CGMutablePath()
+        // Greenland with characteristic shape
+        path.move(to: CGPoint(x: 0, y: 15))      // Northern tip
+        path.addLine(to: CGPoint(x: 8, y: 10))   // East coast
+        path.addLine(to: CGPoint(x: 10, y: 0))   // Southeast
+        path.addLine(to: CGPoint(x: 8, y: -12))  // Southern tip
+        path.addLine(to: CGPoint(x: 2, y: -15))  // Southwest
+        path.addLine(to: CGPoint(x: -5, y: -12)) // West coast south
+        path.addLine(to: CGPoint(x: -8, y: 0))   // West coast
+        path.addLine(to: CGPoint(x: -6, y: 12))  // Northwest
+        path.closeSubpath()
+        return path
     }
     
     private func addMarsBackground() {
