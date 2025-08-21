@@ -10232,8 +10232,8 @@ class GameScene: SKScene {
         for _ in 0..<4 {
             let nebula = createNebula()
             nebula.position = CGPoint(
-                x: CGFloat.random(in: -size.width...size.width),
-                y: CGFloat.random(in: -size.height...size.height)
+                x: CGFloat.random(in: -size.width*0.4...size.width*0.4),
+                y: CGFloat.random(in: -size.height*0.4...size.height*0.4)
             )
             nebula.zPosition = -98
             backgroundLayer.addChild(nebula)
@@ -10245,8 +10245,8 @@ class GameScene: SKScene {
             star.fillColor = SKColor.white.withAlphaComponent(CGFloat.random(in: 0.1...0.4))
             star.strokeColor = .clear
             star.position = CGPoint(
-                x: CGFloat.random(in: -size.width*1.5...size.width*1.5),
-                y: CGFloat.random(in: -size.height*1.5...size.height*1.5)
+                x: CGFloat.random(in: -size.width*0.6...size.width*0.6),
+                y: CGFloat.random(in: -size.height*0.6...size.height*0.6)
             )
             star.zPosition = -99
             backgroundLayer.addChild(star)
@@ -10263,8 +10263,8 @@ class GameScene: SKScene {
         for _ in 0..<5 {
             let pulse = createEnergyPulse()
             pulse.position = CGPoint(
-                x: CGFloat.random(in: -size.width...size.width),
-                y: CGFloat.random(in: -size.height...size.height)
+                x: CGFloat.random(in: -size.width*0.4...size.width*0.4),
+                y: CGFloat.random(in: -size.height*0.4...size.height*0.4)
             )
             pulse.zPosition = -92
             backgroundLayer.addChild(pulse)
