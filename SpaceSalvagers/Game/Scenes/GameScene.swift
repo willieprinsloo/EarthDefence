@@ -8957,7 +8957,7 @@ class GameScene: SKScene {
         atmosphere.run(SKAction.repeatForever(atmosphereRotate))
         
         backgroundLayer.addChild(earthContainer)  // Add to background layer for proper visibility
-        print("✅ Earth background added to gameplayLayer")
+        print("✅ Earth background added to backgroundLayer at position \(earthContainer.position) with z-position \(earthContainer.zPosition)")
     }
     
     private func addMarsBackground() {
@@ -11984,6 +11984,9 @@ class GameScene: SKScene {
         // Clear and recreate background for new map (especially for map 3 galaxy)
         backgroundLayer.removeAllChildren()
         createStarBackground()
+        
+        // Re-add map-specific planet backgrounds after clearing
+        addMapSpecificBackground()
         
         // Give starting salvage for new map (scales with map number)
         // More generous starting salvage for better upgrades early on
