@@ -3254,7 +3254,19 @@ class GameScene: SKScene {
                     buildNode = node.parent!
                 }
                 
-                print("Build node clicked at \(buildNode.position)")
+                // IMPORTANT: Check if we actually clicked ON the build node, not just near it
+                // The build node is a circle with radius ~20, so check if click is within that radius
+                let clickLocation = touch.location(in: buildNode.parent!)
+                let distanceFromCenter = hypot(clickLocation.x - buildNode.position.x,
+                                              clickLocation.y - buildNode.position.y)
+                
+                // Only proceed if we clicked within the build node circle (radius ~20)
+                if distanceFromCenter > 25 {
+                    print("Click too far from build node center: \(distanceFromCenter)")
+                    continue  // Skip this node, check next
+                }
+                
+                print("Build node clicked at \(buildNode.position), distance from center: \(distanceFromCenter)")
                 
                 // Check if there's ALREADY a tower selection menu open
                 if towerSelectionMenu != nil {
@@ -3274,7 +3286,7 @@ class GameScene: SKScene {
                         let towerScenePos = towerNode.convert(CGPoint.zero, to: self)
                         let distance = hypot(towerScenePos.x - buildNodeScenePos.x,
                                            towerScenePos.y - buildNodeScenePos.y)
-                        if distance < 25 {  // Tighter tolerance
+                        if distance < 15 {  // Much tighter tolerance for precise touch
                             // Tower found at this position
                             towerFound = towerNode
                             print("Found tower \(towerNode.name ?? "unknown") at distance \(distance)")
@@ -3302,7 +3314,7 @@ class GameScene: SKScene {
                                 let towerScenePos = child.convert(CGPoint.zero, to: self)
                                 let distance = hypot(towerScenePos.x - buildNodeScenePos.x, 
                                                    towerScenePos.y - buildNodeScenePos.y)
-                                if distance < 40 {
+                                if distance < 20 {
                                     thoroughTowerFound = child
                                     print("Found tower in thorough search: \(child.name ?? "unknown") at distance \(distance)")
                                     break
@@ -3335,6 +3347,18 @@ class GameScene: SKScene {
                 if towerSelectionMenu?.name == "towerSelectorContainer" {
                     // Tower selector is open - completely ignore tower clicks
                     return
+                }
+                
+                // Check if we actually clicked ON the tower, not just near it
+                // Towers have various sizes but generally within radius 20-30
+                let clickLocation = touch.location(in: node.parent!)
+                let distanceFromTower = hypot(clickLocation.x - node.position.x,
+                                             clickLocation.y - node.position.y)
+                
+                // Only proceed if we clicked within the tower itself (radius ~20)
+                if distanceFromTower > 20 {
+                    print("Click too far from tower center: \(distanceFromTower)")
+                    continue  // Skip this node, check next
                 }
                 
                 // Select tower for upgrade/sell
@@ -3937,6 +3961,7 @@ class GameScene: SKScene {
         range.name = "range"
         range.alpha = 0  // Hidden by default
         range.zPosition = -1
+        range.isUserInteractionEnabled = false  // Don't intercept touches
         tower.addChild(range)
         
         // Add construction effect
@@ -4343,6 +4368,7 @@ class GameScene: SKScene {
         rangeCircle.glowWidth = 1
         rangeCircle.name = "rangeIndicator"
         rangeCircle.zPosition = 5  // Above path but below UI
+        rangeCircle.isUserInteractionEnabled = false  // IMPORTANT: Don't intercept touches!
         
         // Add pulsing animation
         let pulse = SKAction.sequence([
@@ -5351,6 +5377,7 @@ class GameScene: SKScene {
         range.lineWidth = 1
         range.name = "range"
         range.alpha = 0  // Hidden by default
+        range.isUserInteractionEnabled = false  // Don't intercept touches
         tower.addChild(range)
         
         // Don't add idle rotation - turrets will aim at enemies instead
@@ -12315,12 +12342,12 @@ class GameScene: SKScene {
     
     private func createHitEffect(on target: SKNode, damageType: String, damage: Int) {
         // Create hit effect - stub implementation
-        print("Hit effect created: \(damageType) for \(damage) damage")
+        // Hit effect created: \(damageType) for \(damage) damage
     }
     
     private func createHitEffect(at position: CGPoint, towerType: String) {
         // Create hit effect at position - stub implementation
-        print("Hit effect created at \(position) for \(towerType)")
+        // Hit effect created at \(position) for \(towerType)
     }
     
     private func createMovingSpaceDebris() {

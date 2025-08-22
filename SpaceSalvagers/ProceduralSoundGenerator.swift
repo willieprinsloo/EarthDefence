@@ -74,7 +74,7 @@ class ProceduralSoundGenerator {
         
         // Play the buffer
         playerNode.scheduleBuffer(buffer, at: nil, options: [], completionHandler: {
-            print("✅ Finished playing tone at \(frequency)Hz")
+            // Finished playing tone at \(frequency)Hz
         })
     }
     

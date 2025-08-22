@@ -141,7 +141,7 @@ class SoundManager {
         guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: "wav") else {
             // If .wav doesn't exist, try .mp3
             guard let mp3Url = Bundle.main.url(forResource: sound.rawValue, withExtension: "mp3") else {
-                print("Sound file not found: \(sound.rawValue) - will use procedural sound")
+                // Sound file not found - will use procedural sound
                 return nil
             }
             return loadSoundFromURL(mp3Url, key: sound.rawValue)
@@ -383,7 +383,7 @@ class SoundManager {
     private func playProceduralSound(_ sound: SoundEffect) {
         guard soundEnabled else { return }
         
-        print("🎵 Playing procedural sound: \(sound.rawValue)")
+        // Playing procedural sound: \(sound.rawValue)
         
         // Use AudioKitSoundGenerator for better sounds
         switch sound {
@@ -472,7 +472,7 @@ extension SoundManager {
         // Create a custom sound action
         return SKAction.run {
             // This would normally generate a tone, but for now we'll use a placeholder
-            print("Playing procedural sound: \(type.rawValue) at \(frequency)Hz")
+            // Playing procedural sound: \(type.rawValue) at \(frequency)Hz
         }
     }
 }
