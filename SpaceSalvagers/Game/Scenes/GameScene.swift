@@ -2878,7 +2878,8 @@ class GameScene: SKScene {
                 return  // CRITICAL: Block all further touch processing when in selector area
             } else {
                 // Touch is outside selector panel - check for overlay click to close
-                for node in nodesAtLocation {
+                let overlayNodes = selectorContainer.nodes(at: touch.location(in: selectorContainer))
+                for node in overlayNodes {
                     if node.name == "selectorOverlay" || node.name == "touchBlocker" {
                         removeTowerSelector()
                         selectedBuildNode = nil
