@@ -1078,7 +1078,7 @@ class GameScene: SKScene {
     private func createNebulaBackground() {
         let nebulaContainer = SKNode()
         nebulaContainer.name = "nebulaBackground"
-        nebulaContainer.zPosition = -100
+        nebulaContainer.zPosition = -95  // In front of stars but behind stations
         backgroundLayer.addChild(nebulaContainer)
         
         // Create nebula clouds
@@ -1103,13 +1103,13 @@ class GameScene: SKScene {
                 y: CGFloat.random(in: -size.height/3...size.height/3)
             )
             
-            // Slow drift
+            // Slow drift - reduced range to prevent edge visibility
             let drift = SKAction.sequence([
-                SKAction.moveBy(x: CGFloat.random(in: -50...50), 
-                              y: CGFloat.random(in: -50...50), 
+                SKAction.moveBy(x: CGFloat.random(in: -20...20), 
+                              y: CGFloat.random(in: -20...20), 
                               duration: Double.random(in: 30...50)),
-                SKAction.moveBy(x: CGFloat.random(in: -50...50), 
-                              y: CGFloat.random(in: -50...50), 
+                SKAction.moveBy(x: CGFloat.random(in: -20...20), 
+                              y: CGFloat.random(in: -20...20), 
                               duration: Double.random(in: 30...50))
             ])
             
@@ -10235,7 +10235,7 @@ class GameScene: SKScene {
                 x: CGFloat.random(in: -size.width*0.4...size.width*0.4),
                 y: CGFloat.random(in: -size.height*0.4...size.height*0.4)
             )
-            nebula.zPosition = -98
+            nebula.zPosition = -96  // In front of stars (-99)
             backgroundLayer.addChild(nebula)
         }
         
@@ -10326,10 +10326,10 @@ class GameScene: SKScene {
             cloud.alpha = CGFloat.random(in: 0.05...0.2)
             nebula.addChild(cloud)
             
-            // Slow drift
+            // Slow drift - minimal movement to prevent edge visibility
             let drift = SKAction.moveBy(
-                x: CGFloat.random(in: -20...20),
-                y: CGFloat.random(in: -20...20),
+                x: CGFloat.random(in: -10...10),
+                y: CGFloat.random(in: -10...10),
                 duration: Double.random(in: 40...80)
             )
             cloud.run(SKAction.repeatForever(SKAction.sequence([drift, drift.reversed()])))
@@ -11306,10 +11306,10 @@ class GameScene: SKScene {
             particle.zPosition = 1
             backgroundLayer.addChild(particle)
             
-            // Slow drift animation
+            // Slow drift animation - constrained to prevent edge visibility
             let drift = SKAction.moveBy(
-                x: CGFloat.random(in: -60...60),
-                y: CGFloat.random(in: -60...60),
+                x: CGFloat.random(in: -20...20),
+                y: CGFloat.random(in: -20...20),
                 duration: Double.random(in: 60...120)
             )
             particle.run(SKAction.repeatForever(SKAction.sequence([drift, drift.reversed()])))
