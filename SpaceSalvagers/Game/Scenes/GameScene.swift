@@ -1962,14 +1962,23 @@ class GameScene: SKScene {
         let bottomY = -(size.height / 2) + 80  // Safe margin from bottom
         selectorContainer.position = CGPoint(x: 0, y: bottomY)
         
-        // Background for selector - wider to fit all 7 towers
-        let selectorBg = SKShapeNode(rectOf: CGSize(width: 720, height: 100), cornerRadius: 10)
-        selectorBg.fillColor = SKColor(red: 0.05, green: 0.05, blue: 0.1, alpha: 0.98)
+        // SOLID OPAQUE Background panel for selector - no transparency
+        let selectorBg = SKShapeNode(rectOf: CGSize(width: 720, height: 110), cornerRadius: 10)
+        selectorBg.fillColor = SKColor(red: 0.08, green: 0.08, blue: 0.12, alpha: 1.0)  // Fully opaque dark blue-gray
         selectorBg.strokeColor = SKColor(red: 0.5, green: 0, blue: 1, alpha: 1) // Purple outline
-        selectorBg.lineWidth = 2
+        selectorBg.lineWidth = 3
         selectorBg.glowWidth = 4
         selectorBg.name = "selectorBackground"
+        selectorBg.zPosition = 0
         selectorContainer.addChild(selectorBg)
+        
+        // Add inner border for extra definition
+        let innerBorder = SKShapeNode(rectOf: CGSize(width: 716, height: 106), cornerRadius: 8)
+        innerBorder.fillColor = .clear
+        innerBorder.strokeColor = SKColor.cyan.withAlphaComponent(0.3)
+        innerBorder.lineWidth = 1
+        innerBorder.zPosition = 1
+        selectorContainer.addChild(innerBorder)
         
         // Tower buttons with proper graphics - Progressive unlocking by MAP
         let allTowers: [(String, String, SKColor, Int, Int)] = [  // Added unlock map
@@ -2017,33 +2026,61 @@ class GameScene: SKScene {
             buttonContainer.name = "towerButton_\(type)"
             buttonContainer.zPosition = 1001
             
-            // Button frame
-            let buttonBg = SKShapeNode(rectOf: CGSize(width: 80, height: 80), cornerRadius: 8)
-            buttonBg.fillColor = SKColor.black.withAlphaComponent(0.85)  // Darker background for better contrast
+            // SOLID button background - fully opaque
+            let buttonBg = SKShapeNode(rectOf: CGSize(width: 85, height: 85), cornerRadius: 8)
+            buttonBg.fillColor = SKColor(red: 0.15, green: 0.15, blue: 0.2, alpha: 1.0)  // Fully opaque slightly lighter than panel
             buttonBg.strokeColor = color
-            buttonBg.lineWidth = 2
-            buttonBg.glowWidth = 2
+            buttonBg.lineWidth = 3
+            buttonBg.glowWidth = 3
+            buttonBg.zPosition = 2
             buttonContainer.addChild(buttonBg)
+            
+            // Add inner highlight for button definition
+            let innerHighlight = SKShapeNode(rectOf: CGSize(width: 79, height: 79), cornerRadius: 6)
+            innerHighlight.fillColor = .clear
+            innerHighlight.strokeColor = color.withAlphaComponent(0.4)
+            innerHighlight.lineWidth = 1
+            innerHighlight.zPosition = 3
+            buttonContainer.addChild(innerHighlight)
             
             // Tower icon preview (simplified version of actual tower)
             let icon = createTowerIcon(type: type, color: color)
             icon.position = CGPoint(x: 0, y: 10)
+            icon.zPosition = 6
             buttonContainer.addChild(icon)
             
-            // Tower name
+            // Tower name with drop shadow for maximum readability
+            let shadowLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
+            shadowLabel.text = name
+            shadowLabel.fontSize = 15
+            shadowLabel.fontColor = .black
+            shadowLabel.position = CGPoint(x: 1, y: -26)
+            shadowLabel.zPosition = 4
+            buttonContainer.addChild(shadowLabel)
+            
             let nameLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
             nameLabel.text = name
-            nameLabel.fontSize = 14
-            nameLabel.fontColor = .white  // White for maximum readability
+            nameLabel.fontSize = 15
+            nameLabel.fontColor = .white  // Pure white
             nameLabel.position = CGPoint(x: 0, y: -25)
+            nameLabel.zPosition = 5
             buttonContainer.addChild(nameLabel)
             
-            // Cost
+            // Cost with drop shadow
+            let costShadow = SKLabelNode(fontNamed: "Helvetica-Bold")
+            costShadow.text = "$\(cost)"
+            costShadow.fontSize = 13
+            costShadow.fontColor = .black
+            costShadow.position = CGPoint(x: 1, y: -39)
+            costShadow.zPosition = 4
+            buttonContainer.addChild(costShadow)
+            
             let costLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
             costLabel.text = "$\(cost)"
-            costLabel.fontSize = 12
-            costLabel.fontColor = SKColor(red: 1.0, green: 1.0, blue: 0.7, alpha: 1.0)  // Light yellow
+            costLabel.fontSize = 13
+            costLabel.fontColor = SKColor(red: 1.0, green: 1.0, blue: 0.6, alpha: 1.0)  // Bright yellow
             costLabel.position = CGPoint(x: 0, y: -38)
+            costLabel.zPosition = 5
             buttonContainer.addChild(costLabel)
             
             selectorContainer.addChild(buttonContainer)
