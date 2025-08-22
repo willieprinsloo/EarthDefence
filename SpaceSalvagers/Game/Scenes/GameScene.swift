@@ -2873,9 +2873,12 @@ class GameScene: SKScene {
                     }
                 }
                 
-                // Touch is in selector area - ALWAYS return to block tower selection
-                // Even if we clicked a button, we handle it here and return
-                return  // CRITICAL: Block all further touch processing when in selector area
+                // Touch is in selector area - only return if we didn't click a button
+                if !clickedOnSelector {
+                    // Clicked in selector panel area but not on a button - block it
+                    return
+                }
+                // If we clicked a selector button, let it continue to be processed below
             } else {
                 // Touch is outside selector panel - check for overlay click to close
                 let overlayNodes = selectorContainer.nodes(at: touch.location(in: selectorContainer))
