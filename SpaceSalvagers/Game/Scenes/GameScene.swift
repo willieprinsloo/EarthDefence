@@ -3124,24 +3124,54 @@ class GameScene: SKScene {
                     closeTowerMenu()
                     return
                 } else if nodeName == "upgradeButton" || node.parent?.name == "upgradeButton" || node.parent?.parent?.name == "upgradeButton" {
-                    // Handle upgrade button - check multiple levels of hierarchy
-                    let buttonNode = (nodeName == "upgradeButton") ? node : 
-                                    (node.parent?.name == "upgradeButton") ? node.parent! : 
-                                    (node.parent?.parent?.name == "upgradeButton") ? node.parent!.parent! : node
-                    if let userData = buttonNode.userData,
-                       let tower = userData["tower"] as? SKNode,
-                       let cost = userData["cost"] as? Int {
+                    // Handle upgrade button - check multiple levels of hierarchy and find userData
+                    var userData: NSMutableDictionary? = node.userData
+                    if userData == nil || userData?["tower"] == nil {
+                        userData = node.parent?.userData
+                    }
+                    if userData == nil || userData?["tower"] == nil {
+                        userData = node.parent?.parent?.userData
+                    }
+                    // Also check siblings for the shape node with userData
+                    if userData == nil || userData?["tower"] == nil {
+                        if let parent = node.parent {
+                            for child in parent.children {
+                                if child.name == "upgradeButton" && child.userData?["tower"] != nil {
+                                    userData = child.userData
+                                    break
+                                }
+                            }
+                        }
+                    }
+                    
+                    if let tower = userData?["tower"] as? SKNode,
+                       let cost = userData?["cost"] as? Int {
                         upgradeTower(tower, cost: cost)
                     }
                     return
                 } else if nodeName == "sellButton" || node.parent?.name == "sellButton" || node.parent?.parent?.name == "sellButton" {
-                    // Handle sell button - check multiple levels of hierarchy
-                    let buttonNode = (nodeName == "sellButton") ? node : 
-                                    (node.parent?.name == "sellButton") ? node.parent! : 
-                                    (node.parent?.parent?.name == "sellButton") ? node.parent!.parent! : node
-                    if let userData = buttonNode.userData,
-                       let tower = userData["tower"] as? SKNode,
-                       let value = userData["value"] as? Int {
+                    // Handle sell button - check multiple levels of hierarchy and find userData
+                    var userData: NSMutableDictionary? = node.userData
+                    if userData == nil || userData?["tower"] == nil {
+                        userData = node.parent?.userData
+                    }
+                    if userData == nil || userData?["tower"] == nil {
+                        userData = node.parent?.parent?.userData
+                    }
+                    // Also check siblings for the shape node with userData
+                    if userData == nil || userData?["tower"] == nil {
+                        if let parent = node.parent {
+                            for child in parent.children {
+                                if child.name == "sellButton" && child.userData?["tower"] != nil {
+                                    userData = child.userData
+                                    break
+                                }
+                            }
+                        }
+                    }
+                    
+                    if let tower = userData?["tower"] as? SKNode,
+                       let value = userData?["value"] as? Int {
                         sellTower(tower, value: value)
                     }
                     return
@@ -3194,10 +3224,32 @@ class GameScene: SKScene {
                     let isOccupied = buildNode.userData?["isOccupied"] as? Bool ?? false
                     
                     if isOccupied {
-                        // Flag says occupied but no tower found - clear it and don't show any menu
-                        print("Warning: Build node marked as occupied but no tower found, clearing flag")
-                        buildNode.userData?["isOccupied"] = false
-                        // Don't show any menu - just clear the bad state
+                        // Flag says occupied but no tower found - try a more thorough search
+                        print("Warning: Build node marked as occupied but no tower found, doing thorough search")
+                        
+                        // Do a more extensive search for any tower at this position
+                        var thoroughTowerFound: SKNode? = nil
+                        for child in towerLayer.children {
+                            if child.name?.contains("tower_") == true {
+                                let distance = hypot(child.position.x - buildNode.position.x, 
+                                                   child.position.y - buildNode.position.y)
+                                if distance < 40 {
+                                    thoroughTowerFound = child
+                                    break
+                                }
+                            }
+                        }
+                        
+                        if let tower = thoroughTowerFound {
+                            // Found tower with thorough search
+                            selectTower(tower)
+                        } else {
+                            // Really no tower - clear flag and show build menu
+                            buildNode.userData?["isOccupied"] = false
+                            selectedNode = buildNode
+                            selectedBuildNode = buildNode
+                            handleTowerSelection(at: buildNode.position)
+                        }
                     } else {
                         // Truly empty - show tower placement menu
                         selectedNode = buildNode
@@ -4157,11 +4209,21 @@ class GameScene: SKScene {
             return
         }
         
-        // Show tower range indicator
-        showTowerRangeIndicator(for: tower)
+        // Clear any existing selection first
+        towerSelectionMenu?.removeFromParent()
+        towerSelectionMenu = nil
+        effectsLayer.enumerateChildNodes(withName: "rangeIndicator") { node, _ in
+            node.removeFromParent()
+        }
         
-        // Show tower upgrade menu
-        showTowerUpgradeMenu(for: tower)
+        // Small delay to ensure clean state
+        run(SKAction.wait(forDuration: 0.05)) { [weak self] in
+            // Show tower range indicator
+            self?.showTowerRangeIndicator(for: tower)
+            
+            // Show tower upgrade menu
+            self?.showTowerUpgradeMenu(for: tower)
+        }
     }
     
     private func showTowerRangeIndicator(for tower: SKNode) {
@@ -4221,8 +4283,8 @@ class GameScene: SKScene {
         overlay.isUserInteractionEnabled = true  // Block touches to elements behind
         menu.addChild(overlay)
         
-        // SIMPLIFIED BACKGROUND - single clean panel
-        let background = SKShapeNode(rectOf: CGSize(width: 280, height: 200), cornerRadius: 15)
+        // SIMPLIFIED BACKGROUND - single clean panel with larger size
+        let background = SKShapeNode(rectOf: CGSize(width: 320, height: 220), cornerRadius: 15)
         background.fillColor = SKColor(red: 0.1, green: 0.1, blue: 0.2, alpha: 0.95)
         background.strokeColor = getTowerColor(type: towerType)
         background.lineWidth = 2
@@ -4257,12 +4319,12 @@ class GameScene: SKScene {
         menu.addChild(actionsContainer)
         
         if currentLevel < 3 {
-            // SIMPLIFIED UPGRADE BUTTON
+            // SIMPLIFIED UPGRADE BUTTON - LARGER HIT AREA
             let upgradeCost = Int(Double(baseCost) * 1.5)
             let canAfford = playerSalvage >= upgradeCost
             
-            let upgradeButton = SKShapeNode(rectOf: CGSize(width: 100, height: 40), cornerRadius: 5)
-            upgradeButton.position = CGPoint(x: -55, y: 0)
+            let upgradeButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
+            upgradeButton.position = CGPoint(x: -60, y: 0)
             upgradeButton.fillColor = canAfford ? SKColor(red: 0.1, green: 0.4, blue: 0.1, alpha: 0.9) : SKColor.gray.withAlphaComponent(0.5)
             upgradeButton.strokeColor = canAfford ? .green : .darkGray
             upgradeButton.lineWidth = 2
@@ -4270,22 +4332,31 @@ class GameScene: SKScene {
             upgradeButton.userData = NSMutableDictionary()
             upgradeButton.userData?["tower"] = tower
             upgradeButton.userData?["cost"] = upgradeCost
+            upgradeButton.zPosition = 10  // Ensure button is above other elements
             actionsContainer.addChild(upgradeButton)
             
             let upgradeLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
             upgradeLabel.text = "UPGRADE"
-            upgradeLabel.fontSize = 12
-            upgradeLabel.fontColor = .white
-            upgradeLabel.position = CGPoint(x: -55, y: 6)
+            upgradeLabel.fontSize = 14
+            upgradeLabel.fontColor = SKColor(red: 0.9, green: 1.0, blue: 0.9, alpha: 1.0)  // Lighter green-white
+            upgradeLabel.position = CGPoint(x: -60, y: 8)
             upgradeLabel.name = "upgradeButton"
+            upgradeLabel.isUserInteractionEnabled = false  // Let touches pass through to button
+            upgradeLabel.userData = NSMutableDictionary()
+            upgradeLabel.userData?["tower"] = tower
+            upgradeLabel.userData?["cost"] = upgradeCost
             actionsContainer.addChild(upgradeLabel)
             
             let costLabel = SKLabelNode(fontNamed: "Helvetica")
             costLabel.text = "$\(upgradeCost)"
-            costLabel.fontSize = 10
-            costLabel.fontColor = canAfford ? .green : .gray
-            costLabel.position = CGPoint(x: -55, y: -8)
+            costLabel.fontSize = 12
+            costLabel.fontColor = canAfford ? SKColor(red: 0.5, green: 1.0, blue: 0.5, alpha: 1.0) : .gray  // Lighter green
+            costLabel.position = CGPoint(x: -60, y: -10)
             costLabel.name = "upgradeButton"
+            costLabel.isUserInteractionEnabled = false
+            costLabel.userData = NSMutableDictionary()
+            costLabel.userData?["tower"] = tower
+            costLabel.userData?["cost"] = upgradeCost
             actionsContainer.addChild(costLabel)
         } else {
             // MAX LEVEL - simple text
@@ -4297,10 +4368,10 @@ class GameScene: SKScene {
             actionsContainer.addChild(maxLabel)
         }
         
-        // SIMPLIFIED SELL BUTTON
+        // SIMPLIFIED SELL BUTTON - LARGER HIT AREA
         let sellValue = getSellValue(for: tower)
-        let sellButton = SKShapeNode(rectOf: CGSize(width: 100, height: 40), cornerRadius: 5)
-        sellButton.position = CGPoint(x: 55, y: 0)
+        let sellButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
+        sellButton.position = CGPoint(x: 60, y: 0)
         sellButton.fillColor = SKColor(red: 0.4, green: 0.2, blue: 0.0, alpha: 0.9)
         sellButton.strokeColor = .orange
         sellButton.lineWidth = 2
@@ -4308,30 +4379,39 @@ class GameScene: SKScene {
         sellButton.userData = NSMutableDictionary()
         sellButton.userData?["tower"] = tower
         sellButton.userData?["value"] = sellValue
+        sellButton.zPosition = 10  // Ensure button is above other elements
         actionsContainer.addChild(sellButton)
         
         let sellLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
         sellLabel.text = "SELL"
-        sellLabel.fontSize = 12
-        sellLabel.fontColor = .white
-        sellLabel.position = CGPoint(x: 55, y: 6)
+        sellLabel.fontSize = 14
+        sellLabel.fontColor = SKColor(red: 1.0, green: 0.95, blue: 0.9, alpha: 1.0)  // Lighter orange-white
+        sellLabel.position = CGPoint(x: 60, y: 8)
         sellLabel.name = "sellButton"
+        sellLabel.isUserInteractionEnabled = false  // Let touches pass through to button
+        sellLabel.userData = NSMutableDictionary()
+        sellLabel.userData?["tower"] = tower
+        sellLabel.userData?["value"] = sellValue
         actionsContainer.addChild(sellLabel)
         
         let valueLabel = SKLabelNode(fontNamed: "Helvetica")
         valueLabel.text = "$\(sellValue)"
-        valueLabel.fontSize = 10
-        valueLabel.fontColor = .orange
-        valueLabel.position = CGPoint(x: 55, y: -8)
+        valueLabel.fontSize = 12
+        valueLabel.fontColor = SKColor(red: 1.0, green: 0.8, blue: 0.4, alpha: 1.0)  // Lighter orange
+        valueLabel.position = CGPoint(x: 60, y: -10)
         valueLabel.name = "sellButton"
+        valueLabel.isUserInteractionEnabled = false
+        valueLabel.userData = NSMutableDictionary()
+        valueLabel.userData?["tower"] = tower
+        valueLabel.userData?["value"] = sellValue
         actionsContainer.addChild(valueLabel)
         
-        // SIMPLIFIED CLOSE BUTTON - X in top-right corner
-        let closeButton = SKShapeNode(circleOfRadius: 15)
+        // SIMPLIFIED CLOSE BUTTON - X in top-right corner (LARGER)
+        let closeButton = SKShapeNode(circleOfRadius: 20)
         closeButton.fillColor = SKColor.red.withAlphaComponent(0.9)
         closeButton.strokeColor = .white
         closeButton.lineWidth = 2
-        closeButton.position = CGPoint(x: 120, y: 60)
+        closeButton.position = CGPoint(x: 140, y: 75)
         closeButton.name = "closeUpgradeMenu"
         closeButton.zPosition = 1001
         menu.addChild(closeButton)
