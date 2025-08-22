@@ -639,6 +639,9 @@ class GameScene: SKScene {
         // Play wave complete sound
         // SoundManager.shared.playSound(.waveComplete)
         
+        // Show victory animation for wave completion
+        showVictoryAnimation()
+        
         // Award screen clear charge every 2 waves
         if currentWave % 2 == 0 && screenClearCharges < maxScreenClearCharges {
             screenClearCharges += 1
@@ -738,6 +741,28 @@ class GameScene: SKScene {
             SKAction.fadeOut(withDuration: 1.0),
             SKAction.removeFromParent()
         ]))
+    }
+    
+    private func shakeScreen(intensity: CGFloat = 10, duration: TimeInterval = 0.5) {
+        // Screen shake effect for impacts and explosions
+        let numberOfShakes = Int(duration * 10)
+        var shakeActions: [SKAction] = []
+        
+        for _ in 0..<numberOfShakes {
+            let moveX = CGFloat.random(in: -intensity...intensity)
+            let moveY = CGFloat.random(in: -intensity...intensity)
+            let shakeAction = SKAction.moveBy(x: moveX, y: moveY, duration: 0.05)
+            shakeActions.append(shakeAction)
+            shakeActions.append(SKAction.moveBy(x: -moveX, y: -moveY, duration: 0.05))
+        }
+        
+        // Apply shake to camera
+        if let camera = camera {
+            camera.run(SKAction.sequence(shakeActions))
+        } else {
+            // Fallback: shake the entire scene
+            run(SKAction.sequence(shakeActions))
+        }
     }
     
     private func showReadyForNextWaveMessage() {
@@ -1877,6 +1902,62 @@ class GameScene: SKScene {
                 y: -150 + (150 * localT)
             )
         }
+    }
+    
+    private func showBossWarning(bossType: String) {
+        // Create dramatic boss warning
+        let warningContainer = SKNode()
+        warningContainer.position = CGPoint(x: 0, y: 100)
+        warningContainer.zPosition = 2000
+        
+        // Red flashing background
+        let flashBg = SKShapeNode(rectOf: CGSize(width: size.width, height: 100))
+        flashBg.fillColor = SKColor.red.withAlphaComponent(0.3)
+        flashBg.strokeColor = .clear
+        flashBg.position = CGPoint.zero
+        warningContainer.addChild(flashBg)
+        
+        // Warning text
+        let warningLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
+        warningLabel.text = bossType == "titan" ? "⚠️ TITAN APPROACHING ⚠️" : 
+                           bossType == "boss" ? "☠️ MEGA BOSS INCOMING ☠️" : 
+                           "⚡ DESTROYER DETECTED ⚡"
+        warningLabel.fontSize = 32
+        warningLabel.fontColor = .red
+        warningLabel.position = CGPoint(x: 0, y: 10)
+        warningContainer.addChild(warningLabel)
+        
+        let subLabel = SKLabelNode(fontNamed: "Helvetica")
+        subLabel.text = "PREPARE YOUR DEFENSES!"
+        subLabel.fontSize = 18
+        subLabel.fontColor = .white
+        subLabel.position = CGPoint(x: 0, y: -20)
+        warningContainer.addChild(subLabel)
+        
+        uiLayer.addChild(warningContainer)
+        
+        // Dramatic animation
+        let flash = SKAction.sequence([
+            SKAction.fadeAlpha(to: 1.0, duration: 0.2),
+            SKAction.fadeAlpha(to: 0.3, duration: 0.2)
+        ])
+        flashBg.run(SKAction.repeat(flash, count: 5))
+        
+        let pulse = SKAction.sequence([
+            SKAction.scale(to: 1.2, duration: 0.3),
+            SKAction.scale(to: 1.0, duration: 0.3)
+        ])
+        warningLabel.run(SKAction.repeat(pulse, count: 3))
+        
+        // Screen shake for drama
+        shakeScreen(intensity: 5, duration: 1.0)
+        
+        // Remove after 3 seconds
+        warningContainer.run(SKAction.sequence([
+            SKAction.wait(forDuration: 3.0),
+            SKAction.fadeOut(withDuration: 0.5),
+            SKAction.removeFromParent()
+        ]))
     }
     
     private func createHeartShape() -> SKShapeNode {
@@ -5459,32 +5540,31 @@ class GameScene: SKScene {
         isWaveActive = true
         isCheckingWaveCompletion = false  // Reset the checking flag for new wave
         enemiesSpawned = 0
-        // BALANCED ENEMY COUNT PROGRESSION
-        // Each planet has appropriate enemy counts for its difficulty
+        // ENHANCED ENEMY COUNT - More enemies per wave since fewer waves
+        // Each wave gets progressively harder with more enemies
         switch currentMap {
-        case 1:  // Mercury - Tutorial
-            enemiesPerWave = 5 + (currentWave * 2)  // Wave 1: 7, Wave 2: 9, Wave 3: 11
-        case 2:  // Venus - First Challenge  
-            enemiesPerWave = 8 + (currentWave * 2)  // Wave 1: 10, Wave 2: 12, Wave 3: 14
-        case 3:  // Kepler Station - Defend the Station
-            // Reduced by 15% for better balance
-            enemiesPerWave = Int(Double(10 + (currentWave * 2)) * 0.85) // Wave 1: 10, Wave 2: 12, Wave 3: 14
-        case 4:  // Mars - Military Outpost
-            enemiesPerWave = 12 + (currentWave * 2) // Wave 1: 14, Wave 2: 16, Wave 3: 18
-        case 5:  // Ceres - Asteroid Belt (swarms)
-            enemiesPerWave = 15 + (currentWave * 3) // More enemies but weaker types
-        case 6:  // Jupiter - Gas Giant
-            enemiesPerWave = 14 + (currentWave * 2) // Fewer but tougher enemies
-        case 7:  // Saturn - Ring Defense
-            enemiesPerWave = 16 + (currentWave * 2)
-        case 8:  // Uranus - Ice World
-            enemiesPerWave = 18 + (currentWave * 2)
-        case 9:  // Neptune - Deep Space
-            enemiesPerWave = 20 + (currentWave * 2)
-        case 10...12:  // Pluto, Eris, Makemake - Endgame
-            enemiesPerWave = 22 + (currentMap - 9) * 3 + (currentWave * 3)
+        case 1:  // Mercury - Tutorial (3 waves)
+            enemiesPerWave = 8 + (currentWave * 4)   // W1: 12, W2: 16, W3: 20
+        case 2:  // Venus (4 waves)
+            enemiesPerWave = 12 + (currentWave * 5)  // W1: 17, W2: 22, W3: 27, W4: 32
+        case 3:  // Earth Station (4 waves)
+            enemiesPerWave = 15 + (currentWave * 5)  // W1: 20, W2: 25, W3: 30, W4: 35
+        case 4:  // Mars (5 waves)
+            enemiesPerWave = 18 + (currentWave * 6)  // W1: 24, W2: 30, W3: 36, W4: 42, W5: 48
+        case 5:  // Neptune (5 waves)
+            enemiesPerWave = 20 + (currentWave * 7)  // W1: 27, W2: 34, W3: 41, W4: 48, W5: 55
+        case 6:  // Saturn (6 waves)
+            enemiesPerWave = 22 + (currentWave * 7)  // W1: 29, W2: 36, W3: 43, W4: 50, W5: 57, W6: 64
+        case 7:  // Jupiter (6 waves)
+            enemiesPerWave = 25 + (currentWave * 8)  // W1: 33, W2: 41, W3: 49, W4: 57, W5: 65, W6: 73
+        case 8:  // Mars Command (7 waves)
+            enemiesPerWave = 28 + (currentWave * 8)  // W1: 36, W2: 44, W3: 52, W4: 60, W5: 68, W6: 76, W7: 84
+        case 9:  // Lunar Defense (7 waves)
+            enemiesPerWave = 30 + (currentWave * 9)  // W1: 39, W2: 48, W3: 57, W4: 66, W5: 75, W6: 84, W7: 93
+        case 10:  // Earth Final Stand (8 waves)
+            enemiesPerWave = 35 + (currentWave * 10) // W1: 45, W2: 55, W3: 65, W4: 75, W5: 85, W6: 95, W7: 105, W8: 115
         default:
-            enemiesPerWave = 25 + (currentWave * 3)  // Fallback for additional maps
+            enemiesPerWave = 30 + (currentWave * 8)  // Fallback for additional maps
         }
         
         // Start spawning enemies
@@ -5505,10 +5585,12 @@ class GameScene: SKScene {
             }
         }
         
-        // Progressively faster spawn rate both within map and across maps
-        let mapSpeedBoost = Double(currentMap - 1) * 0.15   // 15% faster per map
-        let waveSpeedBoost = Double(currentWave - 1) * 0.1  // 10% faster per wave
-        let spawnDelay = max(0.6, 1.5 - mapSpeedBoost - waveSpeedBoost)  // Gets faster each wave AND map
+        // Strategic spawn delays - longer waves with varied pacing
+        // Later waves spawn faster to increase pressure
+        let baseDelay = 2.0  // Base 2 seconds between spawns for pacing
+        let mapSpeedBoost = Double(currentMap - 1) * 0.1    // 10% faster per map
+        let waveSpeedBoost = Double(currentWave - 1) * 0.15  // 15% faster per wave
+        let spawnDelay = max(0.8, baseDelay - mapSpeedBoost - waveSpeedBoost)  // Min 0.8 seconds
         let waitAction = SKAction.wait(forDuration: spawnDelay)
         let sequence = SKAction.sequence([spawnAction, waitAction])
         let repeatAction = SKAction.repeat(sequence, count: enemiesPerWave)
@@ -5526,8 +5608,10 @@ class GameScene: SKScene {
         // Get enemy type
         let enemyType = getEnemyTypeForWave()
         
-        // Play spawn sound for boss enemies
-        if enemyType == "boss" || enemyType == "destroyer" {
+        // Check if boss is coming and show warning
+        if enemyType == "boss" || enemyType == "destroyer" || enemyType == "titan" {
+            // Show boss warning!
+            showBossWarning(bossType: enemyType)
             // SoundManager.shared.playSound(.bossSpawn)
         }
         
@@ -5582,9 +5666,28 @@ class GameScene: SKScene {
     }
     
     private func getEnemyTypeForWave() -> String {
-        // COMPREHENSIVE DIFFICULTY PROGRESSION SYSTEM WITH NEW ENEMY TYPES
-        // Each planet has unique enemy compositions that increase in difficulty
+        // Check if this is the LAST enemy of the LAST wave - spawn BOSS
+        let isLastWave = currentWave >= wavesPerMap
+        let isLastEnemy = enemiesSpawned == enemiesPerWave - 1
         
+        if isLastWave && isLastEnemy {
+            // BOSS TIME! Different boss for each map
+            switch currentMap {
+            case 1...3: return "destroyer"    // Early maps get destroyer boss
+            case 4...6: return "titan"         // Mid maps get titan boss
+            case 7...9: return "boss"          // Late maps get mega boss
+            case 10:    return "boss"          // Final map gets ultimate boss
+            default:    return "boss"
+            }
+        }
+        
+        // Check for mini-boss at end of non-final waves
+        if !isLastWave && isLastEnemy && currentWave > 1 {
+            // Mini-boss at end of wave
+            return Int.random(in: 1...2) == 1 ? "destroyer" : "shield"
+        }
+        
+        // Regular enemy spawning logic
         switch currentMap {
         case 1:  // ALPHA CENTAURI - First Contact (Tutorial)
             // Theme: Learn basic enemy types
@@ -5894,6 +5997,39 @@ class GameScene: SKScene {
             speed = 0.6
             salvageReward = 18  // Destroyer reward
             
+            // SPECIAL ABILITY: Shield that regenerates
+            enemy.userData?["hasShield"] = true
+            enemy.userData?["shieldHealth"] = 10
+            enemy.userData?["maxShieldHealth"] = 10
+            
+            // Add visual shield
+            let shield = SKShapeNode(circleOfRadius: 25)
+            shield.strokeColor = SKColor.cyan.withAlphaComponent(0.5)
+            shield.fillColor = SKColor.cyan.withAlphaComponent(0.1)
+            shield.lineWidth = 2
+            shield.glowWidth = 5
+            shield.name = "shield"
+            body.addChild(shield)
+            
+            // Shield regeneration timer
+            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+                guard enemy.parent != nil else { 
+                    timer.invalidate()
+                    return 
+                }
+                // Regenerate shield
+                if let currentShield = enemy.userData?["shieldHealth"] as? Int,
+                   let maxShield = enemy.userData?["maxShieldHealth"] as? Int {
+                    if currentShield < maxShield {
+                        enemy.userData?["shieldHealth"] = min(currentShield + 2, maxShield)
+                        // Update visual
+                        if let shieldNode = enemy.childNode(withName: "*/shield") as? SKShapeNode {
+                            shieldNode.alpha = CGFloat(currentShield + 2) / CGFloat(maxShield)
+                        }
+                    }
+                }
+            }
+            
         case "titan":
             // MASSIVE ALIEN BOSS - Extremely slow but incredibly powerful
             let path = CGMutablePath()
@@ -5935,6 +6071,39 @@ class GameScene: SKScene {
             health = 100  // EXTREMELY high health
             speed = 0.3   // VERY slow movement
             salvageReward = 50  // Huge reward for defeating it
+            
+            // SPECIAL ABILITY: Health regeneration
+            enemy.userData?["hasRegeneration"] = true
+            enemy.userData?["regenRate"] = 2  // Heals 2 HP every second
+            
+            // Regeneration timer
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                guard enemy.parent != nil else { 
+                    timer.invalidate()
+                    return 
+                }
+                // Regenerate health
+                if let currentHealth = enemy.userData?["health"] as? Int {
+                    if currentHealth < 100 && currentHealth > 0 {
+                        enemy.userData?["health"] = min(currentHealth + 2, 100)
+                        // Visual effect for regeneration
+                        let healEffect = SKShapeNode(circleOfRadius: 30)
+                        healEffect.strokeColor = SKColor.green.withAlphaComponent(0.8)
+                        healEffect.fillColor = .clear
+                        healEffect.lineWidth = 2
+                        healEffect.glowWidth = 10
+                        healEffect.position = CGPoint.zero
+                        enemy.addChild(healEffect)
+                        healEffect.run(SKAction.sequence([
+                            SKAction.group([
+                                SKAction.scale(to: 2.0, duration: 0.5),
+                                SKAction.fadeOut(withDuration: 0.5)
+                            ]),
+                            SKAction.removeFromParent()
+                        ]))
+                    }
+                }
+            }
             
             // Add armor plates
             let innerPath = CGMutablePath()
@@ -6834,6 +7003,7 @@ class GameScene: SKScene {
             
             // Check game over
             if self.stationHealth <= 0 {
+                self.showDefeatAnimation()
                 self.gameOver()
             }
         }
@@ -8928,27 +9098,21 @@ class GameScene: SKScene {
     }
     
     private func updateWavesPerMap() {
-        // Get waves from vector_maps.txt data if available
-        if let mapData = currentMapData {
-            wavesPerMap = mapData.totalWaves
-            print("Map \(currentMap) loaded with \(wavesPerMap) waves from map data")
-        } else {
-            // Fallback wave counts if map data not loaded
-            switch currentMap {
-            case 1: wavesPerMap = 10   // Tutorial
-            case 2: wavesPerMap = 12
-            case 3: wavesPerMap = 15
-            case 4: wavesPerMap = 18
-            case 5: wavesPerMap = 25   // Neptune
-            case 6: wavesPerMap = 30   // Saturn
-            case 7: wavesPerMap = 35   // Jupiter
-            case 8: wavesPerMap = 40   // Mars Command
-            case 9: wavesPerMap = 45   // Lunar Defense
-            case 10: wavesPerMap = 50  // Earth Final Stand
-            default: wavesPerMap = 20
-            }
-            print("Map \(currentMap) set to \(wavesPerMap) waves (fallback)")
+        // Set wave counts - 3-8 waves max
+        switch currentMap {
+        case 1: wavesPerMap = 3    // Tutorial - 3 waves
+        case 2: wavesPerMap = 4    // Venus - 4 waves
+        case 3: wavesPerMap = 4    // Earth Station - 4 waves
+        case 4: wavesPerMap = 5    // Mars - 5 waves
+        case 5: wavesPerMap = 5    // Neptune - 5 waves
+        case 6: wavesPerMap = 6    // Saturn - 6 waves
+        case 7: wavesPerMap = 6    // Jupiter - 6 waves
+        case 8: wavesPerMap = 7    // Mars Command - 7 waves
+        case 9: wavesPerMap = 7    // Lunar Defense - 7 waves
+        case 10: wavesPerMap = 8   // Earth Final Stand - 8 waves
+        default: wavesPerMap = 5
         }
+        print("Map \(currentMap) set to \(wavesPerMap) waves")
     }
     
     private func loadMapLayout() {
@@ -13066,5 +13230,255 @@ class GameScene: SKScene {
     
     private func hasPowerUp(type: PowerUpType) -> Bool {
         return activePowerUps.contains { $0.type == type }
+    }
+    
+    // MARK: - Enhanced Visual Effects
+    
+    private func createImpactParticles(at position: CGPoint, type: String, damage: Int) {
+        // Enhanced impact particles based on weapon type
+        let particleCount: Int
+        let particleColor: SKColor
+        let particleSize: CGFloat
+        let particleSpeed: CGFloat
+        
+        switch type {
+        case "laser":
+            particleCount = 8
+            particleColor = SKColor(red: 1.0, green: 0.2, blue: 0.2, alpha: 1.0)
+            particleSize = 3
+            particleSpeed = 100
+            
+        case "plasma":
+            particleCount = 12
+            particleColor = SKColor(red: 0.2, green: 0.8, blue: 1.0, alpha: 1.0)
+            particleSize = 4
+            particleSpeed = 120
+            
+        case "cannon", "kinetic":
+            particleCount = 15
+            particleColor = SKColor(red: 1.0, green: 0.6, blue: 0.0, alpha: 1.0)
+            particleSize = 5
+            particleSpeed = 150
+            
+        case "missile":
+            particleCount = 20
+            particleColor = SKColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
+            particleSize = 6
+            particleSpeed = 180
+            
+        case "rail":
+            particleCount = 10
+            particleColor = SKColor(red: 0.8, green: 0.8, blue: 1.0, alpha: 1.0)
+            particleSize = 3
+            particleSpeed = 200
+            
+        case "freeze":
+            particleCount = 10
+            particleColor = SKColor(red: 0.7, green: 0.9, blue: 1.0, alpha: 1.0)
+            particleSize = 4
+            particleSpeed = 80
+            
+        case "tesla":
+            particleCount = 8
+            particleColor = SKColor(red: 0.8, green: 0.0, blue: 1.0, alpha: 1.0)
+            particleSize = 3
+            particleSpeed = 120
+            
+        default:
+            particleCount = 6
+            particleColor = .white
+            particleSize = 3
+            particleSpeed = 100
+        }
+        
+        // Scale particles based on damage
+        let damageScale = min(CGFloat(damage) / 10.0, 2.0)
+        
+        // Create particles
+        for i in 0..<particleCount {
+            let particle = SKShapeNode(circleOfRadius: particleSize * damageScale)
+            particle.fillColor = particleColor
+            particle.strokeColor = .clear
+            particle.glowWidth = particleSize * 2
+            particle.position = position
+            particle.zPosition = 100
+            particle.alpha = 1.0
+            effectsLayer.addChild(particle)
+            
+            // Random direction with slight upward bias
+            let angle = CGFloat(i) * (CGFloat.pi * 2 / CGFloat(particleCount)) + CGFloat.random(in: -0.3...0.3)
+            let distance = CGFloat.random(in: 20...50) * damageScale
+            let destination = CGPoint(
+                x: position.x + cos(angle) * distance,
+                y: position.y + sin(angle) * distance + CGFloat.random(in: 0...10)
+            )
+            
+            // Animate particle
+            let moveAction = SKAction.move(to: destination, duration: 0.4)
+            let fadeAction = SKAction.fadeOut(withDuration: 0.4)
+            let scaleAction = SKAction.scale(to: 0.1, duration: 0.4)
+            let group = SKAction.group([moveAction, fadeAction, scaleAction])
+            
+            particle.run(SKAction.sequence([group, SKAction.removeFromParent()]))
+        }
+        
+        // Add impact flash
+        let flash = SKShapeNode(circleOfRadius: particleSize * 3)
+        flash.fillColor = particleColor
+        flash.strokeColor = .clear
+        flash.glowWidth = particleSize * 4
+        flash.position = position
+        flash.zPosition = 99
+        flash.alpha = 0.8
+        effectsLayer.addChild(flash)
+        
+        let flashAction = SKAction.sequence([
+            SKAction.scale(to: 2.5, duration: 0.1),
+            SKAction.group([
+                SKAction.fadeOut(withDuration: 0.15),
+                SKAction.scale(to: 4.0, duration: 0.15)
+            ]),
+            SKAction.removeFromParent()
+        ])
+        flash.run(flashAction)
+    }
+    
+    private func showVictoryAnimation() {
+        // Create victory fireworks
+        for _ in 0..<5 {
+            let delay = Double.random(in: 0...1.0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+                guard let self = self else { return }
+                let x = CGFloat.random(in: -200...200)
+                let y = CGFloat.random(in: -100...100)
+                self.createFirework(at: CGPoint(x: x, y: y), color: self.randomBrightColor())
+            }
+        }
+        
+        // Victory pulse effect
+        let pulse = SKShapeNode(circleOfRadius: 300)
+        pulse.strokeColor = SKColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0)
+        pulse.lineWidth = 5
+        pulse.fillColor = .clear
+        pulse.glowWidth = 20
+        pulse.alpha = 0
+        pulse.zPosition = 1000
+        uiLayer.addChild(pulse)
+        
+        let victoryPulse = SKAction.sequence([
+            SKAction.fadeAlpha(to: 0.8, duration: 0.3),
+            SKAction.group([
+                SKAction.scale(to: 2.0, duration: 1.0),
+                SKAction.fadeOut(withDuration: 1.0)
+            ]),
+            SKAction.removeFromParent()
+        ])
+        pulse.run(victoryPulse)
+    }
+    
+    private func showDefeatAnimation() {
+        // Create defeat shockwave
+        let shockwave = SKShapeNode(circleOfRadius: 50)
+        shockwave.strokeColor = SKColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        shockwave.lineWidth = 8
+        shockwave.fillColor = .clear
+        shockwave.glowWidth = 15
+        shockwave.position = CGPoint(x: 0, y: 0) // Station position
+        shockwave.zPosition = 1000
+        effectsLayer.addChild(shockwave)
+        
+        let defeatWave = SKAction.sequence([
+            SKAction.group([
+                SKAction.scale(to: 8.0, duration: 1.5),
+                SKAction.fadeOut(withDuration: 1.5)
+            ]),
+            SKAction.removeFromParent()
+        ])
+        shockwave.run(defeatWave)
+        
+        // Screen flash red
+        let flash = SKSpriteNode(color: SKColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.3), size: self.size)
+        flash.position = CGPoint.zero
+        flash.zPosition = 999
+        uiLayer.addChild(flash)
+        
+        flash.run(SKAction.sequence([
+            SKAction.fadeAlpha(to: 0.5, duration: 0.1),
+            SKAction.fadeOut(withDuration: 0.5),
+            SKAction.removeFromParent()
+        ]))
+        
+        // Shake screen intensely
+        shakeScreen(intensity: 10, duration: 1.5)
+    }
+    
+    private func createFirework(at position: CGPoint, color: SKColor) {
+        // Create firework explosion
+        let particleCount = 30
+        
+        for i in 0..<particleCount {
+            let particle = SKShapeNode(circleOfRadius: 3)
+            particle.fillColor = color
+            particle.strokeColor = .clear
+            particle.glowWidth = 5
+            particle.position = position
+            particle.zPosition = 500
+            effectsLayer.addChild(particle)
+            
+            let angle = CGFloat(i) * (CGFloat.pi * 2 / CGFloat(particleCount))
+            let distance = CGFloat.random(in: 50...150)
+            let destination = CGPoint(
+                x: position.x + cos(angle) * distance,
+                y: position.y + sin(angle) * distance
+            )
+            
+            // Trail effect
+            let trail = SKShapeNode(circleOfRadius: 2)
+            trail.fillColor = color.withAlphaComponent(0.5)
+            trail.strokeColor = .clear
+            trail.glowWidth = 3
+            particle.addChild(trail)
+            
+            let move = SKAction.move(to: destination, duration: 1.0)
+            let fade = SKAction.fadeOut(withDuration: 1.0)
+            let scale = SKAction.scale(to: 0.1, duration: 1.0)
+            let group = SKAction.group([move, fade, scale])
+            
+            particle.run(SKAction.sequence([
+                group,
+                SKAction.removeFromParent()
+            ]))
+        }
+        
+        // Central flash
+        let flash = SKShapeNode(circleOfRadius: 20)
+        flash.fillColor = color
+        flash.strokeColor = .clear
+        flash.glowWidth = 30
+        flash.position = position
+        flash.zPosition = 499
+        effectsLayer.addChild(flash)
+        
+        flash.run(SKAction.sequence([
+            SKAction.scale(to: 3.0, duration: 0.3),
+            SKAction.group([
+                SKAction.fadeOut(withDuration: 0.3),
+                SKAction.scale(to: 5.0, duration: 0.3)
+            ]),
+            SKAction.removeFromParent()
+        ]))
+    }
+    
+    private func randomBrightColor() -> SKColor {
+        let colors: [SKColor] = [
+            SKColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0),
+            SKColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0),
+            SKColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0),
+            SKColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0),
+            SKColor(red: 1.0, green: 0.0, blue: 1.0, alpha: 1.0),
+            SKColor(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0),
+            SKColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0)
+        ]
+        return colors.randomElement() ?? .white
     }
 }

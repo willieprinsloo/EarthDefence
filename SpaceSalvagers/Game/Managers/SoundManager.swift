@@ -448,31 +448,10 @@ extension SoundManager {
     func generateProceduralSound(_ type: SoundEffect) -> SKAction {
         guard soundEnabled else { return SKAction() }
         
-        let frequency: Float
-        
-        switch type {
-        case .cannonFire:
-            frequency = 150
-        case .laserFire:
-            frequency = 800
-        case .plasmaFire:
-            frequency = 600
-        case .enemyHit:
-            frequency = 400
-        case .enemyDestroyed:
-            frequency = 200
-        case .buttonTap:
-            frequency = 1000
-        case .creditEarned:
-            frequency = 1500
-        default:
-            frequency = 500
-        }
-        
         // Create a custom sound action
         return SKAction.run {
             // This would normally generate a tone, but for now we'll use a placeholder
-            // Playing procedural sound: \(type.rawValue) at \(frequency)Hz
+            // Playing procedural sound: \(type.rawValue)
         }
     }
 }
