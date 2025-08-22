@@ -1757,6 +1757,10 @@ class GameScene: SKScene {
     }
     
     private func createStartIndicator(at position: CGPoint) {
+        // Temporarily disabled - spawn indicators not needed as spawn portals are clear enough
+        return
+        
+        /*
         let startContainer = SKNode()
         startContainer.position = position
         startContainer.zPosition = 50
@@ -1782,6 +1786,7 @@ class GameScene: SKScene {
         startContainer.run(SKAction.repeatForever(pulse))
         
         gameplayLayer.addChild(startContainer)
+        */
     }
     
     private func createEndIndicator() {
@@ -3261,7 +3266,7 @@ class GameScene: SKScene {
                                               clickLocation.y - buildNode.position.y)
                 
                 // Only proceed if we clicked within the build node circle (radius ~20)
-                if distanceFromCenter > 25 {
+                if distanceFromCenter > 20 {  // Even tighter - must click directly on build node
                     print("Click too far from build node center: \(distanceFromCenter)")
                     continue  // Skip this node, check next
                 }
@@ -3355,8 +3360,8 @@ class GameScene: SKScene {
                 let distanceFromTower = hypot(clickLocation.x - node.position.x,
                                              clickLocation.y - node.position.y)
                 
-                // Only proceed if we clicked within the tower itself (radius ~20)
-                if distanceFromTower > 20 {
+                // Only proceed if we clicked within the tower itself (radius ~15 for more precision)
+                if distanceFromTower > 15 {
                     print("Click too far from tower center: \(distanceFromTower)")
                     continue  // Skip this node, check next
                 }
@@ -8163,18 +8168,19 @@ class GameScene: SKScene {
         
         // Apply slow effect to target - 75% slow (25% of normal speed)
         let slowMultiplier: CGFloat = 0.25
-        let slowDuration: TimeInterval = 1.0 + TimeInterval(level) * 0.5  // Longer slow at higher levels
+        let slowDuration: TimeInterval = 2.0 + TimeInterval(level) * 0.5  // Longer slow at higher levels
         
-        // Store original speed if not already slowed
-        if target.userData?["originalSpeed"] == nil {
-            let currentSpeed = target.userData?["speed"] as? CGFloat ?? 100
-            target.userData?["originalSpeed"] = currentSpeed
+        // Check if already frozen
+        if target.userData?["isFrozen"] as? Bool == true {
+            // Refresh freeze duration
+            target.userData?["freezeEndTime"] = CACurrentMediaTime() + slowDuration
+            return  // Already frozen, just refresh duration
         }
         
-        // Apply the slow effect
-        let originalSpeed = target.userData?["originalSpeed"] as? CGFloat ?? 100
-        target.userData?["speed"] = originalSpeed * slowMultiplier
+        // Apply the slow effect using SKAction.speed
+        target.userData?["isFrozen"] = true
         target.userData?["freezeEndTime"] = CACurrentMediaTime() + slowDuration
+        target.speed = slowMultiplier  // This actually slows down all actions on the enemy!
         
         // Visual ice effect on enemy
         if target.childNode(withName: "freezeEffect") == nil {
@@ -8213,12 +8219,11 @@ class GameScene: SKScene {
                 // Check if freeze effect has expired
                 if let freezeEndTime = target.userData?["freezeEndTime"] as? TimeInterval {
                     if CACurrentMediaTime() >= freezeEndTime {
-                        // Restore original speed
-                        if let originalSpeed = target.userData?["originalSpeed"] as? CGFloat {
-                            target.userData?["speed"] = originalSpeed
-                            target.userData?["originalSpeed"] = nil
-                            target.userData?["freezeEndTime"] = nil
-                        }
+                        // Restore normal speed
+                        target.speed = 1.0
+                        target.userData?["isFrozen"] = false
+                        target.userData?["freezeEndTime"] = nil
+                        
                         // Remove visual effect
                         target.childNode(withName: "freezeEffect")?.removeFromParent()
                     }
@@ -8908,33 +8913,42 @@ class GameScene: SKScene {
     
     private func getMapName(for mapNumber: Int) -> String {
         switch mapNumber {
-        case 1: return "Alpha Centauri Outpost"
-        case 2: return "Proxima B Colony"
-        case 3: return "Kepler Station"
-        case 4: return "Tau Ceti Base"
-        case 5: return "Pluto Defense Line"
-        case 6: return "Neptune Fortress"
-        case 7: return "Uranus Shield Station"
-        case 8: return "Saturn Ring Platform"
-        case 9: return "Jupiter Stronghold"
-        case 10: return "Mars Command Center"
-        case 11: return "Lunar Defense Base"
-        case 12: return "EARTH - FINAL STAND"
+        case 1: return "Mercury Outpost - Tutorial"
+        case 2: return "Venus Cloud Colony"
+        case 3: return "Earth Defense Station"
+        case 4: return "Mars Forward Base"
+        case 5: return "Neptune - The Spiral"
+        case 6: return "Saturn - Multi-Path Junction"
+        case 7: return "Jupiter's Highways"
+        case 8: return "Mars Command"
+        case 9: return "Lunar Defense"
+        case 10: return "EARTH - FINAL STAND"
         default: return "Deep Space \(mapNumber)"
         }
     }
     
     private func updateWavesPerMap() {
-        // Update waves per map based on current level (per game design doc)
-        switch currentMap {
-        case 1...2:
-            wavesPerMap = 3  // Maps 1-2: 3 waves
-        case 3...4:
-            wavesPerMap = 4  // Maps 3-4: 4 waves  
-        default:
-            wavesPerMap = 5  // Maps 5+: 5 waves
+        // Get waves from vector_maps.txt data if available
+        if let mapData = currentMapData {
+            wavesPerMap = mapData.totalWaves
+            print("Map \(currentMap) loaded with \(wavesPerMap) waves from map data")
+        } else {
+            // Fallback wave counts if map data not loaded
+            switch currentMap {
+            case 1: wavesPerMap = 10   // Tutorial
+            case 2: wavesPerMap = 12
+            case 3: wavesPerMap = 15
+            case 4: wavesPerMap = 18
+            case 5: wavesPerMap = 25   // Neptune
+            case 6: wavesPerMap = 30   // Saturn
+            case 7: wavesPerMap = 35   // Jupiter
+            case 8: wavesPerMap = 40   // Mars Command
+            case 9: wavesPerMap = 45   // Lunar Defense
+            case 10: wavesPerMap = 50  // Earth Final Stand
+            default: wavesPerMap = 20
+            }
+            print("Map \(currentMap) set to \(wavesPerMap) waves (fallback)")
         }
-        print("Map \(currentMap) set to \(wavesPerMap) waves")
     }
     
     private func loadMapLayout() {
@@ -10418,29 +10432,32 @@ class GameScene: SKScene {
         // Detect device type for enhanced animations
         let deviceType = UIDevice.current.userInterfaceIdiom
         let isIPad = deviceType == .pad
-        let animationCount = isIPad ? 15 : 8  // More animations for iPad
         
-        // Add floating debris in background
-        for _ in 0..<animationCount {
-            let debris = SKShapeNode(rectOf: CGSize(width: CGFloat.random(in: 2...6), 
-                                                     height: CGFloat.random(in: 2...6)))
-            debris.fillColor = SKColor.white.withAlphaComponent(0.1)
-            debris.strokeColor = .clear
-            debris.position = CGPoint(x: CGFloat.random(in: -size.width/2...size.width/2),
-                                    y: CGFloat.random(in: -size.height/2...size.height/2))
-            debris.zPosition = -90
-            backgroundLayer.addChild(debris)
+        // Skip floating debris for Earth map (map 10) - it has its own detailed background
+        if currentMap != 10 {
+            let animationCount = isIPad ? 15 : 8  // More animations for iPad
             
-            // Floating animation
-            let duration = Double.random(in: 20...40)
-            let moveX = CGFloat.random(in: -50...50)
-            let moveY = CGFloat.random(in: -30...30)
-            let float = SKAction.sequence([
-                SKAction.moveBy(x: moveX, y: moveY, duration: duration/2),
-                SKAction.moveBy(x: -moveX, y: -moveY, duration: duration/2)
-            ])
-            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: duration)
-            debris.run(SKAction.repeatForever(SKAction.group([float, rotate])))
+            // Add floating debris in background - but make them circular instead of rectangular
+            for _ in 0..<animationCount {
+                let debris = SKShapeNode(circleOfRadius: CGFloat.random(in: 2...4))
+                debris.fillColor = SKColor.white.withAlphaComponent(0.05)  // Even more subtle
+                debris.strokeColor = .clear
+                debris.position = CGPoint(x: CGFloat.random(in: -size.width/2...size.width/2),
+                                        y: CGFloat.random(in: -size.height/2...size.height/2))
+                debris.zPosition = -90
+                backgroundLayer.addChild(debris)
+                
+                // Floating animation
+                let duration = Double.random(in: 20...40)
+                let moveX = CGFloat.random(in: -50...50)
+                let moveY = CGFloat.random(in: -30...30)
+                let float = SKAction.sequence([
+                    SKAction.moveBy(x: moveX, y: moveY, duration: duration/2),
+                    SKAction.moveBy(x: -moveX, y: -moveY, duration: duration/2)
+                ])
+                let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: duration)
+                debris.run(SKAction.repeatForever(SKAction.group([float, rotate])))
+            }
         }
         
         // Add distant ships (more for iPad)
@@ -10643,22 +10660,22 @@ class GameScene: SKScene {
     
     private func createStarBackground() {
         // Create map-specific themed backgrounds
+        // Maps 5-10 have their planets added by addMapSpecificBackground()
         switch currentMap {
         case 1:
-            createMercuryBackground()
+            createMercuryBackground()  // Map 1: Mercury
         case 2:
-            createVenusBackground()
+            createVenusBackground()     // Map 2: Venus
         case 3:
-            createEarthDefenseBackground()
+            createEarthDefenseBackground()  // Map 3: Earth Defense Station
         case 4:
-            createMarsBackground()
-        case 5:
-            createAsteroidBeltBackground()
-        case 6:
-            createNeptuneBackground()
-        case 7:
-            createSaturnBackground()
-        case 8...12:
+            createMarsBackground()      // Map 4: Mars
+        case 5, 6, 7, 8, 9, 10:
+            // Maps 5-10 have custom planets added by addMapSpecificBackground()
+            // Map 5: Neptune, Map 6: Saturn, Map 7: Jupiter
+            // Map 8: Mars, Map 9: Moon, Map 10: Earth
+            createDefaultSpaceBackground()  // Just stars, no duplicate planets
+        case 11...12:
             createOuterPlanetsBackground()
         default:
             // Default space background
