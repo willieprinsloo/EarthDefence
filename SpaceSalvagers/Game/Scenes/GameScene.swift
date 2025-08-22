@@ -3243,15 +3243,21 @@ class GameScene: SKScene {
                 }
                 
                 // Always check if there's a tower at this position first (in towerLayer)
+                // Convert build node position to scene coordinates for accurate comparison
+                let buildNodeScenePos = buildNode.convert(CGPoint.zero, to: self)
+                
                 var towerFound: SKNode? = nil
                 towerLayer.enumerateChildNodes(withName: "tower_*") { towerNode, _ in
                     if towerFound == nil {
-                        let distance = hypot(towerNode.position.x - buildNode.position.x,
-                                           towerNode.position.y - buildNode.position.y)
+                        // Convert tower position to scene coordinates
+                        let towerScenePos = towerNode.convert(CGPoint.zero, to: self)
+                        let distance = hypot(towerScenePos.x - buildNodeScenePos.x,
+                                           towerScenePos.y - buildNodeScenePos.y)
                         if distance < 25 {  // Tighter tolerance
                             // Tower found at this position
                             towerFound = towerNode
-                            print("Found tower at build node position: \(towerNode.name ?? "unknown") at distance \(distance)")
+                            print("Found tower \(towerNode.name ?? "unknown") at distance \(distance)")
+                            print("  Build node scene pos: \(buildNodeScenePos), Tower scene pos: \(towerScenePos)")
                         }
                     }
                 }
@@ -3268,13 +3274,16 @@ class GameScene: SKScene {
                         print("Warning: Build node marked as occupied but no tower found, doing thorough search")
                         
                         // Do a more extensive search for any tower at this position
+                        // Using scene coordinates for accurate comparison
                         var thoroughTowerFound: SKNode? = nil
                         for child in towerLayer.children {
                             if child.name?.contains("tower_") == true {
-                                let distance = hypot(child.position.x - buildNode.position.x, 
-                                                   child.position.y - buildNode.position.y)
+                                let towerScenePos = child.convert(CGPoint.zero, to: self)
+                                let distance = hypot(towerScenePos.x - buildNodeScenePos.x, 
+                                                   towerScenePos.y - buildNodeScenePos.y)
                                 if distance < 40 {
                                     thoroughTowerFound = child
+                                    print("Found tower in thorough search: \(child.name ?? "unknown") at distance \(distance)")
                                     break
                                 }
                             }
