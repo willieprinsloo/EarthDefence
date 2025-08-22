@@ -2086,20 +2086,20 @@ class GameScene: SKScene {
             selectorContainer.addChild(buttonContainer)
         }
         
-        // Add close button - smaller size
-        let closeButton = SKShapeNode(circleOfRadius: 18)  // Reduced from 28
+        // Add close button - even smaller and on top of window
+        let closeButton = SKShapeNode(circleOfRadius: 14)  // Further reduced
         closeButton.fillColor = SKColor.red.withAlphaComponent(0.95)
         closeButton.strokeColor = .white
         closeButton.lineWidth = 2
-        closeButton.glowWidth = 3
-        closeButton.position = CGPoint(x: 340, y: 35)  // Adjusted position for smaller size
+        closeButton.glowWidth = 2
+        closeButton.position = CGPoint(x: 350, y: 45)  // Top right corner of panel
         closeButton.name = "closeTowerSelector"
         closeButton.zPosition = 1000  // Ensure always on top
         selectorContainer.addChild(closeButton)
         
         let closeX = SKLabelNode(fontNamed: "Helvetica-Bold")
         closeX.text = "×"
-        closeX.fontSize = 18  // Reduced from 20
+        closeX.fontSize = 16  // Further reduced
         closeX.fontColor = .white
         closeX.position = CGPoint(x: 0, y: 0)  // Keep centered
         closeX.verticalAlignmentMode = .center
