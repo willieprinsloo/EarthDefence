@@ -2019,7 +2019,7 @@ class GameScene: SKScene {
             
             // Button frame
             let buttonBg = SKShapeNode(rectOf: CGSize(width: 80, height: 80), cornerRadius: 8)
-            buttonBg.fillColor = SKColor.black.withAlphaComponent(0.7)
+            buttonBg.fillColor = SKColor.black.withAlphaComponent(0.85)  // Darker background for better contrast
             buttonBg.strokeColor = color
             buttonBg.lineWidth = 2
             buttonBg.glowWidth = 2
@@ -2033,16 +2033,16 @@ class GameScene: SKScene {
             // Tower name
             let nameLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
             nameLabel.text = name
-            nameLabel.fontSize = 12
-            nameLabel.fontColor = color
+            nameLabel.fontSize = 14
+            nameLabel.fontColor = .white  // White for maximum readability
             nameLabel.position = CGPoint(x: 0, y: -25)
             buttonContainer.addChild(nameLabel)
             
             // Cost
-            let costLabel = SKLabelNode(fontNamed: "Helvetica")
+            let costLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
             costLabel.text = "$\(cost)"
-            costLabel.fontSize = 11
-            costLabel.fontColor = .yellow
+            costLabel.fontSize = 12
+            costLabel.fontColor = SKColor(red: 1.0, green: 1.0, blue: 0.7, alpha: 1.0)  // Light yellow
             costLabel.position = CGPoint(x: 0, y: -38)
             buttonContainer.addChild(costLabel)
             
