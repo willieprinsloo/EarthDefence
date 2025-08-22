@@ -97,8 +97,8 @@ class SoundManager {
             UserDefaults.standard.set(true, forKey: "hasSetAudioDefaults")
             UserDefaults.standard.set(true, forKey: "soundEnabled")
             UserDefaults.standard.set(true, forKey: "musicEnabled")
-            UserDefaults.standard.set(0.7, forKey: "soundVolume")
-            UserDefaults.standard.set(0.5, forKey: "musicVolume")
+            UserDefaults.standard.set(0.5, forKey: "soundVolume")  // Reduced from 0.7 to 0.5 (30% reduction)
+            UserDefaults.standard.set(0.35, forKey: "musicVolume")  // Reduced from 0.5 to 0.35 (30% reduction)
         }
         
         setupAudioSession()
@@ -180,7 +180,8 @@ class SoundManager {
                 do {
                     let url = player.url!
                     let newPlayer = try AVAudioPlayer(contentsOf: url)
-                    newPlayer.volume = volume ?? self.soundVolume
+                    let reducedVolume = (volume ?? self.soundVolume) * 0.7  // Apply 30% reduction
+                    newPlayer.volume = reducedVolume
                     newPlayer.prepareToPlay()
                     
                     DispatchQueue.main.async {

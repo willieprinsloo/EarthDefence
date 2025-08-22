@@ -34,6 +34,12 @@ class GameScene: SKScene {
     private var selectedBuildNode: SKNode?
     private var selectedTowerType: String? // Changed to String for now
     
+    // Sound throttling for performance
+    private var lastSoundTime: TimeInterval = 0
+    private var soundThrottleInterval: TimeInterval = 0.1  // Play sounds max 10 times per second
+    private var soundsPlayedThisFrame = 0
+    private let maxSoundsPerFrame = 3  // Limit sounds per frame
+    
     // Map Visual Themes
     enum MapTheme {
         case alphaCentauri  // Bright yellow/gold - alien star system
@@ -5328,6 +5334,9 @@ class GameScene: SKScene {
     // MARK: - Update Loop
     
     override func update(_ currentTime: TimeInterval) {
+        // Reset sound counter each frame for performance
+        soundsPlayedThisFrame = 0
+        
         gameEngine.update(currentTime: currentTime)
         
         // Apply game speed to scene
@@ -7182,8 +7191,13 @@ class GameScene: SKScene {
         let towerLevel = tower.userData?["level"] as? Int ?? 1
         let towerType = tower.userData?["type"] as? String ?? "kinetic"
         
-        // Play appropriate sound effect
-        // SoundManager.shared.playTowerSound(type: towerType)
+        // Throttled sound playing - only play if enough time has passed and not too many sounds this frame
+        let currentTime = CACurrentMediaTime()
+        if currentTime - lastSoundTime > soundThrottleInterval && soundsPlayedThisFrame < maxSoundsPerFrame {
+            // SoundManager.shared.playTowerSound(type: towerType)
+            lastSoundTime = currentTime
+            soundsPlayedThisFrame += 1
+        }
         
         // Create projectile based on tower type
         if tower.name?.contains("laser") == true {
@@ -7251,22 +7265,24 @@ class GameScene: SKScene {
         let bulletAngle = atan2(deltaY, deltaX) + .pi/2
         bullet.zRotation = bulletAngle
         
-        // Add small muzzle flash at barrel tip
-        let muzzleFlash = SKShapeNode(circleOfRadius: 3)
-        muzzleFlash.position = adjustedFirePosition
-        muzzleFlash.fillColor = SKColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0)
-        muzzleFlash.strokeColor = .clear
-        muzzleFlash.blendMode = .add
-        muzzleFlash.setScale(0.5)
-        effectsLayer.addChild(muzzleFlash)
-        
-        muzzleFlash.run(SKAction.sequence([
-            SKAction.group([
-                SKAction.scale(to: 1.5, duration: 0.05),
-                SKAction.fadeOut(withDuration: 0.05)
-            ]),
-            SKAction.removeFromParent()
-        ]))
+        // Reduce muzzle flash frequency for performance (only 50% of shots)
+        if Int.random(in: 0...1) == 0 {
+            let muzzleFlash = SKShapeNode(circleOfRadius: 3)
+            muzzleFlash.position = adjustedFirePosition
+            muzzleFlash.fillColor = SKColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0)
+            muzzleFlash.strokeColor = .clear
+            muzzleFlash.blendMode = .add
+            muzzleFlash.setScale(0.5)
+            effectsLayer.addChild(muzzleFlash)
+            
+            muzzleFlash.run(SKAction.sequence([
+                SKAction.group([
+                    SKAction.scale(to: 1.5, duration: 0.05),
+                    SKAction.fadeOut(withDuration: 0.05)
+                ]),
+                SKAction.removeFromParent()
+            ]))
+        }
         
         // Add bullet to projectile layer
         projectileLayer.addChild(bullet)
