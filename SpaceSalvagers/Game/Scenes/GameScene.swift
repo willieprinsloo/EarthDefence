@@ -1011,7 +1011,7 @@ class GameScene: SKScene {
     private func createSlowPlasmaBackground() {
         let plasmaContainer = SKNode()
         plasmaContainer.name = "plasmaBackground"
-        plasmaContainer.zPosition = -100  // Behind everything
+        plasmaContainer.zPosition = -50  // Move to front layer (was -100)
         backgroundLayer.addChild(plasmaContainer)
         
         // Create multiple plasma layers
@@ -1027,14 +1027,14 @@ class GameScene: SKScene {
         // Create plasma blobs
         let blobCount = 5 + index * 2
         for _ in 0..<blobCount {
-            let blob = SKShapeNode(circleOfRadius: CGFloat.random(in: 80...200))
+            let blob = SKShapeNode(circleOfRadius: CGFloat.random(in: 100...250))  // Bigger blobs
             
             // Set plasma colors
             let colors: [SKColor] = [
-                SKColor(red: 0.8, green: 0.2, blue: 1.0, alpha: 0.15),  // Purple
-                SKColor(red: 0.2, green: 0.8, blue: 1.0, alpha: 0.15),  // Cyan
-                SKColor(red: 1.0, green: 0.4, blue: 0.6, alpha: 0.15),  // Pink
-                SKColor(red: 0.4, green: 1.0, blue: 0.8, alpha: 0.15)   // Turquoise
+                SKColor(red: 0.8, green: 0.2, blue: 1.0, alpha: 0.08),  // Purple - reduced alpha
+                SKColor(red: 0.2, green: 0.8, blue: 1.0, alpha: 0.08),  // Cyan - reduced alpha
+                SKColor(red: 1.0, green: 0.4, blue: 0.6, alpha: 0.08),  // Pink - reduced alpha
+                SKColor(red: 0.4, green: 1.0, blue: 0.8, alpha: 0.08)   // Turquoise - reduced alpha
             ]
             
             blob.fillColor = colors.randomElement()!
