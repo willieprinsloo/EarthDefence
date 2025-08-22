@@ -3245,11 +3245,14 @@ class GameScene: SKScene {
                 // Always check if there's a tower at this position first (in towerLayer)
                 var towerFound: SKNode? = nil
                 towerLayer.enumerateChildNodes(withName: "tower_*") { towerNode, _ in
-                    if towerFound == nil && abs(towerNode.position.x - buildNode.position.x) < 30 &&
-                       abs(towerNode.position.y - buildNode.position.y) < 30 {
-                        // Tower found at this position
-                        towerFound = towerNode
-                        print("Found tower at build node position: \(towerNode.name ?? "unknown")")
+                    if towerFound == nil {
+                        let distance = hypot(towerNode.position.x - buildNode.position.x,
+                                           towerNode.position.y - buildNode.position.y)
+                        if distance < 25 {  // Tighter tolerance
+                            // Tower found at this position
+                            towerFound = towerNode
+                            print("Found tower at build node position: \(towerNode.name ?? "unknown") at distance \(distance)")
+                        }
                     }
                 }
                 
@@ -3279,9 +3282,11 @@ class GameScene: SKScene {
                         
                         if let tower = thoroughTowerFound {
                             // Found tower with thorough search
+                            print("Found tower after thorough search: \(tower.name ?? "unknown")")
                             selectTower(tower)
                         } else {
                             // Really no tower - clear flag and show build menu
+                            print("No tower found even after thorough search - clearing occupied flag")
                             buildNode.userData?["isOccupied"] = false
                             selectedNode = buildNode
                             selectedBuildNode = buildNode
@@ -4242,7 +4247,19 @@ class GameScene: SKScene {
         // Validate that tower actually exists and has a parent
         guard tower.parent != nil, 
               tower.name?.contains("tower_") == true else {
-            print("WARNING: Attempted to select invalid tower")
+            print("WARNING: Attempted to select invalid tower - no parent or invalid name")
+            return
+        }
+        
+        // Double-check that the tower is actually in the tower layer
+        guard tower.parent === towerLayer else {
+            print("WARNING: Tower is not in towerLayer, parent is: \(type(of: tower.parent))")
+            return
+        }
+        
+        // Verify tower has valid position and userData
+        guard tower.userData != nil else {
+            print("WARNING: Tower has no userData")
             return
         }
         
