@@ -2873,11 +2873,9 @@ class GameScene: SKScene {
                     }
                 }
                 
-                // Touch is in selector area - block it from hitting towers behind
-                if !clickedOnSelector {
-                    // Clicked in selector panel area but not on a button - ignore
-                    return
-                }
+                // Touch is in selector area - ALWAYS return to block tower selection
+                // Even if we clicked a button, we handle it here and return
+                return  // CRITICAL: Block all further touch processing when in selector area
             } else {
                 // Touch is outside selector panel - check for overlay click to close
                 for node in nodesAtLocation {
@@ -3329,6 +3327,12 @@ class GameScene: SKScene {
                 }
                 return
             } else if node.name?.contains("tower_") == true {
+                // IMPORTANT: Don't select towers if tower build selector is open
+                if towerSelectionMenu?.name == "towerSelectorContainer" {
+                    // Tower selector is open - completely ignore tower clicks
+                    return
+                }
+                
                 // Select tower for upgrade/sell
                 // Only select if no menu is currently open or it's a different tower
                 if towerSelectionMenu == nil {
@@ -3347,6 +3351,12 @@ class GameScene: SKScene {
                 }
                 return
             } else if node.parent?.name?.contains("tower_") == true {
+                // IMPORTANT: Don't select towers if tower build selector is open
+                if towerSelectionMenu?.name == "towerSelectorContainer" {
+                    // Tower selector is open - completely ignore tower clicks
+                    return
+                }
+                
                 // Clicked on a child of a tower (like turret)
                 let tower = node.parent!
                 if towerSelectionMenu == nil {
