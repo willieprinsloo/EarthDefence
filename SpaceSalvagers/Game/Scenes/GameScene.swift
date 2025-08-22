@@ -2843,37 +2843,50 @@ class GameScene: SKScene {
         // PRIORITY 0: Check if tower selector is open - block all non-selector touches
         if let selectorContainer = uiLayer.childNode(withName: "towerSelectorContainer") ?? 
            gameplayLayer.childNode(withName: "towerSelectorContainer") {
-            // Get touch location in selector container
-            let selectorLocation = touch.location(in: selectorContainer)
-            let selectorNodes = selectorContainer.nodes(at: selectorLocation)
             
-            // Check if we clicked on a valid selector element
-            var clickedOnSelector = false
-            for node in selectorNodes {
-                if let nodeName = node.name {
-                    if nodeName.starts(with: "towerButton_") ||
-                       nodeName == "closeTowerSelector" ||
-                       nodeName == "selectorBackground" ||
-                       nodeName.contains("TowerButton") ||
-                       node.parent?.name?.starts(with: "towerButton_") == true {
-                        clickedOnSelector = true
-                        // Process the selector interaction
-                        break
+            // Check if touch is in the selector panel area (bottom of screen)
+            let selectorY = selectorContainer.position.y
+            let selectorHeight: CGFloat = 130  // Height of selector panel + buffer
+            let touchYInScene = location.y
+            let selectorTop = selectorY + selectorHeight/2
+            let selectorBottom = selectorY - selectorHeight/2
+            
+            // If touch is within the selector's vertical range, handle it
+            if touchYInScene >= selectorBottom && touchYInScene <= selectorTop {
+                // Touch is in selector area - check for button interactions
+                let selectorLocation = touch.location(in: selectorContainer)
+                let selectorNodes = selectorContainer.nodes(at: selectorLocation)
+                
+                // Check if we clicked on a valid selector element
+                var clickedOnSelector = false
+                for node in selectorNodes {
+                    if let nodeName = node.name {
+                        if nodeName.starts(with: "towerButton_") ||
+                           nodeName == "closeTowerSelector" ||
+                           nodeName == "selectorBackground" ||
+                           nodeName.contains("TowerButton") ||
+                           node.parent?.name?.starts(with: "towerButton_") == true {
+                            clickedOnSelector = true
+                            // Process the selector interaction - let it continue below
+                            break
+                        }
                     }
                 }
-            }
-            
-            // If we didn't click on a selector element but clicked on overlay, close selector
-            if !clickedOnSelector {
-                for node in selectorNodes {
+                
+                // Touch is in selector area - block it from hitting towers behind
+                if !clickedOnSelector {
+                    // Clicked in selector panel area but not on a button - ignore
+                    return
+                }
+            } else {
+                // Touch is outside selector panel - check for overlay click to close
+                for node in nodesAtLocation {
                     if node.name == "selectorOverlay" || node.name == "touchBlocker" {
                         removeTowerSelector()
                         selectedBuildNode = nil
                         return
                     }
                 }
-                // Block all other touches when selector is open
-                return
             }
         }
         
