@@ -741,13 +741,7 @@ class SimpleVectorMapLoader {
         // Clean center
         portal.addChild(center)
         
-        // Label with spawn index
-        let label = SKLabelNode(text: index == 0 ? "S" : "S\(index+1)")
-        label.fontSize = 18
-        label.fontName = "AvenirNext-Bold"
-        label.fontColor = .white
-        label.verticalAlignmentMode = .center
-        portal.addChild(label)
+        // No label - just the portal effect
         
         parent.addChild(portal)
     }

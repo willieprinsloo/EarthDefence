@@ -4407,7 +4407,8 @@ class GameScene: SKScene {
             upgradeShadow.text = "UPGRADE"
             upgradeShadow.fontSize = 16
             upgradeShadow.fontColor = .black
-            upgradeShadow.position = CGPoint(x: -59, y: 7)
+            upgradeShadow.position = CGPoint(x: -59, y: -1)  // Centered vertically with shadow offset
+            upgradeShadow.verticalAlignmentMode = .center
             upgradeShadow.name = "upgradeButton"
             upgradeShadow.isUserInteractionEnabled = false
             upgradeShadow.userData = NSMutableDictionary()
@@ -4420,7 +4421,8 @@ class GameScene: SKScene {
             upgradeLabel.text = "UPGRADE"
             upgradeLabel.fontSize = 16
             upgradeLabel.fontColor = .white  // Pure white for maximum contrast
-            upgradeLabel.position = CGPoint(x: -60, y: 8)
+            upgradeLabel.position = CGPoint(x: -60, y: 0)  // Centered vertically
+            upgradeLabel.verticalAlignmentMode = .center
             upgradeLabel.name = "upgradeButton"
             upgradeLabel.isUserInteractionEnabled = false  // Let touches pass through to button
             upgradeLabel.userData = NSMutableDictionary()
@@ -4433,7 +4435,8 @@ class GameScene: SKScene {
             costLabel.text = "$\(upgradeCost)"
             costLabel.fontSize = 14
             costLabel.fontColor = canAfford ? SKColor(red: 0.8, green: 1.0, blue: 0.8, alpha: 1.0) : .gray  // Very light green
-            costLabel.position = CGPoint(x: -60, y: -10)
+            costLabel.position = CGPoint(x: -60, y: -15)  // Move down slightly
+            costLabel.verticalAlignmentMode = .center
             costLabel.name = "upgradeButton"
             costLabel.isUserInteractionEnabled = false
             costLabel.userData = NSMutableDictionary()
@@ -4469,7 +4472,8 @@ class GameScene: SKScene {
         sellShadow.text = "SELL"
         sellShadow.fontSize = 16
         sellShadow.fontColor = .black
-        sellShadow.position = CGPoint(x: 61, y: 7)
+        sellShadow.position = CGPoint(x: 61, y: -1)  // Centered vertically with shadow offset
+        sellShadow.verticalAlignmentMode = .center
         sellShadow.name = "sellButton"
         sellShadow.isUserInteractionEnabled = false
         sellShadow.userData = NSMutableDictionary()
@@ -4482,7 +4486,8 @@ class GameScene: SKScene {
         sellLabel.text = "SELL"
         sellLabel.fontSize = 16
         sellLabel.fontColor = .white  // Pure white for maximum contrast
-        sellLabel.position = CGPoint(x: 60, y: 8)
+        sellLabel.position = CGPoint(x: 60, y: 0)  // Centered vertically
+        sellLabel.verticalAlignmentMode = .center
         sellLabel.name = "sellButton"
         sellLabel.isUserInteractionEnabled = false  // Let touches pass through to button
         sellLabel.userData = NSMutableDictionary()
@@ -4495,7 +4500,8 @@ class GameScene: SKScene {
         valueLabel.text = "$\(sellValue)"
         valueLabel.fontSize = 14
         valueLabel.fontColor = SKColor(red: 1.0, green: 0.9, blue: 0.7, alpha: 1.0)  // Very light orange
-        valueLabel.position = CGPoint(x: 60, y: -10)
+        valueLabel.position = CGPoint(x: 60, y: -15)  // Move down slightly
+        valueLabel.verticalAlignmentMode = .center
         valueLabel.name = "sellButton"
         valueLabel.isUserInteractionEnabled = false
         valueLabel.userData = NSMutableDictionary()
