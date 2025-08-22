@@ -4320,34 +4320,64 @@ class GameScene: SKScene {
         overlay.isUserInteractionEnabled = true  // Block touches to elements behind
         menu.addChild(overlay)
         
-        // SIMPLIFIED BACKGROUND - single clean panel with larger size
+        // SOLID OPAQUE BACKGROUND - no transparency for better visibility
         let background = SKShapeNode(rectOf: CGSize(width: 320, height: 220), cornerRadius: 15)
-        background.fillColor = SKColor(red: 0.1, green: 0.1, blue: 0.2, alpha: 0.95)
+        background.fillColor = SKColor(red: 0.08, green: 0.08, blue: 0.12, alpha: 1.0)  // Fully opaque dark blue-gray
         background.strokeColor = getTowerColor(type: towerType)
-        background.lineWidth = 2
+        background.lineWidth = 3
+        background.glowWidth = 2
         background.position = CGPoint.zero
+        background.zPosition = 0
         menu.addChild(background)
         
-        // SIMPLIFIED TITLE - just tower name and level
+        // Add inner border for extra definition
+        let innerBorder = SKShapeNode(rectOf: CGSize(width: 316, height: 216), cornerRadius: 13)
+        innerBorder.fillColor = .clear
+        innerBorder.strokeColor = getTowerColor(type: towerType).withAlphaComponent(0.3)
+        innerBorder.lineWidth = 1
+        innerBorder.position = CGPoint.zero
+        innerBorder.zPosition = 1
+        menu.addChild(innerBorder)
+        
+        // SIMPLIFIED TITLE - just tower name and level with shadow
+        let titleShadow = SKLabelNode(fontNamed: "Helvetica-Bold")
+        titleShadow.text = "\(towerType.uppercased()) - LVL \(currentLevel)"
+        titleShadow.fontSize = 18
+        titleShadow.fontColor = .black
+        titleShadow.position = CGPoint(x: 1, y: 64)
+        titleShadow.zPosition = 2
+        menu.addChild(titleShadow)
+        
         let title = SKLabelNode(fontNamed: "Helvetica-Bold")
         title.text = "\(towerType.uppercased()) - LVL \(currentLevel)"
         title.fontSize = 18
         title.fontColor = getTowerColor(type: towerType)
         title.position = CGPoint(x: 0, y: 65)
+        title.zPosition = 3
         menu.addChild(title)
         
-        // SIMPLIFIED STATS - text only, no fancy buttons
+        // SIMPLIFIED STATS - text only with shadow for readability
         let damage = Int(10 * currentLevel * getDamageMultiplier(type: towerType))
         let range = Int(getTowerRange(type: towerType) + CGFloat((currentLevel - 1) * 20))
         let fireRate = getTowerFireRate(type: towerType, level: currentLevel)
         let speed = String(format: "%.1f", 1.0 / fireRate)
         
         let statsText = "Damage: \(damage)   Range: \(range)   Speed: \(speed)/s"
-        let statsLabel = SKLabelNode(fontNamed: "Helvetica")
+        
+        let statsShadow = SKLabelNode(fontNamed: "Helvetica-Bold")
+        statsShadow.text = statsText
+        statsShadow.fontSize = 13
+        statsShadow.fontColor = .black
+        statsShadow.position = CGPoint(x: 1, y: 29)
+        statsShadow.zPosition = 2
+        menu.addChild(statsShadow)
+        
+        let statsLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
         statsLabel.text = statsText
-        statsLabel.fontSize = 12
+        statsLabel.fontSize = 13
         statsLabel.fontColor = .white
         statsLabel.position = CGPoint(x: 0, y: 30)
+        statsLabel.zPosition = 3
         menu.addChild(statsLabel)
         
         // SIMPLIFIED BUTTONS - just upgrade and sell
@@ -4356,15 +4386,16 @@ class GameScene: SKScene {
         menu.addChild(actionsContainer)
         
         if currentLevel < 3 {
-            // SIMPLIFIED UPGRADE BUTTON - LARGER HIT AREA
+            // SIMPLIFIED UPGRADE BUTTON - LARGER HIT AREA WITH SOLID BACKGROUND
             let upgradeCost = Int(Double(baseCost) * 1.5)
             let canAfford = playerSalvage >= upgradeCost
             
             let upgradeButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
             upgradeButton.position = CGPoint(x: -60, y: 0)
-            upgradeButton.fillColor = canAfford ? SKColor(red: 0.0, green: 0.3, blue: 0.0, alpha: 0.95) : SKColor.gray.withAlphaComponent(0.5)
+            upgradeButton.fillColor = canAfford ? SKColor(red: 0.0, green: 0.25, blue: 0.0, alpha: 1.0) : SKColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)  // Fully opaque
             upgradeButton.strokeColor = canAfford ? .green : .darkGray
-            upgradeButton.lineWidth = 2
+            upgradeButton.lineWidth = 3
+            upgradeButton.glowWidth = 2
             upgradeButton.name = "upgradeButton"
             upgradeButton.userData = NSMutableDictionary()
             upgradeButton.userData?["tower"] = tower
@@ -4405,13 +4436,14 @@ class GameScene: SKScene {
             actionsContainer.addChild(maxLabel)
         }
         
-        // SIMPLIFIED SELL BUTTON - LARGER HIT AREA
+        // SIMPLIFIED SELL BUTTON - LARGER HIT AREA WITH SOLID BACKGROUND
         let sellValue = getSellValue(for: tower)
         let sellButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
         sellButton.position = CGPoint(x: 60, y: 0)
-        sellButton.fillColor = SKColor(red: 0.5, green: 0.15, blue: 0.0, alpha: 0.95)
+        sellButton.fillColor = SKColor(red: 0.4, green: 0.12, blue: 0.0, alpha: 1.0)  // Fully opaque
         sellButton.strokeColor = .orange
-        sellButton.lineWidth = 2
+        sellButton.lineWidth = 3
+        sellButton.glowWidth = 2
         sellButton.name = "sellButton"
         sellButton.userData = NSMutableDictionary()
         sellButton.userData?["tower"] = tower
