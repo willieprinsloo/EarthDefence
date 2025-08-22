@@ -4325,7 +4325,7 @@ class GameScene: SKScene {
             
             let upgradeButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
             upgradeButton.position = CGPoint(x: -60, y: 0)
-            upgradeButton.fillColor = canAfford ? SKColor(red: 0.1, green: 0.4, blue: 0.1, alpha: 0.9) : SKColor.gray.withAlphaComponent(0.5)
+            upgradeButton.fillColor = canAfford ? SKColor(red: 0.0, green: 0.3, blue: 0.0, alpha: 0.95) : SKColor.gray.withAlphaComponent(0.5)
             upgradeButton.strokeColor = canAfford ? .green : .darkGray
             upgradeButton.lineWidth = 2
             upgradeButton.name = "upgradeButton"
@@ -4337,8 +4337,8 @@ class GameScene: SKScene {
             
             let upgradeLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
             upgradeLabel.text = "UPGRADE"
-            upgradeLabel.fontSize = 14
-            upgradeLabel.fontColor = SKColor(red: 0.9, green: 1.0, blue: 0.9, alpha: 1.0)  // Lighter green-white
+            upgradeLabel.fontSize = 16
+            upgradeLabel.fontColor = .white  // Pure white for maximum contrast
             upgradeLabel.position = CGPoint(x: -60, y: 8)
             upgradeLabel.name = "upgradeButton"
             upgradeLabel.isUserInteractionEnabled = false  // Let touches pass through to button
@@ -4347,10 +4347,10 @@ class GameScene: SKScene {
             upgradeLabel.userData?["cost"] = upgradeCost
             actionsContainer.addChild(upgradeLabel)
             
-            let costLabel = SKLabelNode(fontNamed: "Helvetica")
+            let costLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
             costLabel.text = "$\(upgradeCost)"
-            costLabel.fontSize = 12
-            costLabel.fontColor = canAfford ? SKColor(red: 0.5, green: 1.0, blue: 0.5, alpha: 1.0) : .gray  // Lighter green
+            costLabel.fontSize = 14
+            costLabel.fontColor = canAfford ? SKColor(red: 0.8, green: 1.0, blue: 0.8, alpha: 1.0) : .gray  // Very light green
             costLabel.position = CGPoint(x: -60, y: -10)
             costLabel.name = "upgradeButton"
             costLabel.isUserInteractionEnabled = false
@@ -4372,7 +4372,7 @@ class GameScene: SKScene {
         let sellValue = getSellValue(for: tower)
         let sellButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
         sellButton.position = CGPoint(x: 60, y: 0)
-        sellButton.fillColor = SKColor(red: 0.4, green: 0.2, blue: 0.0, alpha: 0.9)
+        sellButton.fillColor = SKColor(red: 0.5, green: 0.15, blue: 0.0, alpha: 0.95)
         sellButton.strokeColor = .orange
         sellButton.lineWidth = 2
         sellButton.name = "sellButton"
@@ -4384,8 +4384,8 @@ class GameScene: SKScene {
         
         let sellLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
         sellLabel.text = "SELL"
-        sellLabel.fontSize = 14
-        sellLabel.fontColor = SKColor(red: 1.0, green: 0.95, blue: 0.9, alpha: 1.0)  // Lighter orange-white
+        sellLabel.fontSize = 16
+        sellLabel.fontColor = .white  // Pure white for maximum contrast
         sellLabel.position = CGPoint(x: 60, y: 8)
         sellLabel.name = "sellButton"
         sellLabel.isUserInteractionEnabled = false  // Let touches pass through to button
@@ -4394,10 +4394,10 @@ class GameScene: SKScene {
         sellLabel.userData?["value"] = sellValue
         actionsContainer.addChild(sellLabel)
         
-        let valueLabel = SKLabelNode(fontNamed: "Helvetica")
+        let valueLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
         valueLabel.text = "$\(sellValue)"
-        valueLabel.fontSize = 12
-        valueLabel.fontColor = SKColor(red: 1.0, green: 0.8, blue: 0.4, alpha: 1.0)  // Lighter orange
+        valueLabel.fontSize = 14
+        valueLabel.fontColor = SKColor(red: 1.0, green: 0.9, blue: 0.7, alpha: 1.0)  // Very light orange
         valueLabel.position = CGPoint(x: 60, y: -10)
         valueLabel.name = "sellButton"
         valueLabel.isUserInteractionEnabled = false
