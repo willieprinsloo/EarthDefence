@@ -2094,7 +2094,7 @@ class GameScene: SKScene {
         closeButton.glowWidth = 2
         closeButton.position = CGPoint(x: 350, y: 45)  // Top right corner of panel
         closeButton.name = "closeTowerSelector"
-        closeButton.zPosition = 1000  // Ensure always on top
+        closeButton.zPosition = 2000  // Higher than tower buttons (1001)
         selectorContainer.addChild(closeButton)
         
         let closeX = SKLabelNode(fontNamed: "Helvetica-Bold")
