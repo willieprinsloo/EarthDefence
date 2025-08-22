@@ -4386,22 +4386,35 @@ class GameScene: SKScene {
         menu.addChild(actionsContainer)
         
         if currentLevel < 3 {
-            // SIMPLIFIED UPGRADE BUTTON - LARGER HIT AREA WITH SOLID BACKGROUND
+            // SIMPLIFIED UPGRADE BUTTON - LIGHTER BACKGROUND FOR TEXT VISIBILITY
             let upgradeCost = Int(Double(baseCost) * 1.5)
             let canAfford = playerSalvage >= upgradeCost
             
             let upgradeButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
             upgradeButton.position = CGPoint(x: -60, y: 0)
-            upgradeButton.fillColor = canAfford ? SKColor(red: 0.0, green: 0.25, blue: 0.0, alpha: 1.0) : SKColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)  // Fully opaque
-            upgradeButton.strokeColor = canAfford ? .green : .darkGray
-            upgradeButton.lineWidth = 3
-            upgradeButton.glowWidth = 2
+            upgradeButton.fillColor = canAfford ? SKColor(red: 0.1, green: 0.5, blue: 0.1, alpha: 1.0) : SKColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 1.0)  // Lighter green/gray
+            upgradeButton.strokeColor = canAfford ? SKColor(red: 0.3, green: 1.0, blue: 0.3, alpha: 1.0) : .gray
+            upgradeButton.lineWidth = 2
             upgradeButton.name = "upgradeButton"
             upgradeButton.userData = NSMutableDictionary()
             upgradeButton.userData?["tower"] = tower
             upgradeButton.userData?["cost"] = upgradeCost
             upgradeButton.zPosition = 10  // Ensure button is above other elements
             actionsContainer.addChild(upgradeButton)
+            
+            // Add text shadow for upgrade button
+            let upgradeShadow = SKLabelNode(fontNamed: "Helvetica-Bold")
+            upgradeShadow.text = "UPGRADE"
+            upgradeShadow.fontSize = 16
+            upgradeShadow.fontColor = .black
+            upgradeShadow.position = CGPoint(x: -59, y: 7)
+            upgradeShadow.name = "upgradeButton"
+            upgradeShadow.isUserInteractionEnabled = false
+            upgradeShadow.userData = NSMutableDictionary()
+            upgradeShadow.userData?["tower"] = tower
+            upgradeShadow.userData?["cost"] = upgradeCost
+            upgradeShadow.zPosition = 11
+            actionsContainer.addChild(upgradeShadow)
             
             let upgradeLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
             upgradeLabel.text = "UPGRADE"
@@ -4413,6 +4426,7 @@ class GameScene: SKScene {
             upgradeLabel.userData = NSMutableDictionary()
             upgradeLabel.userData?["tower"] = tower
             upgradeLabel.userData?["cost"] = upgradeCost
+            upgradeLabel.zPosition = 12
             actionsContainer.addChild(upgradeLabel)
             
             let costLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
@@ -4436,20 +4450,33 @@ class GameScene: SKScene {
             actionsContainer.addChild(maxLabel)
         }
         
-        // SIMPLIFIED SELL BUTTON - LARGER HIT AREA WITH SOLID BACKGROUND
+        // SIMPLIFIED SELL BUTTON - LIGHTER BACKGROUND FOR TEXT VISIBILITY
         let sellValue = getSellValue(for: tower)
         let sellButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
         sellButton.position = CGPoint(x: 60, y: 0)
-        sellButton.fillColor = SKColor(red: 0.4, green: 0.12, blue: 0.0, alpha: 1.0)  // Fully opaque
-        sellButton.strokeColor = .orange
-        sellButton.lineWidth = 3
-        sellButton.glowWidth = 2
+        sellButton.fillColor = SKColor(red: 0.6, green: 0.3, blue: 0.1, alpha: 1.0)  // Lighter brown-orange
+        sellButton.strokeColor = SKColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0)
+        sellButton.lineWidth = 2
         sellButton.name = "sellButton"
         sellButton.userData = NSMutableDictionary()
         sellButton.userData?["tower"] = tower
         sellButton.userData?["value"] = sellValue
         sellButton.zPosition = 10  // Ensure button is above other elements
         actionsContainer.addChild(sellButton)
+        
+        // Add text shadow for sell button
+        let sellShadow = SKLabelNode(fontNamed: "Helvetica-Bold")
+        sellShadow.text = "SELL"
+        sellShadow.fontSize = 16
+        sellShadow.fontColor = .black
+        sellShadow.position = CGPoint(x: 61, y: 7)
+        sellShadow.name = "sellButton"
+        sellShadow.isUserInteractionEnabled = false
+        sellShadow.userData = NSMutableDictionary()
+        sellShadow.userData?["tower"] = tower
+        sellShadow.userData?["value"] = sellValue
+        sellShadow.zPosition = 11
+        actionsContainer.addChild(sellShadow)
         
         let sellLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
         sellLabel.text = "SELL"
@@ -4461,6 +4488,7 @@ class GameScene: SKScene {
         sellLabel.userData = NSMutableDictionary()
         sellLabel.userData?["tower"] = tower
         sellLabel.userData?["value"] = sellValue
+        sellLabel.zPosition = 12
         actionsContainer.addChild(sellLabel)
         
         let valueLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
