@@ -3268,8 +3268,31 @@ class GameScene: SKScene {
                     closeTowerMenu()
                     return
                 } else if nodeName == "upgradeButton" || node.parent?.name == "upgradeButton" || node.parent?.parent?.name == "upgradeButton" {
-                    // Handle upgrade button - check multiple levels of hierarchy and find userData
+                    // Handle upgrade button - improved hit detection for entire button area
                     var userData: NSMutableDictionary? = node.userData
+                    
+                    // Check if we need to find the actual button node
+                    if userData == nil || userData?["tower"] == nil {
+                        // Check if touch is within upgrade button bounds
+                        if let menu = towerSelectionMenu {
+                            let touchInMenu = touch.location(in: menu)
+                            for child in menu.children {
+                                if child.name == "upgradeButton",
+                                   let button = child as? SKShapeNode {
+                                    // Check if touch is within button frame
+                                    let buttonFrame = CGRect(x: button.position.x - 60, 
+                                                            y: button.position.y - 25,
+                                                            width: 120, height: 50)
+                                    if buttonFrame.contains(touchInMenu) {
+                                        userData = child.userData
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Fallback to parent checking
                     if userData == nil || userData?["tower"] == nil {
                         userData = node.parent?.userData
                     }
@@ -3294,8 +3317,31 @@ class GameScene: SKScene {
                     }
                     return
                 } else if nodeName == "sellButton" || node.parent?.name == "sellButton" || node.parent?.parent?.name == "sellButton" {
-                    // Handle sell button - check multiple levels of hierarchy and find userData
+                    // Handle sell button - improved hit detection for entire button area
                     var userData: NSMutableDictionary? = node.userData
+                    
+                    // Check if we need to find the actual button node
+                    if userData == nil || userData?["tower"] == nil {
+                        // Check if touch is within sell button bounds
+                        if let menu = towerSelectionMenu {
+                            let touchInMenu = touch.location(in: menu)
+                            for child in menu.children {
+                                if child.name == "sellButton",
+                                   let button = child as? SKShapeNode {
+                                    // Check if touch is within button frame
+                                    let buttonFrame = CGRect(x: button.position.x - 60,
+                                                            y: button.position.y - 25,
+                                                            width: 120, height: 50)
+                                    if buttonFrame.contains(touchInMenu) {
+                                        userData = child.userData
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Fallback to parent checking
                     if userData == nil || userData?["tower"] == nil {
                         userData = node.parent?.userData
                     }
@@ -5993,16 +6039,17 @@ class GameScene: SKScene {
             body.lineWidth = 4
             body.fillColor = SKColor(red: 0.5, green: 0.0, blue: 0.0, alpha: 0.3)
             body.glowWidth = 15 // Maximum glow for boss enemies
-            body.setScale(1.5)  // Make it even bigger!
-            health = 80  // MUCH tougher (was 30)
+            body.setScale(1.8)  // Even BIGGER to match 250% difficulty!
+            health = 105  // 250% increase! (was 30)
             speed = 0.7  // Slightly faster (was 0.6)
-            salvageReward = 50  // Better reward (was 18)
+            salvageReward = 60  // Better reward to match difficulty
             
             // SPECIAL ABILITY: Stronger shield that regenerates faster
             enemy.userData?["hasShield"] = true
-            enemy.userData?["shieldHealth"] = 30  // Much stronger shield (was 10)
-            enemy.userData?["maxShieldHealth"] = 30
+            enemy.userData?["shieldHealth"] = 40  // Even stronger shield to match 250% difficulty
+            enemy.userData?["maxShieldHealth"] = 40
             enemy.userData?["damageReduction"] = 0.5  // Takes 50% less damage
+            enemy.userData?["armor"] = 5  // Added armor for extra toughness
             
             // Add visual shield
             let shield = SKShapeNode(circleOfRadius: 25)
@@ -6070,9 +6117,9 @@ class GameScene: SKScene {
                 body.addChild(tentacle)
             }
             
-            health = 200  // INSANELY high health (was 100)
+            health = 300  // TITAN LEVEL health!
             speed = 0.4   // Slightly faster but still slow (was 0.3)
-            salvageReward = 100  // Massive reward (was 50)
+            salvageReward = 120  // Massive reward to match the challenge
             
             // SPECIAL ABILITIES: Health regeneration AND damage resistance
             enemy.userData?["hasRegeneration"] = true
@@ -6088,8 +6135,8 @@ class GameScene: SKScene {
                 }
                 // Regenerate health
                 if let currentHealth = enemy.userData?["health"] as? Int {
-                    if currentHealth < 200 && currentHealth > 0 {  // Max health is 200 now
-                        enemy.userData?["health"] = min(currentHealth + 5, 200)  // Faster regen
+                    if currentHealth < 300 && currentHealth > 0 {  // Max health is 300 now
+                        enemy.userData?["health"] = min(currentHealth + 5, 300)  // Faster regen
                         // Visual effect for regeneration
                         let healEffect = SKShapeNode(circleOfRadius: 30)
                         healEffect.strokeColor = SKColor.green.withAlphaComponent(0.8)
@@ -6503,9 +6550,9 @@ class GameScene: SKScene {
             body.fillColor = .clear
             body.glowWidth = 20
             body.setScale(2.5)  // MASSIVE size increase
-            health = 300  // ULTRA tanky (was 100)
+            health = 400  // MEGA BOSS health!
             speed = 0.5   // Faster than before (was 0.3)
-            salvageReward = 150  // Huge reward (was 100)
+            salvageReward = 200  // Epic reward for defeating the mega boss
             
             // SPECIAL ABILITIES: Multiple devastating abilities
             enemy.userData?["hasShield"] = true
@@ -6568,7 +6615,7 @@ class GameScene: SKScene {
                 
                 // Check if health is below 50% for rage mode
                 if let currentHealth = enemy.userData?["health"] as? Int {
-                    if currentHealth < 150 && enemy.userData?["rageActive"] as? Bool != true {
+                    if currentHealth < 200 && enemy.userData?["rageActive"] as? Bool != true {  // 50% of 400 HP
                         // ACTIVATE RAGE MODE!
                         enemy.userData?["rageActive"] = true
                         enemy.userData?["speed"] = 0.8  // Speed boost
