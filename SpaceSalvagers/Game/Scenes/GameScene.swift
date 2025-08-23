@@ -5635,14 +5635,18 @@ class GameScene: SKScene {
         // Later waves spawn faster to increase pressure
         var baseDelay = 2.0  // Base 2 seconds between spawns for pacing
         
-        // Maps 1 and 2 have faster spawn rates for increased difficulty
+        // Maps 1, 2, 3, and 4 have faster spawn rates for increased difficulty
         if currentMap == 1 {
             baseDelay = 1.3  // 35% faster spawning for 50% harder difficulty
         } else if currentMap == 2 {
             baseDelay = 1.0  // 50% faster spawning for 100% harder difficulty
+        } else if currentMap == 3 {
+            baseDelay = 0.8  // 60% faster spawning for 150% harder difficulty - EARTH UNDER SIEGE!
+        } else if currentMap == 4 {
+            baseDelay = 0.65  // 67.5% faster spawning for 200% harder difficulty - MARS INVASION!
         }
         
-        let mapSpeedBoost = Double(max(0, currentMap - 3)) * 0.1    // Speed boost only after map 2
+        let mapSpeedBoost = Double(max(0, currentMap - 5)) * 0.1    // Speed boost only after map 4 now
         let waveSpeedBoost = Double(currentWave - 1) * 0.15  // 15% faster per wave
         let spawnDelay = max(0.5, baseDelay - mapSpeedBoost - waveSpeedBoost)  // Min 0.5 seconds for intense action
         let waitAction = SKAction.wait(forDuration: spawnDelay)
@@ -5797,40 +5801,55 @@ class GameScene: SKScene {
                 }
             }
             
-        case 3:  // EARTH - Defend Home
-            // Theme: Balanced mix of all basic enemy types
+        case 3:  // EARTH - Defend Home - 150% HARDER!
+            // Theme: EXTREME DIFFICULTY - Earth's last stand against overwhelming forces
             if currentWave == 1 {
-                // Wave 1: Standard mix (50% fighters, 50% swarms)
-                return Int.random(in: 1...2) == 1 ? "fighter" : "swarm"
-            } else if currentWave == 2 {
-                // Wave 2: Add special units (30% fighters, 30% bombers, 20% stealth, 20% swarms)
+                // Wave 1: No more easy start! (30% bombers, 30% fighters, 20% shield, 20% armored)
                 let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "fighter" }
-                else if roll <= 6 { return "bomber" }
-                else if roll <= 8 { return "stealth" }
-                else { return "swarm" }
-            } else {
-                // Wave 3+: Shield units appear (25% each: fighters, bombers, shields, stealth)
-                return ["fighter", "bomber", "shield", "stealth"].randomElement()!
-            }
-            
-        case 4:  // MARS - Military Outpost
-            // Theme: Heavy armored units and organized attacks
-            if currentWave == 1 {
-                // Wave 1: Tougher basics (60% fighters, 40% bombers)
-                return Int.random(in: 1...10) <= 6 ? "fighter" : "bomber"
+                if roll <= 3 { return "bomber" }
+                else if roll <= 6 { return "fighter" }
+                else if roll <= 8 { return "shield" }
+                else { return "armored" }
             } else if currentWave == 2 {
-                // Wave 2: Shield and stealth units (30% shields, 30% stealth, 40% bombers)
-                let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "shield" }
-                else if roll <= 6 { return "stealth" }
-                else { return "bomber" }
-            } else {
-                // Wave 3+: Destroyer units (30% destroyers, 30% shields, 40% bombers)
+                // Wave 2: Elite units attack (30% destroyer, 30% shield, 20% bomber, 20% stealth)
                 let roll = Int.random(in: 1...10)
                 if roll <= 3 { return "destroyer" }
                 else if roll <= 6 { return "shield" }
+                else if roll <= 8 { return "bomber" }
+                else { return "stealth" }
+            } else if currentWave == 3 {
+                // Wave 3: Devastating force (25% destroyer, 25% shield, 25% bomber, 25% stealth)
+                return ["destroyer", "shield", "bomber", "stealth"].randomElement()!
+            } else {
+                // Wave 4+: OVERWHELMING ASSAULT (30% destroyer, 20% shield, 20% bomber, 20% stealth, 10% mini-titan)
+                let roll = Int.random(in: 1...10)
+                if roll <= 3 { return "destroyer" }
+                else if roll <= 5 { return "shield" }
+                else if roll <= 7 { return "bomber" }
+                else if roll <= 9 { return "stealth" }
+                else { return "destroyer" }  // Extra destroyer instead of titan every spawn
+            }
+            
+        case 4:  // MARS - Military Outpost - 200% HARDER!
+            // Theme: EXTREME military assault with overwhelming firepower
+            if currentWave == 1 {
+                // Wave 1: No mercy start (30% destroyer, 30% bomber, 20% shield, 20% juggernaut)
+                let roll = Int.random(in: 1...10)
+                if roll <= 3 { return "destroyer" }
+                else if roll <= 6 { return "bomber" }
+                else if roll <= 8 { return "shield" }
+                else { return "juggernaut" }  // New heavy unit from wave 1!
+            } else if currentWave == 2 {
+                // Wave 2: Elite forces (30% destroyer, 25% goliath, 25% shield, 20% behemoth)
+                let roll = Int.random(in: 1...10)
+                if roll <= 3 { return "destroyer" }
+                else if roll <= 5 { return "goliath" }  // Heavy fortress
+                else if roll <= 7 { return "shield" }
+                else if roll <= 9 { return "behemoth" }  // Regenerating tank
                 else { return "bomber" }
+            } else {
+                // Wave 3+: APOCALYPTIC ASSAULT (Equal mix of all heavy units)
+                return ["destroyer", "juggernaut", "goliath", "behemoth", "shield", "bomber"].randomElement()!
             }
             
         case 5:  // CERES - Asteroid Belt
@@ -5858,14 +5877,15 @@ class GameScene: SKScene {
                 // Wave 1: Heavy units (50% bombers, 50% shields)
                 return Int.random(in: 1...2) == 1 ? "bomber" : "shield"
             } else if currentWave == 2 {
-                // Wave 2: Destroyers arrive (40% destroyers, 30% shields, 30% bombers)
+                // Wave 2: Destroyers and new tanks arrive (30% destroyers, 20% juggernaut, 25% shields, 25% bombers)
                 let roll = Int.random(in: 1...10)
-                if roll <= 4 { return "destroyer" }
+                if roll <= 3 { return "destroyer" }
+                else if roll <= 5 { return "juggernaut" }  // New slow tank
                 else if roll <= 7 { return "shield" }
                 else { return "bomber" }
             } else {
-                // Wave 3+: Elite mix (Equal chances of destroyer, shield, stealth, bomber)
-                return ["destroyer", "shield", "stealth", "bomber"].randomElement()!
+                // Wave 3+: Elite mix with new enemies (destroyer, shield, stealth, bomber, juggernaut, goliath)
+                return ["destroyer", "shield", "stealth", "bomber", "juggernaut", "goliath"].randomElement()!
             }
             
         case 7:  // SATURN - Ring Defense
@@ -5877,18 +5897,20 @@ class GameScene: SKScene {
                 // Wave 2: Advanced units (Equal chances of shield, destroyer, stealth, bomber)
                 return ["shield", "destroyer", "stealth", "bomber"].randomElement()!
             } else {
-                // Wave 3+: Full variety (All enemy types with destroyer emphasis)
-                let roll = Int.random(in: 1...10)
+                // Wave 3+: Full variety with new heavy enemies
+                let roll = Int.random(in: 1...12)
                 if roll <= 3 { return "destroyer" }
                 else if roll <= 5 { return "shield" }
                 else if roll <= 7 { return "stealth" }
                 else if roll <= 9 { return "bomber" }
+                else if roll == 10 { return "behemoth" }  // New slow tank
+                else if roll == 11 { return "goliath" }    // New fortress
                 else { return "swarm" }
             }
             
         case 8:  // URANUS - Ice World
-            // Theme: Slow but extremely durable enemies
-            return ["shield", "destroyer", "bomber", "stealth"].randomElement()!
+            // Theme: Slow but extremely durable enemies with new tanks
+            return ["shield", "destroyer", "bomber", "juggernaut", "goliath", "behemoth"].randomElement()!
             
         case 9:  // NEPTUNE - Deep Space
             // Theme: Elite enemy compositions
@@ -5970,7 +5992,7 @@ class GameScene: SKScene {
             body.glowWidth = 6 // Increased glow
             health = 2  // Fast but fragile as specified
             speed = 1.2
-            salvageReward = 5  // Scout reward
+            salvageReward = 4  // Scout reward (reduced from 5)
             
             // Add engine trail with particles
             let trail = SKShapeNode(circleOfRadius: 3)
@@ -5995,7 +6017,7 @@ class GameScene: SKScene {
             body.glowWidth = 6
             health = 4  // Balanced fighter
             speed = 1.0
-            salvageReward = 12  // Fighter reward
+            salvageReward = 9  // Fighter reward (reduced from 12)
             
             // Add weapon ports
             for x in [-8, 8] {
@@ -6029,7 +6051,7 @@ class GameScene: SKScene {
             body.glowWidth = 8 // Extra glow for bombers
             health = 10  // Tanky bomber as specified
             speed = 0.8
-            salvageReward = 15  // Bomber reward
+            salvageReward = 11  // Bomber reward (reduced from 15)
             
             // Add rotating core
             let core = SKShapeNode(circleOfRadius: 5)
@@ -6063,7 +6085,7 @@ class GameScene: SKScene {
             body.setScale(1.8)  // Even BIGGER to match 250% difficulty!
             health = 126  // 320% increase! (was 30, then 105)
             speed = 0.7  // Slightly faster (was 0.6)
-            salvageReward = 60  // Better reward to match difficulty
+            salvageReward = 45  // Better reward to match difficulty (reduced from 60)
             
             // SPECIAL ABILITY: Stronger shield that regenerates faster
             enemy.userData?["hasShield"] = true
@@ -6218,7 +6240,7 @@ class GameScene: SKScene {
             body.glowWidth = 10
             health = 15  // High health
             speed = 0.7  // Slow
-            salvageReward = 15  // Shield tank reward
+            salvageReward = 11  // Reduced from 15  // Shield tank reward
             
             // Add shield effect
             let shield = SKShapeNode(circleOfRadius: 20)
@@ -6334,7 +6356,7 @@ class GameScene: SKScene {
             body.setScale(1.2)
             health = 120  // Extremely high health
             speed = 0.4  // Very slow
-            salvageReward = 80  // Massive reward
+            salvageReward = 6  // Reduced from 80  // Massive reward
             
             // Add bio-organic details
             let bioCore = SKShapeNode(circleOfRadius: 20)
@@ -6386,7 +6408,7 @@ class GameScene: SKScene {
             body.glowWidth = 10
             health = 2  // Very fragile
             speed = 2.0  // Extremely fast
-            salvageReward = 8
+            salvageReward = 6  // Reduced from 8
             
             // Add speed trail effects
             for i in 1...4 {
@@ -6431,7 +6453,7 @@ class GameScene: SKScene {
             body.glowWidth = 6
             health = 20  // Very tanky
             speed = 0.5  // Very slow
-            salvageReward = 20
+            salvageReward = 11  // Reduced from 15  // Reduced from 20
             
             // Add layered armor plates
             let outerPlate = SKShapeNode(rectOf: CGSize(width: 22, height: 22), cornerRadius: 2)
@@ -6470,7 +6492,7 @@ class GameScene: SKScene {
             body.glowWidth = 8
             health = 10
             speed = 0.8
-            salvageReward = 15
+            salvageReward = 11  // Reduced from 15
             
             // Add hexagonal shield bubble
             let shieldPath = CGMutablePath()
@@ -6550,6 +6572,119 @@ class GameScene: SKScene {
                 particle.run(SKAction.repeatForever(float))
             }
             
+        case "juggernaut":
+            // SLOW HEAVY TANK - New ultra-tough enemy
+            let jugPath = CGMutablePath()
+            jugPath.addRoundedRect(in: CGRect(x: -25, y: -25, width: 50, height: 50), cornerWidth: 8, cornerHeight: 8)
+            body = SKShapeNode(path: jugPath)
+            body.strokeColor = SKColor(red: 0.7, green: 0.3, blue: 0.0, alpha: 1.0) // Dark bronze
+            body.lineWidth = 4
+            body.fillColor = SKColor(red: 0.4, green: 0.2, blue: 0.0, alpha: 0.3)
+            body.glowWidth = 12
+            body.setScale(1.4)
+            health = 80  // Very high health
+            speed = 0.3  // EXTREMELY slow
+            salvageReward = 45
+            
+            // Heavy armor plating visual
+            for angle in stride(from: 0, to: CGFloat.pi * 2, by: CGFloat.pi / 4) {
+                let plate = SKShapeNode(rectOf: CGSize(width: 15, height: 8))
+                plate.strokeColor = SKColor(red: 0.5, green: 0.25, blue: 0.0, alpha: 0.7)
+                plate.lineWidth = 2
+                plate.fillColor = .clear
+                plate.position = CGPoint(x: cos(angle) * 20, y: sin(angle) * 20)
+                plate.zRotation = angle
+                body.addChild(plate)
+            }
+            
+            // Add damage reduction
+            enemy.userData?["damageReduction"] = 0.5  // Takes 50% damage
+            enemy.userData?["armor"] = 8
+            
+        case "goliath":
+            // MASSIVE SLOW FORTRESS - Another new enemy
+            let goliathPath = CGMutablePath()
+            for i in 0..<8 {
+                let angle = CGFloat(i) * .pi / 4
+                let x = cos(angle) * 30
+                let y = sin(angle) * 30
+                if i == 0 {
+                    goliathPath.move(to: CGPoint(x: x, y: y))
+                } else {
+                    goliathPath.addLine(to: CGPoint(x: x, y: y))
+                }
+            }
+            goliathPath.closeSubpath()
+            body = SKShapeNode(path: goliathPath)
+            body.strokeColor = SKColor(red: 0.4, green: 0.4, blue: 0.8, alpha: 1.0) // Steel blue
+            body.lineWidth = 5
+            body.fillColor = SKColor(red: 0.2, green: 0.2, blue: 0.4, alpha: 0.4)
+            body.glowWidth = 15
+            body.setScale(1.6)
+            health = 100  // Extremely high health
+            speed = 0.35  // Very slow
+            salvageReward = 55
+            
+            // Shield generator visual
+            let shieldRing = SKShapeNode(circleOfRadius: 35)
+            shieldRing.strokeColor = SKColor.cyan.withAlphaComponent(0.3)
+            shieldRing.lineWidth = 2
+            shieldRing.fillColor = .clear
+            shieldRing.glowWidth = 5
+            body.addChild(shieldRing)
+            
+            // Rotating shield animation
+            let rotate = SKAction.rotate(byAngle: .pi * 2, duration: 4.0)
+            shieldRing.run(SKAction.repeatForever(rotate))
+            
+            // Shield properties
+            enemy.userData?["hasShield"] = true
+            enemy.userData?["shieldHealth"] = 30
+            enemy.userData?["maxShieldHealth"] = 30
+            
+        case "behemoth":
+            // COLOSSAL ALIEN TANK - Third new enemy
+            let behemothPath = CGMutablePath()
+            behemothPath.addEllipse(in: CGRect(x: -28, y: -22, width: 56, height: 44))
+            body = SKShapeNode(path: behemothPath)
+            body.strokeColor = SKColor(red: 0.6, green: 0.0, blue: 0.6, alpha: 1.0) // Deep purple
+            body.lineWidth = 6
+            body.fillColor = SKColor(red: 0.3, green: 0.0, blue: 0.3, alpha: 0.3)
+            body.glowWidth = 18
+            body.setScale(1.5)
+            health = 90  // Very high health
+            speed = 0.4  // Slow
+            salvageReward = 50
+            
+            // Organic armor scales
+            for i in 0..<12 {
+                let angle = CGFloat(i) * .pi / 6
+                let scale = SKShapeNode(ellipseOf: CGSize(width: 12, height: 8))
+                scale.strokeColor = SKColor(red: 0.7, green: 0.0, blue: 0.7, alpha: 0.6)
+                scale.lineWidth = 1.5
+                scale.fillColor = SKColor(red: 0.4, green: 0.0, blue: 0.4, alpha: 0.3)
+                scale.position = CGPoint(x: cos(angle) * 22, y: sin(angle) * 18)
+                scale.zRotation = angle
+                body.addChild(scale)
+            }
+            
+            // Regeneration ability
+            enemy.userData?["hasRegeneration"] = true
+            enemy.userData?["regenRate"] = 3  // Heals 3 HP every second
+            
+            // Start regeneration timer
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                guard enemy.parent != nil else {
+                    timer.invalidate()
+                    return
+                }
+                if let currentHealth = enemy.userData?["health"] as? Int {
+                    if currentHealth < 90 && currentHealth > 0 {
+                        enemy.userData?["health"] = min(currentHealth + 3, 90)
+                    }
+                }
+            }
+            
         case "boss":
             // Massive intimidating fortress with rotating parts
             let path = CGMutablePath()
@@ -6573,7 +6708,7 @@ class GameScene: SKScene {
             body.setScale(2.5)  // MASSIVE size increase
             health = 480  // MEGA BOSS health! (20% increase from 400)
             speed = 0.5   // Faster than before (was 0.3)
-            salvageReward = 200  // Epic reward for defeating the mega boss
+            salvageReward = 11  // Reduced from 15  // Reduced from 200  // Epic reward for defeating the mega boss
             
             // SPECIAL ABILITIES: Multiple devastating abilities
             enemy.userData?["hasShield"] = true
