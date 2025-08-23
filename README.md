@@ -34,41 +34,83 @@ open SpaceSalvagers.xcodeproj
 - **Difficulty Progression**: Game gets progressively harder with each map
 
 ### Tower Types
-1. **Cannon** (100 salvage)
-   - Basic starter tower
-   - Fast fire rate (0.6s)
-   - 1 damage per shot
-   - Level 3 gets dual barrels (visual only)
+1. **Machine Gun** (75 salvage)
+   - Rapid-fire starter tower
+   - Extremely fast fire rate (5 shots/sec)
+   - 0.85 damage per shot (reduced 15%)
+   - Best against swarms
+
+2. **Cannon** (80 salvage)
+   - Balanced damage tower
+   - Moderate fire rate
+   - Good all-around choice
    
-2. **Laser** (140 salvage)
+3. **Laser** (120 salvage)
    - Powerful but slow charging (2.2s)
    - 5-11 damage based on level
    - Instant hit with visual beam
    - Charging effect before firing
    
-3. **Plasma** (180 salvage)
+4. **Plasma** (150 salvage)
    - Medium fire rate (1.2s)
    - Area damage on impact
    - Purple energy projectiles
    
-4. **Missile** (200 salvage)
+5. **Missile** (200 salvage)
    - Homing projectiles
    - 2.0s fire rate
    - Targets furthest enemies
    
-5. **Tesla/EMP** (240 salvage)
+6. **Tesla** (160 salvage)
+   - Chain lightning damage
+   - Area effect
+   - Targets weakest enemies
+
+7. **EMP** (160 salvage)
+   - Disables enemy shields
+   - Slows enemies
+   - Area of effect
+
+8. **Gravity** (140 salvage)
+   - Slows all enemies in range
+   - No damage
+   - Essential for late game
+
+9. **Nanobot** (120 salvage)
+   - Healing support tower
+   - Repairs nearby towers
+   - Boosts tower efficiency
    - Chain lightning damage
    - Area effect
    - Targets weakest enemies
 
 ### Enemy Types
-1. **Scout** - Pink triangle, 2 HP, fast (1.2x), 5 salvage
-2. **Fighter** - Orange diamond, 4 HP, normal speed, 10 salvage
-3. **Bomber** - Green hexagon, 10 HP, slow (0.8x), 15 salvage
-4. **Destroyer** - Red star, 30 HP, very slow (0.6x), 25 salvage
-5. **Swarm** - Cyan circle, 1 HP, very fast (1.8x), 3 salvage
-6. **Shield** - Blue oval, 15 HP, slow (0.7x), 18 salvage
-7. **Stealth** - Gray arrow, 3 HP, fast (1.4x), phases in/out, 10 salvage
+
+#### Basic Enemies
+1. **Scout** - Pink triangle, 2 HP, fast (1.2x), 4 salvage
+2. **Fighter** - Orange diamond, 4 HP, normal speed, 9 salvage
+3. **Bomber** - Purple hexagon, 10 HP, slow (0.8x), 11 salvage
+4. **Swarm** - Cyan circle, 1 HP, very fast (2.5x), 5 salvage
+5. **Shield** - Blue oval, 15 HP, slow (0.7x), 8 salvage
+6. **Stealth** - Gray arrow, 3 HP, fast (1.4x), phases in/out, 7 salvage
+7. **Armored** - Metal gray square, 20 HP, very slow (0.5x), 15 salvage
+8. **Fast** - Yellow arrow, 2 HP, extremely fast (2.0x), 6 salvage
+
+#### Heavy Enemies (New)
+9. **Juggernaut** - Molten orange fortress, 80 HP, extremely slow (0.3x), 34 salvage
+   - 50% damage reduction, heavy armor plating
+10. **Goliath** - Crystalline cyan octagon, 100 HP, very slow (0.35x), 41 salvage
+    - Multi-layered shields (30 HP shield)
+11. **Behemoth** - Bio-mechanical purple horror, 90 HP, slow (0.4x), 38 salvage
+    - Regenerates 3 HP/second
+
+#### Boss Enemies
+12. **Destroyer** - Massive red hexagon, 126 HP, slow (0.7x), 45 salvage
+    - 48 HP regenerating shield, 50% damage reduction
+13. **Titan** - Alien purple tentacle beast, 360 HP, very slow (0.4x), 90 salvage
+    - Regenerates 5 HP/second, 30% damage reduction
+14. **Mega Boss** - Fortress with rotating parts, 480 HP, slow (0.5x), 150 salvage
+    - 60 HP shield, 40% damage reduction
 
 ### Visual Effects
 - **Hit Reactions**: Enemies shake and flash when damaged
@@ -79,11 +121,20 @@ open SpaceSalvagers.xcodeproj
 - **UI Animations**: Pulsing health bars, glowing buttons
 
 ### Game Balance
-- **Starting Resources**: 120 salvage
+- **Starting Resources**: 120 salvage + (map-1) × 40
 - **Station Health**: 3 lives
-- **Wave Bonuses**: 60-80+ salvage per wave
-- **Map Completion**: 600 salvage for map 1, scaling for others
-- **Enemy Progression**: Gradual introduction of tougher enemies
+- **Salvage Rewards**: Reduced by 25-30% for harder progression
+- **Map Difficulty**:
+  - Map 1 (Mars): 45% harder from wave 2 onwards
+  - Map 2 (Venus): 100% harder (doubled difficulty)
+  - Map 3 (Earth): 150% harder with elite enemies
+  - Map 4 (Mars Outpost): 200% harder with heavy units
+  - Maps 5-12: Progressive difficulty with boss variations
+- **Spawn Rates**:
+  - Map 1: 1.8s (wave 1), 1.1s (wave 2+)
+  - Map 2: 1.0s base delay
+  - Map 3: 0.8s base delay
+  - Map 4: 0.65s base delay
 
 ## 🕹️ Controls
 
@@ -218,7 +269,33 @@ SpaceSalvagers/
 - Fast forward feature
 - Multiple difficulty adjustments
 
-## 🆕 Recent Updates (v1.3.0)
+## 🆕 Recent Updates (v1.4.0)
+
+### Major Difficulty Overhaul
+- **Map Difficulty Scaling**
+  - Map 1: 45% harder from wave 2 (tutorial only wave 1)
+  - Map 2: 100% harder with immediate tough enemies
+  - Map 3: 150% harder with elite units from start
+  - Map 4: 200% harder with heavy tanks and fast spawns
+  
+- **New Heavy Tank Enemies**
+  - Juggernaut: Industrial war machine with pulsing armor
+  - Goliath: Crystalline fortress with triple shield layers
+  - Behemoth: Bio-mechanical horror with regeneration
+  
+- **Visual Enhancements**
+  - All new enemies have stunning particle effects
+  - Multiple animation layers per enemy
+  - Vibrant neon colors with high glow values
+  - Iridescent and color-shifting effects
+  
+- **Balance Changes**
+  - All salvage rewards reduced by 25-30%
+  - Machine gun damage reduced by 15%
+  - Boss health increased by 20%
+  - Boss shields increased by 20%
+  
+## Previous Updates (v1.3.0)
 
 ### Background Animations & Map Navigation
 - **Stunning Background Effects**
@@ -241,7 +318,7 @@ SpaceSalvagers/
   - Removed automatic salvage increase bug
   - Fixed salvage only increases from destroying enemies
 
-### Previous Updates (v1.2.0)
+### v1.2.0
 - **Enhanced Visual Effects**
   - Massive explosion effects when losing lives with screen shake
   - Improved planet animations in main menu with orbiting moon and space station

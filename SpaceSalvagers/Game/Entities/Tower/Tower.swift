@@ -241,7 +241,7 @@ class Tower: BaseEntity {
         switch type {
         case .machineGun:
             return TowerStats(
-                damage: 1,  // Minimal damage per shot (much weaker than cannon)
+                damage: 0.85,  // Reduced by 15% from 1.0 - now even weaker
                 fireRate: 5,  // EXTREMELY fast fire rate - true machine gun
                 range: 60,  // Slightly shorter range
                 specialEffect: nil

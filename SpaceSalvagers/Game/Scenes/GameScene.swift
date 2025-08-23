@@ -5637,7 +5637,12 @@ class GameScene: SKScene {
         
         // Maps 1, 2, 3, and 4 have faster spawn rates for increased difficulty
         if currentMap == 1 {
-            baseDelay = 1.3  // 35% faster spawning for 50% harder difficulty
+            // Map 1: Faster spawning from wave 2 onwards for 45% increased difficulty
+            if currentWave == 1 {
+                baseDelay = 1.8  // Wave 1 is still tutorial pace
+            } else {
+                baseDelay = 1.1  // 45% faster spawning from wave 2 onwards!
+            }
         } else if currentMap == 2 {
             baseDelay = 1.0  // 50% faster spawning for 100% harder difficulty
         } else if currentMap == 3 {
@@ -5747,26 +5752,28 @@ class GameScene: SKScene {
         
         // Regular enemy spawning logic
         switch currentMap {
-        case 1:  // ALPHA CENTAURI - First Contact (Tutorial)
-            // Theme: Learn basic enemy types
+        case 1:  // MARS - 45% HARDER from Wave 2!
+            // Theme: Tutorial ends after wave 1 - then it gets REAL
             if currentWave == 1 {
-                return "scout"  // Wave 1: Only scouts (100%)
+                return "scout"  // Wave 1: Only scouts for learning (100%)
             } else if currentWave == 2 {
-                // Wave 2: Introduce fast enemies (60% scouts, 40% fast)
-                return Int.random(in: 1...10) <= 6 ? "scout" : "fast"
-            } else if currentWave == 3 {
-                // Wave 3: Add swarms (40% scouts, 30% fast, 30% swarm)
+                // Wave 2: 45% HARDER - Tougher mix (30% fighter, 30% fast, 20% armored, 20% bomber)
                 let roll = Int.random(in: 1...10)
-                if roll <= 4 { return "scout" }
-                else if roll <= 7 { return "fast" }
-                else { return "swarm" }
-            } else {
-                // Wave 4+: Mix with armored (30% scout, 30% fast, 20% swarm, 20% armored)
-                let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "scout" }
+                if roll <= 3 { return "fighter" }
                 else if roll <= 6 { return "fast" }
-                else if roll <= 8 { return "swarm" }
-                else { return "armored" }
+                else if roll <= 8 { return "armored" }
+                else { return "bomber" }  // Bombers already in wave 2!
+            } else if currentWave == 3 {
+                // Wave 3: Elite units appear (25% bomber, 25% shield, 25% fighter, 25% armored)
+                return ["bomber", "shield", "fighter", "armored"].randomElement()!
+            } else {
+                // Wave 4+: EXTREME challenge (20% destroyer, 20% shield, 20% bomber, 20% armored, 20% stealth)
+                let roll = Int.random(in: 1...10)
+                if roll <= 2 { return "destroyer" }  // Mini-bosses in regular waves!
+                else if roll <= 4 { return "shield" }
+                else if roll <= 6 { return "bomber" }
+                else if roll <= 8 { return "armored" }
+                else { return "stealth" }
             }
             
         case 2:  // VENUS - 100% HARDER (DOUBLED DIFFICULTY)
