@@ -2545,6 +2545,11 @@ class GameScene: SKScene {
         // Remove existing button
         screenClearButton?.removeFromParent()
         
+        // Only available from Map 5 onwards
+        guard currentMap >= 5 else { 
+            return  // Don't create button for maps 1-4
+        }
+        
         // Create screen clear superweapon button (bottom left)
         screenClearButton = SKNode()
         screenClearButton!.position = CGPoint(x: -size.width/2 + 60, y: -size.height/2 + 60)
@@ -5790,24 +5795,28 @@ class GameScene: SKScene {
                 else if roll <= 6 { return "armored" }
                 else { return "fast" }
             } else if currentWave == 2 {
-                // Wave 2: 40% HARDER - Elite assault (30% destroyer, 30% bomber, 20% shield, 20% juggernaut)
+                // Wave 2: Challenging but fair (30% bomber, 30% shield, 30% fighter, 10% destroyer)
                 let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "destroyer" }  // Mini-bosses in wave 2!
-                else if roll <= 6 { return "bomber" }
-                else if roll <= 8 { return "shield" }
-                else { return "juggernaut" }  // Heavy tank appears!
+                if roll <= 3 { return "bomber" }
+                else if roll <= 6 { return "shield" }
+                else if roll <= 9 { return "fighter" }
+                else { return "destroyer" }  // Only 10% chance of mini-boss
             } else if currentWave == 3 {
-                // Wave 3: EXTREME mix (25% destroyer, 25% goliath, 25% shield, 25% stealth)
-                return ["destroyer", "goliath", "shield", "stealth"].randomElement()!
+                // Wave 3: Tougher mix (30% bomber, 30% shield, 20% stealth, 20% destroyer)
+                let roll = Int.random(in: 1...10)
+                if roll <= 3 { return "bomber" }
+                else if roll <= 6 { return "shield" }
+                else if roll <= 8 { return "stealth" }
+                else { return "destroyer" }
             } else {
-                // Wave 4+: APOCALYPSE (20% destroyer, 20% juggernaut, 20% goliath, 20% behemoth, 20% shield)
+                // Wave 4+: Hard but manageable (20% destroyer, 20% shield, 20% bomber, 20% stealth, 20% armored)
                 let roll = Int.random(in: 1...5)
                 switch roll {
                 case 1: return "destroyer"
-                case 2: return "juggernaut"
-                case 3: return "goliath"
-                case 4: return "behemoth"
-                default: return "shield"
+                case 2: return "shield"
+                case 3: return "bomber"
+                case 4: return "stealth"
+                default: return "armored"
                 }
             }
             
@@ -12912,6 +12921,13 @@ class GameScene: SKScene {
         enemiesSpawned = 0
         enemiesDestroyed = 0
         enemiesPerWave = 10
+        
+        // Reset screen clear charges for new map (1 charge per map from map 5+)
+        if currentMap >= 5 {
+            screenClearCharges = 1  // 1 use per map
+        } else {
+            screenClearCharges = 0  // No charges for maps 1-4
+        }
         
         // Clear and recreate background for new map (especially for map 3 galaxy)
         backgroundLayer.removeAllChildren()
