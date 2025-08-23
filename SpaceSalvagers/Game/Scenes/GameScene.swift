@@ -5631,12 +5631,20 @@ class GameScene: SKScene {
             }
         }
         
-        // Strategic spawn delays - longer waves with varied pacing
+        // Strategic spawn delays - Maps 1 and 2 spawn MUCH faster for increased difficulty
         // Later waves spawn faster to increase pressure
-        let baseDelay = 2.0  // Base 2 seconds between spawns for pacing
-        let mapSpeedBoost = Double(currentMap - 1) * 0.1    // 10% faster per map
+        var baseDelay = 2.0  // Base 2 seconds between spawns for pacing
+        
+        // Maps 1 and 2 have faster spawn rates for increased difficulty
+        if currentMap == 1 {
+            baseDelay = 1.3  // 35% faster spawning for 50% harder difficulty
+        } else if currentMap == 2 {
+            baseDelay = 1.0  // 50% faster spawning for 100% harder difficulty
+        }
+        
+        let mapSpeedBoost = Double(max(0, currentMap - 3)) * 0.1    // Speed boost only after map 2
         let waveSpeedBoost = Double(currentWave - 1) * 0.15  // 15% faster per wave
-        let spawnDelay = max(0.8, baseDelay - mapSpeedBoost - waveSpeedBoost)  // Min 0.8 seconds
+        let spawnDelay = max(0.5, baseDelay - mapSpeedBoost - waveSpeedBoost)  // Min 0.5 seconds for intense action
         let waitAction = SKAction.wait(forDuration: spawnDelay)
         let sequence = SKAction.sequence([spawnAction, waitAction])
         let repeatAction = SKAction.repeat(sequence, count: enemiesPerWave)
@@ -5757,23 +5765,36 @@ class GameScene: SKScene {
                 else { return "armored" }
             }
             
-        case 2:  // PROXIMA B - Red Dwarf Colony
-            // Theme: Heat and shields - introduce shielded and regenerator enemies
+        case 2:  // VENUS - 100% HARDER (DOUBLED DIFFICULTY)
+            // Theme: Much tougher enemies from the start - no more easy waves
             if currentWave == 1 {
-                // Wave 1: Mix of basic (50% swarm, 50% fast)
-                return Int.random(in: 1...2) == 1 ? "swarm" : "fast"
+                // Wave 1: Immediately challenging (40% fighter, 30% armored, 30% fast)
+                let roll = Int.random(in: 1...10)
+                if roll <= 4 { return "fighter" }
+                else if roll <= 7 { return "armored" }
+                else { return "fast" }
             } else if currentWave == 2 {
-                // Wave 2: Introduce shielded (40% swarm, 30% fast, 30% shielded)
+                // Wave 2: Very tough (30% bomber, 30% shield, 40% fighter)
                 let roll = Int.random(in: 1...10)
-                if roll <= 4 { return "swarm" }
-                else if roll <= 7 { return "fast" }
-                else { return "shielded" }
+                if roll <= 3 { return "bomber" }
+                else if roll <= 6 { return "shield" }
+                else { return "fighter" }
+            } else if currentWave == 3 {
+                // Wave 3: Brutal mix (30% bomber, 30% shield, 20% stealth, 20% destroyer mini-boss chance)
+                let roll = Int.random(in: 1...10)
+                if roll <= 3 { return "bomber" }
+                else if roll <= 6 { return "shield" }
+                else if roll <= 8 { return "stealth" }
+                else { return "fighter" }  // More fighters instead of mini-boss every time
             } else {
-                // Wave 3+: First bombers appear (30% fighters, 30% bombers, 40% swarms)
-                let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "fighter" }
-                else if roll <= 6 { return "bomber" }
-                else { return "swarm" }
+                // Wave 4: Nightmare (25% bomber, 25% shield, 25% stealth, 25% fighter)
+                let roll = Int.random(in: 1...4)
+                switch roll {
+                case 1: return "bomber"
+                case 2: return "shield"
+                case 3: return "stealth"
+                default: return "fighter"
+                }
             }
             
         case 3:  // EARTH - Defend Home
