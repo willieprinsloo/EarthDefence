@@ -5644,7 +5644,12 @@ class GameScene: SKScene {
                 baseDelay = 1.1  // 45% faster spawning from wave 2 onwards!
             }
         } else if currentMap == 2 {
-            baseDelay = 1.0  // 50% faster spawning for 100% harder difficulty
+            // Map 2: Much faster spawning from wave 2 onwards for 140% difficulty
+            if currentWave == 1 {
+                baseDelay = 1.2  // Wave 1 is moderately fast
+            } else {
+                baseDelay = 0.85  // 40% faster from wave 2 onwards!
+            }
         } else if currentMap == 3 {
             baseDelay = 0.8  // 60% faster spawning for 150% harder difficulty - EARTH UNDER SIEGE!
         } else if currentMap == 4 {
@@ -5776,35 +5781,33 @@ class GameScene: SKScene {
                 else { return "stealth" }
             }
             
-        case 2:  // VENUS - 100% HARDER (DOUBLED DIFFICULTY)
-            // Theme: Much tougher enemies from the start - no more easy waves
+        case 2:  // VENUS - 140% HARDER from Wave 2!
+            // Theme: Wave 1 is manageable, then it gets MUCH harder
             if currentWave == 1 {
-                // Wave 1: Immediately challenging (40% fighter, 30% armored, 30% fast)
+                // Wave 1: Still challenging but not insane (30% fighter, 30% armored, 40% fast)
                 let roll = Int.random(in: 1...10)
-                if roll <= 4 { return "fighter" }
-                else if roll <= 7 { return "armored" }
+                if roll <= 3 { return "fighter" }
+                else if roll <= 6 { return "armored" }
                 else { return "fast" }
             } else if currentWave == 2 {
-                // Wave 2: Very tough (30% bomber, 30% shield, 40% fighter)
+                // Wave 2: 40% HARDER - Elite assault (30% destroyer, 30% bomber, 20% shield, 20% juggernaut)
                 let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "bomber" }
-                else if roll <= 6 { return "shield" }
-                else { return "fighter" }
+                if roll <= 3 { return "destroyer" }  // Mini-bosses in wave 2!
+                else if roll <= 6 { return "bomber" }
+                else if roll <= 8 { return "shield" }
+                else { return "juggernaut" }  // Heavy tank appears!
             } else if currentWave == 3 {
-                // Wave 3: Brutal mix (30% bomber, 30% shield, 20% stealth, 20% destroyer mini-boss chance)
-                let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "bomber" }
-                else if roll <= 6 { return "shield" }
-                else if roll <= 8 { return "stealth" }
-                else { return "fighter" }  // More fighters instead of mini-boss every time
+                // Wave 3: EXTREME mix (25% destroyer, 25% goliath, 25% shield, 25% stealth)
+                return ["destroyer", "goliath", "shield", "stealth"].randomElement()!
             } else {
-                // Wave 4: Nightmare (25% bomber, 25% shield, 25% stealth, 25% fighter)
-                let roll = Int.random(in: 1...4)
+                // Wave 4+: APOCALYPSE (20% destroyer, 20% juggernaut, 20% goliath, 20% behemoth, 20% shield)
+                let roll = Int.random(in: 1...5)
                 switch roll {
-                case 1: return "bomber"
-                case 2: return "shield"
-                case 3: return "stealth"
-                default: return "fighter"
+                case 1: return "destroyer"
+                case 2: return "juggernaut"
+                case 3: return "goliath"
+                case 4: return "behemoth"
+                default: return "shield"
                 }
             }
             
