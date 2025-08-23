@@ -6061,14 +6061,14 @@ class GameScene: SKScene {
             body.fillColor = SKColor(red: 0.5, green: 0.0, blue: 0.0, alpha: 0.3)
             body.glowWidth = 15 // Maximum glow for boss enemies
             body.setScale(1.8)  // Even BIGGER to match 250% difficulty!
-            health = 105  // 250% increase! (was 30)
+            health = 126  // 320% increase! (was 30, then 105)
             speed = 0.7  // Slightly faster (was 0.6)
             salvageReward = 60  // Better reward to match difficulty
             
             // SPECIAL ABILITY: Stronger shield that regenerates faster
             enemy.userData?["hasShield"] = true
-            enemy.userData?["shieldHealth"] = 40  // Even stronger shield to match 250% difficulty
-            enemy.userData?["maxShieldHealth"] = 40
+            enemy.userData?["shieldHealth"] = 48  // Even stronger shield to match 320% difficulty
+            enemy.userData?["maxShieldHealth"] = 48
             enemy.userData?["damageReduction"] = 0.5  // Takes 50% less damage
             enemy.userData?["armor"] = 5  // Added armor for extra toughness
             
@@ -6138,7 +6138,7 @@ class GameScene: SKScene {
                 body.addChild(tentacle)
             }
             
-            health = 300  // TITAN LEVEL health!
+            health = 360  // TITAN LEVEL health! (20% increase from 300)
             speed = 0.4   // Slightly faster but still slow (was 0.3)
             salvageReward = 120  // Massive reward to match the challenge
             
@@ -6156,8 +6156,8 @@ class GameScene: SKScene {
                 }
                 // Regenerate health
                 if let currentHealth = enemy.userData?["health"] as? Int {
-                    if currentHealth < 300 && currentHealth > 0 {  // Max health is 300 now
-                        enemy.userData?["health"] = min(currentHealth + 5, 300)  // Faster regen
+                    if currentHealth < 360 && currentHealth > 0 {  // Max health is 360 now
+                        enemy.userData?["health"] = min(currentHealth + 5, 360)  // Faster regen
                         // Visual effect for regeneration
                         let healEffect = SKShapeNode(circleOfRadius: 30)
                         healEffect.strokeColor = SKColor.green.withAlphaComponent(0.8)
@@ -6571,14 +6571,14 @@ class GameScene: SKScene {
             body.fillColor = .clear
             body.glowWidth = 20
             body.setScale(2.5)  // MASSIVE size increase
-            health = 400  // MEGA BOSS health!
+            health = 480  // MEGA BOSS health! (20% increase from 400)
             speed = 0.5   // Faster than before (was 0.3)
             salvageReward = 200  // Epic reward for defeating the mega boss
             
             // SPECIAL ABILITIES: Multiple devastating abilities
             enemy.userData?["hasShield"] = true
-            enemy.userData?["shieldHealth"] = 50
-            enemy.userData?["maxShieldHealth"] = 50
+            enemy.userData?["shieldHealth"] = 60
+            enemy.userData?["maxShieldHealth"] = 60
             enemy.userData?["damageReduction"] = 0.4  // Takes 60% damage
             enemy.userData?["armor"] = 15  // High armor
             enemy.userData?["hasRageMode"] = true  // Gets faster when damaged
