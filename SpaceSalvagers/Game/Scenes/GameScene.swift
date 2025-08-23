@@ -5795,21 +5795,33 @@ class GameScene: SKScene {
                 else if roll <= 6 { return "armored" }
                 else { return "fast" }
             } else if currentWave == 2 {
-                // Wave 2: Challenging but fair (30% bomber, 30% shield, 30% fighter, 10% destroyer)
+                // Wave 2: ONE guaranteed Juggernaut at position 5
+                // Check if this is the 5th enemy spawned in the wave
+                if enemiesSpawned == 4 {  // 0-indexed, so 4 = 5th enemy
+                    return "juggernaut"  // Guaranteed Juggernaut
+                }
+                // Rest of wave: bomber, shield, fighter mix
                 let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "bomber" }
-                else if roll <= 6 { return "shield" }
-                else if roll <= 9 { return "fighter" }
-                else { return "destroyer" }  // Only 10% chance of mini-boss
+                if roll <= 4 { return "bomber" }
+                else if roll <= 7 { return "shield" }
+                else { return "fighter" }
             } else if currentWave == 3 {
-                // Wave 3: Tougher mix (30% bomber, 30% shield, 20% stealth, 20% destroyer)
+                // Wave 3: ONE guaranteed Juggernaut at position 7
+                if enemiesSpawned == 6 {  // 7th enemy
+                    return "juggernaut"  // Guaranteed Juggernaut
+                }
+                // Rest: bomber, shield, stealth, occasional destroyer
                 let roll = Int.random(in: 1...10)
                 if roll <= 3 { return "bomber" }
                 else if roll <= 6 { return "shield" }
                 else if roll <= 8 { return "stealth" }
                 else { return "destroyer" }
             } else {
-                // Wave 4+: Hard but manageable (20% destroyer, 20% shield, 20% bomber, 20% stealth, 20% armored)
+                // Wave 4+: ONE guaranteed Juggernaut at position 10
+                if enemiesSpawned == 9 {  // 10th enemy
+                    return "juggernaut"  // Guaranteed Juggernaut
+                }
+                // Rest: Mixed challenging enemies
                 let roll = Int.random(in: 1...5)
                 switch roll {
                 case 1: return "destroyer"
