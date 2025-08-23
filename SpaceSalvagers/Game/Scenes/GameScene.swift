@@ -9722,15 +9722,15 @@ class GameScene: SKScene {
     
     private func getMapName(for mapNumber: Int) -> String {
         switch mapNumber {
-        case 1: return "Mercury Outpost - Tutorial"
-        case 2: return "Venus Cloud Colony"
-        case 3: return "Earth Defense Station"
-        case 4: return "Mars Forward Base"
-        case 5: return "Neptune - The Spiral"
-        case 6: return "Saturn - Multi-Path Junction"
-        case 7: return "Jupiter's Highways"
-        case 8: return "Mars Command"
-        case 9: return "Lunar Defense"
+        case 1: return "Alpha Centauri A"
+        case 2: return "Proxima B"
+        case 3: return "Kepler Station"
+        case 4: return "Tau Ceti"
+        case 5: return "Neptune"
+        case 6: return "Saturn"
+        case 7: return "Jupiter"
+        case 8: return "Mars"
+        case 9: return "Moon Base"
         case 10: return "EARTH - FINAL STAND"
         default: return "Deep Space \(mapNumber)"
         }
