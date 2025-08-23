@@ -5555,6 +5555,7 @@ class GameScene: SKScene {
     private var enemiesSpawned = 0
     private var enemiesPerWave = 10
     private var enemiesDestroyed = 0
+    private var bossSpawnedThisWave = false  // Track if boss already spawned this wave
     private var stationHealth = 3  // Less health
     private var maxStationHealth = 3  // Harder game
     private var lastFireTime: [SKNode: TimeInterval] = [:]
@@ -5591,6 +5592,7 @@ class GameScene: SKScene {
         isWaveActive = true
         isCheckingWaveCompletion = false  // Reset the checking flag for new wave
         enemiesSpawned = 0
+        bossSpawnedThisWave = false  // Reset boss spawn flag for new wave
         // ENHANCED ENEMY COUNT - More enemies per wave since fewer waves
         // Each wave gets progressively harder with more enemies
         switch currentMap {
@@ -5739,12 +5741,16 @@ class GameScene: SKScene {
     }
     
     private func getEnemyTypeForWave() -> String {
+        // Define which enemy types are considered "god creatures" (bosses)
+        let godCreatures = ["destroyer", "titan", "boss"]
+        
         // Check if this is the LAST enemy of the LAST wave - spawn BOSS
         let isLastWave = currentWave >= wavesPerMap
         let isLastEnemy = enemiesSpawned == enemiesPerWave - 1
         
-        if isLastWave && isLastEnemy {
-            // BOSS TIME! Different boss for each map
+        if isLastWave && isLastEnemy && !bossSpawnedThisWave {
+            // BOSS TIME! Different boss for each map - BUT ONLY ONE
+            bossSpawnedThisWave = true  // Mark that we spawned a boss
             switch currentMap {
             case 1...3: return "destroyer"    // Early maps get destroyer boss
             case 4...6: return "titan"         // Mid maps get titan boss
@@ -5754,11 +5760,7 @@ class GameScene: SKScene {
             }
         }
         
-        // Check for mini-boss at end of non-final waves
-        if !isLastWave && isLastEnemy && currentWave > 1 {
-            // Mini-boss at end of wave
-            return Int.random(in: 1...2) == 1 ? "destroyer" : "shield"
-        }
+        // No mini-bosses in non-final waves - removed to ensure only one boss per wave
         
         // Regular enemy spawning logic
         switch currentMap {
@@ -5777,13 +5779,15 @@ class GameScene: SKScene {
                 // Wave 3: Elite units appear (25% bomber, 25% shield, 25% fighter, 25% armored)
                 return ["bomber", "shield", "fighter", "armored"].randomElement()!
             } else {
-                // Wave 4+: EXTREME challenge (20% destroyer, 20% shield, 20% bomber, 20% armored, 20% stealth)
-                let roll = Int.random(in: 1...10)
-                if roll <= 2 { return "destroyer" }  // Mini-bosses in regular waves!
-                else if roll <= 4 { return "shield" }
-                else if roll <= 6 { return "bomber" }
-                else if roll <= 8 { return "armored" }
-                else { return "stealth" }
+                // Wave 4+: EXTREME challenge (NO destroyers - only one boss per wave)
+                let roll = Int.random(in: 1...5)
+                switch roll {
+                case 1: return "shield"
+                case 2: return "bomber"
+                case 3: return "armored"
+                case 4: return "stealth"
+                default: return "fighter"  // Replace destroyer with fighter
+                }
             }
             
         case 2:  // VENUS - Much harder from the start!
@@ -5813,21 +5817,21 @@ class GameScene: SKScene {
                 if enemiesSpawned == 6 {  // 7th enemy
                     return "juggernaut"  // Guaranteed Juggernaut
                 }
-                // Rest: bomber, shield, stealth, occasional destroyer
+                // Rest: bomber, shield, stealth, armored (no destroyer)
                 let roll = Int.random(in: 1...10)
                 if roll <= 3 { return "bomber" }
                 else if roll <= 6 { return "shield" }
                 else if roll <= 8 { return "stealth" }
-                else { return "destroyer" }
+                else { return "armored" }  // Replace destroyer with armored
             } else {
                 // Wave 4+: ONE guaranteed Juggernaut at position 10
                 if enemiesSpawned == 9 {  // 10th enemy
                     return "juggernaut"  // Guaranteed Juggernaut
                 }
-                // Rest: Mixed challenging enemies
+                // Rest: Mixed challenging enemies (no destroyer)
                 let roll = Int.random(in: 1...5)
                 switch roll {
-                case 1: return "destroyer"
+                case 1: return "fighter"  // Replace destroyer with fighter
                 case 2: return "shield"
                 case 3: return "bomber"
                 case 4: return "stealth"
@@ -5845,45 +5849,80 @@ class GameScene: SKScene {
                 else if roll <= 8 { return "shield" }
                 else { return "armored" }
             } else if currentWave == 2 {
-                // Wave 2: Elite units attack (30% destroyer, 30% shield, 20% bomber, 20% stealth)
+                // Wave 2: ONE destroyer at position 8, rest are tough enemies
+                if enemiesSpawned == 7 && !bossSpawnedThisWave {  // 8th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: shield, bomber, stealth, armored
                 let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "destroyer" }
-                else if roll <= 6 { return "shield" }
-                else if roll <= 8 { return "bomber" }
-                else { return "stealth" }
-            } else if currentWave == 3 {
-                // Wave 3: Devastating force (25% destroyer, 25% shield, 25% bomber, 25% stealth)
-                return ["destroyer", "shield", "bomber", "stealth"].randomElement()!
-            } else {
-                // Wave 4+: OVERWHELMING ASSAULT (30% destroyer, 20% shield, 20% bomber, 20% stealth, 10% mini-titan)
-                let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "destroyer" }
-                else if roll <= 5 { return "shield" }
+                if roll <= 4 { return "shield" }
                 else if roll <= 7 { return "bomber" }
                 else if roll <= 9 { return "stealth" }
-                else { return "destroyer" }  // Extra destroyer instead of titan every spawn
+                else { return "armored" }
+            } else if currentWave == 3 {
+                // Wave 3: ONE destroyer at position 10
+                if enemiesSpawned == 9 && !bossSpawnedThisWave {  // 10th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: tough mix without destroyer
+                return ["shield", "bomber", "stealth", "armored"].randomElement()!
+            } else {
+                // Wave 4+: ONE destroyer at position 12
+                if enemiesSpawned == 11 && !bossSpawnedThisWave {  // 12th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: challenging mix
+                let roll = Int.random(in: 1...5)
+                switch roll {
+                case 1: return "shield"
+                case 2: return "bomber"
+                case 3: return "stealth"
+                case 4: return "armored"
+                default: return "fighter"
+                }
             }
             
         case 4:  // MARS - Military Outpost - 200% HARDER!
             // Theme: EXTREME military assault with overwhelming firepower
             if currentWave == 1 {
-                // Wave 1: No mercy start (30% destroyer, 30% bomber, 20% shield, 20% juggernaut)
+                // Wave 1: ONE destroyer at position 6
+                if enemiesSpawned == 5 && !bossSpawnedThisWave {  // 6th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: bomber, shield, armored
                 let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "destroyer" }
-                else if roll <= 6 { return "bomber" }
-                else if roll <= 8 { return "shield" }
-                else { return "juggernaut" }  // New heavy unit from wave 1!
-            } else if currentWave == 2 {
-                // Wave 2: Elite forces (30% destroyer, 25% goliath, 25% shield, 20% behemoth)
-                let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "destroyer" }
-                else if roll <= 5 { return "goliath" }  // Heavy fortress
+                if roll <= 4 { return "bomber" }
                 else if roll <= 7 { return "shield" }
-                else if roll <= 9 { return "behemoth" }  // Regenerating tank
-                else { return "bomber" }
+                else { return "armored" }
+            } else if currentWave == 2 {
+                // Wave 2: ONE destroyer at position 8
+                if enemiesSpawned == 7 && !bossSpawnedThisWave {  // 8th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: ONE goliath at position 12
+                if enemiesSpawned == 11 {  // 12th enemy
+                    return "goliath"  // Heavy fortress but not a god creature
+                }
+                // Other enemies: shield, bomber, armored
+                let roll = Int.random(in: 1...3)
+                switch roll {
+                case 1: return "shield"
+                case 2: return "bomber"
+                default: return "armored"
+                }
             } else {
-                // Wave 3+: APOCALYPTIC ASSAULT (Equal mix of all heavy units)
-                return ["destroyer", "juggernaut", "goliath", "behemoth", "shield", "bomber"].randomElement()!
+                // Wave 3+: ONE destroyer at position 10
+                if enemiesSpawned == 9 && !bossSpawnedThisWave {  // 10th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: heavy tanks and tough enemies (but not god creatures)
+                return ["juggernaut", "goliath", "behemoth", "shield", "bomber", "armored"].randomElement()!
             }
             
         case 5:  // CERES - Asteroid Belt
