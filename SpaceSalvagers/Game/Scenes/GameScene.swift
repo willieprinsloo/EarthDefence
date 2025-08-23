@@ -5975,12 +5975,12 @@ class GameScene: SKScene {
             core.run(SKAction.repeatForever(rotate))
             
         case "destroyer":
-            // Hexagonal heavy destroyer
+            // MASSIVE Hexagonal heavy destroyer
             let path = CGMutablePath()
             for i in 0..<6 {
                 let angle = CGFloat(i) * .pi / 3
-                let x = cos(angle) * 20
-                let y = sin(angle) * 20
+                let x = cos(angle) * 35  // Much bigger
+                let y = sin(angle) * 35
                 if i == 0 {
                     path.move(to: CGPoint(x: x, y: y))
                 } else {
@@ -5990,17 +5990,19 @@ class GameScene: SKScene {
             path.closeSubpath()
             body = SKShapeNode(path: path)
             body.strokeColor = SKColor(red: 1.0, green: 0.2, blue: 0.2, alpha: 1.0) // Neon red
-            body.lineWidth = 3
-            body.fillColor = .clear
-            body.glowWidth = 10 // Maximum glow for boss enemies
-            health = 30  // Boss destroyer as specified
-            speed = 0.6
-            salvageReward = 18  // Destroyer reward
+            body.lineWidth = 4
+            body.fillColor = SKColor(red: 0.5, green: 0.0, blue: 0.0, alpha: 0.3)
+            body.glowWidth = 15 // Maximum glow for boss enemies
+            body.setScale(1.5)  // Make it even bigger!
+            health = 80  // MUCH tougher (was 30)
+            speed = 0.7  // Slightly faster (was 0.6)
+            salvageReward = 50  // Better reward (was 18)
             
-            // SPECIAL ABILITY: Shield that regenerates
+            // SPECIAL ABILITY: Stronger shield that regenerates faster
             enemy.userData?["hasShield"] = true
-            enemy.userData?["shieldHealth"] = 10
-            enemy.userData?["maxShieldHealth"] = 10
+            enemy.userData?["shieldHealth"] = 30  // Much stronger shield (was 10)
+            enemy.userData?["maxShieldHealth"] = 30
+            enemy.userData?["damageReduction"] = 0.5  // Takes 50% less damage
             
             // Add visual shield
             let shield = SKShapeNode(circleOfRadius: 25)
@@ -6011,17 +6013,17 @@ class GameScene: SKScene {
             shield.name = "shield"
             body.addChild(shield)
             
-            // Shield regeneration timer
-            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+            // Shield regeneration timer - faster regeneration
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 guard enemy.parent != nil else { 
                     timer.invalidate()
                     return 
                 }
-                // Regenerate shield
+                // Regenerate shield faster
                 if let currentShield = enemy.userData?["shieldHealth"] as? Int,
                    let maxShield = enemy.userData?["maxShieldHealth"] as? Int {
                     if currentShield < maxShield {
-                        enemy.userData?["shieldHealth"] = min(currentShield + 2, maxShield)
+                        enemy.userData?["shieldHealth"] = min(currentShield + 5, maxShield)  // Faster regen (was 2)
                         // Update visual
                         if let shieldNode = enemy.childNode(withName: "*/shield") as? SKShapeNode {
                             shieldNode.alpha = CGFloat(currentShield + 2) / CGFloat(maxShield)
@@ -6041,10 +6043,10 @@ class GameScene: SKScene {
             body.lineWidth = 5
             body.fillColor = .clear
             body.glowWidth = 20 // Maximum glow
-            body.setScale(1.5) // Make it bigger
+            body.setScale(2.0) // Make it MUCH bigger (was 1.5)
             
             // Add pulsing core
-            let core = SKShapeNode(circleOfRadius: 15)
+            let core = SKShapeNode(circleOfRadius: 20)  // Bigger core
             core.fillColor = SKColor(red: 1.0, green: 0.0, blue: 0.8, alpha: 0.8)
             core.strokeColor = .clear
             core.glowWidth = 10
@@ -6068,13 +6070,15 @@ class GameScene: SKScene {
                 body.addChild(tentacle)
             }
             
-            health = 100  // EXTREMELY high health
-            speed = 0.3   // VERY slow movement
-            salvageReward = 50  // Huge reward for defeating it
+            health = 200  // INSANELY high health (was 100)
+            speed = 0.4   // Slightly faster but still slow (was 0.3)
+            salvageReward = 100  // Massive reward (was 50)
             
-            // SPECIAL ABILITY: Health regeneration
+            // SPECIAL ABILITIES: Health regeneration AND damage resistance
             enemy.userData?["hasRegeneration"] = true
-            enemy.userData?["regenRate"] = 2  // Heals 2 HP every second
+            enemy.userData?["regenRate"] = 5  // Heals 5 HP every second (was 2)
+            enemy.userData?["damageReduction"] = 0.3  // Takes 70% damage
+            enemy.userData?["armor"] = 10  // Flat damage reduction
             
             // Regeneration timer
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
@@ -6084,8 +6088,8 @@ class GameScene: SKScene {
                 }
                 // Regenerate health
                 if let currentHealth = enemy.userData?["health"] as? Int {
-                    if currentHealth < 100 && currentHealth > 0 {
-                        enemy.userData?["health"] = min(currentHealth + 2, 100)
+                    if currentHealth < 200 && currentHealth > 0 {  // Max health is 200 now
+                        enemy.userData?["health"] = min(currentHealth + 5, 200)  // Faster regen
                         // Visual effect for regeneration
                         let healEffect = SKShapeNode(circleOfRadius: 30)
                         healEffect.strokeColor = SKColor.green.withAlphaComponent(0.8)
@@ -6497,10 +6501,19 @@ class GameScene: SKScene {
             body.strokeColor = SKColor(red: 1.0, green: 0.1, blue: 0.1, alpha: 1.0) // Deep red
             body.lineWidth = 5
             body.fillColor = .clear
-            body.glowWidth = 15
-            health = 100  // Extremely tanky
-            speed = 0.3   // Very slow
-            salvageReward = 100
+            body.glowWidth = 20
+            body.setScale(2.5)  // MASSIVE size increase
+            health = 300  // ULTRA tanky (was 100)
+            speed = 0.5   // Faster than before (was 0.3)
+            salvageReward = 150  // Huge reward (was 100)
+            
+            // SPECIAL ABILITIES: Multiple devastating abilities
+            enemy.userData?["hasShield"] = true
+            enemy.userData?["shieldHealth"] = 50
+            enemy.userData?["maxShieldHealth"] = 50
+            enemy.userData?["damageReduction"] = 0.4  // Takes 60% damage
+            enemy.userData?["armor"] = 15  // High armor
+            enemy.userData?["hasRageMode"] = true  // Gets faster when damaged
             
             // Add rotating inner core
             let core = SKShapeNode(circleOfRadius: 18)
@@ -6513,10 +6526,10 @@ class GameScene: SKScene {
             let coreRotate = SKAction.rotate(byAngle: .pi * 2, duration: 2.0)
             core.run(SKAction.repeatForever(coreRotate))
             
-            // Add weapon ports
+            // Add weapon ports that fire back!
             for i in 0..<8 {
                 let angle = CGFloat(i) * .pi / 4
-                let port = SKShapeNode(circleOfRadius: 4)
+                let port = SKShapeNode(circleOfRadius: 6)  // Bigger ports
                 port.fillColor = SKColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 0.9)
                 port.strokeColor = SKColor.red
                 port.lineWidth = 1
@@ -6545,6 +6558,38 @@ class GameScene: SKScene {
                 SKAction.fadeIn(withDuration: 0.5)
             ])
             danger.run(SKAction.repeatForever(flash))
+            
+            // RAGE MODE: Gets faster and deadlier when damaged
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+                guard enemy.parent != nil else {
+                    timer.invalidate()
+                    return
+                }
+                
+                // Check if health is below 50% for rage mode
+                if let currentHealth = enemy.userData?["health"] as? Int {
+                    if currentHealth < 150 && enemy.userData?["rageActive"] as? Bool != true {
+                        // ACTIVATE RAGE MODE!
+                        enemy.userData?["rageActive"] = true
+                        enemy.userData?["speed"] = 0.8  // Speed boost
+                        
+                        // Visual rage effect
+                        let rageEffect = SKShapeNode(circleOfRadius: 50)
+                        rageEffect.strokeColor = SKColor.red
+                        rageEffect.fillColor = SKColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.2)
+                        rageEffect.lineWidth = 3
+                        rageEffect.glowWidth = 15
+                        rageEffect.name = "rageAura"
+                        enemy.addChild(rageEffect)
+                        
+                        let ragePulse = SKAction.sequence([
+                            SKAction.scale(to: 1.2, duration: 0.3),
+                            SKAction.scale(to: 0.9, duration: 0.3)
+                        ])
+                        rageEffect.run(SKAction.repeatForever(ragePulse))
+                    }
+                }
+            }
             
         default:
             // Generic enemy with enhanced outline
@@ -6886,15 +6931,22 @@ class GameScene: SKScene {
         } else if enemy.name?.contains("bomber") == true {
             duration = 18.0
         } else if enemy.name?.contains("destroyer") == true {
-            duration = 22.0  // Slow boss
+            duration = 18.0  // Faster boss (was 22.0)
         } else if enemy.name?.contains("titan") == true {
-            duration = 40.0  // EXTREMELY SLOW ALIEN TITAN
+            duration = 25.0  // Faster titan (was 40.0)
+        } else if enemy.name?.contains("boss") == true {
+            duration = 20.0  // Mega boss speed
         } else if enemy.name?.contains("swarm") == true {
             duration = 10.0  // Very fast swarm
         } else if enemy.name?.contains("shield") == true {
             duration = 20.0  // Slow tank
         } else if enemy.name?.contains("stealth") == true {
             duration = 11.0  // Fast stealth
+        }
+        
+        // Check for rage mode speed boost
+        if enemy.userData?["rageActive"] as? Bool == true {
+            duration *= 0.6  // 40% faster when in rage mode
         }
         
         let followPath = SKAction.follow(path, asOffset: false, orientToPath: true, duration: duration)
@@ -8704,9 +8756,57 @@ class GameScene: SKScene {
             tileDamageBonus = damageBonus
         }
         
-        let finalDamage = Int(Float(damage) * damageMultiplier * achievementDamageBonus * synergyDamageMultiplier * synergyArmorPiercing * tileDamageBonus)
+        var finalDamage = Int(Float(damage) * damageMultiplier * achievementDamageBonus * synergyDamageMultiplier * synergyArmorPiercing * tileDamageBonus)
         
-        // Deal damage to enemy
+        // Check for shield first
+        if let shieldHealth = target.userData?["shieldHealth"] as? Int, shieldHealth > 0 {
+            // Damage goes to shield first
+            let shieldDamage = min(shieldHealth, finalDamage)
+            target.userData?["shieldHealth"] = shieldHealth - shieldDamage
+            finalDamage -= shieldDamage
+            
+            // Update shield visual
+            if let shieldNode = target.childNode(withName: "*/shield") as? SKShapeNode {
+                let newShieldHealth = (shieldHealth - shieldDamage)
+                let maxShield = target.userData?["maxShieldHealth"] as? Int ?? 10
+                shieldNode.alpha = CGFloat(newShieldHealth) / CGFloat(maxShield)
+                
+                if newShieldHealth <= 0 {
+                    // Shield broken effect
+                    let shieldBreak = SKShapeNode(circleOfRadius: 30)
+                    shieldBreak.strokeColor = SKColor.cyan
+                    shieldBreak.lineWidth = 3
+                    shieldBreak.glowWidth = 10
+                    shieldBreak.position = target.position
+                    effectsLayer.addChild(shieldBreak)
+                    shieldBreak.run(SKAction.sequence([
+                        SKAction.group([
+                            SKAction.scale(to: 2.0, duration: 0.3),
+                            SKAction.fadeOut(withDuration: 0.3)
+                        ]),
+                        SKAction.removeFromParent()
+                    ]))
+                }
+            }
+            
+            // If shield absorbed all damage, return
+            if finalDamage <= 0 {
+                return
+            }
+        }
+        
+        // Apply armor (flat damage reduction)
+        if let armor = target.userData?["armor"] as? Int {
+            finalDamage = max(1, finalDamage - armor)  // Always do at least 1 damage
+        }
+        
+        // Apply damage reduction (percentage)
+        if let damageReduction = target.userData?["damageReduction"] as? Double {
+            finalDamage = Int(Double(finalDamage) * (1.0 - damageReduction))
+            finalDamage = max(1, finalDamage)  // Always do at least 1 damage
+        }
+        
+        // Deal damage to enemy health
         if let currentHealth = target.userData?["health"] as? Int {
             let newHealth = currentHealth - finalDamage
             target.userData?["health"] = newHealth
