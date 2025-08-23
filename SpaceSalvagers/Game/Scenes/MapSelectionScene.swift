@@ -178,23 +178,25 @@ class MapSelectionScene: SKScene {
         let radiusMultiplier: CGFloat = deviceType == .pad ? 0.4 : 0.3  // Much smaller orbits
         let sizeMultiplier: CGFloat = deviceType == .pad ? 0.4 : 0.3      // Much smaller planets
         
-        // Planet data: EXACTLY 10 MAPS - Game completes after Map 10
+        // Planet data: EXACTLY 12 MAPS - Game completes after Map 12 (EARTH)
         let planets: [(name: String, radius: CGFloat, size: CGFloat, color: SKColor, mapNumber: Int)] = [
-            // OUTER DEFENSE - Far from Sun (defending incoming invasion)
-            ("Alpha Centauri", 500 * radiusMultiplier, 45 * sizeMultiplier, SKColor(red: 1.0, green: 0.8, blue: 0.3, alpha: 1.0), 1),
-            ("Proxima B", 450 * radiusMultiplier, 40 * sizeMultiplier, SKColor(red: 0.9, green: 0.4, blue: 0.2, alpha: 1.0), 2),
-            ("Kepler Station", 400 * radiusMultiplier, 38 * sizeMultiplier, SKColor(red: 0.7, green: 0.3, blue: 0.9, alpha: 1.0), 3),
-            ("Tau Ceti", 350 * radiusMultiplier, 42 * sizeMultiplier, SKColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0), 4),
+            // OUTER DEFENSE - Far from Earth (defending incoming invasion)
+            ("Alpha Centauri", 600 * radiusMultiplier, 45 * sizeMultiplier, SKColor(red: 1.0, green: 0.8, blue: 0.3, alpha: 1.0), 1),
+            ("Proxima B", 550 * radiusMultiplier, 40 * sizeMultiplier, SKColor(red: 0.9, green: 0.4, blue: 0.2, alpha: 1.0), 2),
+            ("Kepler Station", 500 * radiusMultiplier, 38 * sizeMultiplier, SKColor(red: 0.7, green: 0.3, blue: 0.9, alpha: 1.0), 3),
+            ("Tau Ceti", 450 * radiusMultiplier, 42 * sizeMultiplier, SKColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0), 4),
+            ("Pluto", 400 * radiusMultiplier, 45 * sizeMultiplier, SKColor(red: 0.7, green: 0.7, blue: 0.8, alpha: 1.0), 5),
             
-            // MID DEFENSE - Holding the line
-            ("Neptune", 300 * radiusMultiplier, 75 * sizeMultiplier, SKColor(red: 0.2, green: 0.3, blue: 0.9, alpha: 1.0), 5),
-            ("Saturn", 250 * radiusMultiplier, 55 * sizeMultiplier, SKColor(red: 0.9, green: 0.8, blue: 0.5, alpha: 1.0), 6),
-            ("Jupiter", 200 * radiusMultiplier, 60 * sizeMultiplier, SKColor(red: 0.8, green: 0.6, blue: 0.4, alpha: 1.0), 7),
+            // MID DEFENSE - Outer solar system
+            ("Neptune", 350 * radiusMultiplier, 50 * sizeMultiplier, SKColor(red: 0.2, green: 0.3, blue: 0.9, alpha: 1.0), 6),
+            ("Saturn", 300 * radiusMultiplier, 55 * sizeMultiplier, SKColor(red: 0.9, green: 0.8, blue: 0.5, alpha: 1.0), 7),
+            ("Jupiter", 250 * radiusMultiplier, 60 * sizeMultiplier, SKColor(red: 0.8, green: 0.6, blue: 0.4, alpha: 1.0), 8),
+            ("Io", 220 * radiusMultiplier, 25 * sizeMultiplier, SKColor(red: 0.9, green: 0.8, blue: 0.4, alpha: 1.0), 9),
             
-            // INNER DEFENSE - Last stand before Earth
-            ("Mars", 150 * radiusMultiplier, 35 * sizeMultiplier, SKColor(red: 0.8, green: 0.3, blue: 0.2, alpha: 1.0), 8),
-            ("Moon Base", 100 * radiusMultiplier, 30 * sizeMultiplier, SKColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0), 9),
-            ("EARTH", 60 * radiusMultiplier, 45 * sizeMultiplier, SKColor(red: 0.2, green: 0.5, blue: 0.8, alpha: 1.0), 10)
+            // INNER DEFENSE - Close to Earth
+            ("Mars", 180 * radiusMultiplier, 35 * sizeMultiplier, SKColor(red: 0.8, green: 0.3, blue: 0.2, alpha: 1.0), 10),
+            ("Moon Base", 120 * radiusMultiplier, 30 * sizeMultiplier, SKColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0), 11),
+            ("EARTH", 60 * radiusMultiplier, 45 * sizeMultiplier, SKColor(red: 0.2, green: 0.5, blue: 0.8, alpha: 1.0), 12)
         ]
         
         // Orbital paths removed - using linear progression layout instead
@@ -224,22 +226,26 @@ class MapSelectionScene: SKScene {
             case 1: // Alpha Centauri - Top left
                 position = CGPoint(x: leftBoundary + usableWidth * 0.1, y: topBoundary - usableHeight * 0.1)
             case 2: // Proxima B - Top center-left
-                position = CGPoint(x: leftBoundary + usableWidth * 0.3, y: topBoundary - usableHeight * 0.05)
+                position = CGPoint(x: leftBoundary + usableWidth * 0.25, y: topBoundary - usableHeight * 0.15)
             case 3: // Kepler Station - Top center
-                position = CGPoint(x: leftBoundary + usableWidth * 0.5, y: topBoundary - usableHeight * 0.1)
+                position = CGPoint(x: leftBoundary + usableWidth * 0.4, y: topBoundary - usableHeight * 0.1)
             case 4: // Tau Ceti - Top center-right
-                position = CGPoint(x: leftBoundary + usableWidth * 0.7, y: topBoundary - usableHeight * 0.05)
-            case 5: // Neptune - Far right side
-                position = CGPoint(x: leftBoundary + usableWidth * 0.95, y: topBoundary - usableHeight * 0.2)
-            case 6: // Saturn - Middle left
-                position = CGPoint(x: leftBoundary + usableWidth * 0.15, y: topBoundary - usableHeight * 0.4)
-            case 7: // Jupiter - Middle center-left
-                position = CGPoint(x: leftBoundary + usableWidth * 0.35, y: topBoundary - usableHeight * 0.5)
-            case 8: // Mars - Middle center-right
-                position = CGPoint(x: leftBoundary + usableWidth * 0.65, y: topBoundary - usableHeight * 0.5)
-            case 9: // Moon Base - Middle right
-                position = CGPoint(x: leftBoundary + usableWidth * 0.85, y: topBoundary - usableHeight * 0.4)
-            case 10: // EARTH - Bottom center, prominent final destination
+                position = CGPoint(x: leftBoundary + usableWidth * 0.55, y: topBoundary - usableHeight * 0.15)
+            case 5: // Pluto - Far right side (moved to right and made bigger)
+                position = CGPoint(x: leftBoundary + usableWidth * 0.9, y: topBoundary - usableHeight * 0.1)
+            case 6: // Neptune - Upper middle left
+                position = CGPoint(x: leftBoundary + usableWidth * 0.15, y: topBoundary - usableHeight * 0.35)
+            case 7: // Saturn - Upper middle center
+                position = CGPoint(x: leftBoundary + usableWidth * 0.35, y: topBoundary - usableHeight * 0.4)
+            case 8: // Jupiter - Upper middle right
+                position = CGPoint(x: leftBoundary + usableWidth * 0.55, y: topBoundary - usableHeight * 0.35)
+            case 9: // Io - Middle right
+                position = CGPoint(x: leftBoundary + usableWidth * 0.75, y: topBoundary - usableHeight * 0.4)
+            case 10: // Mars - Lower middle left
+                position = CGPoint(x: leftBoundary + usableWidth * 0.25, y: topBoundary - usableHeight * 0.65)
+            case 11: // Moon Base - Lower middle right
+                position = CGPoint(x: leftBoundary + usableWidth * 0.65, y: topBoundary - usableHeight * 0.65)
+            case 12: // EARTH - Bottom center, prominent final destination
                 position = CGPoint(x: leftBoundary + usableWidth * 0.5, y: bottomBoundary + usableHeight * 0.15)
             default:
                 // Fallback grid layout using available space
@@ -553,7 +559,9 @@ class MapSelectionScene: SKScene {
                 addJupiterEffects(to: planetContainer, planetSize: size, planet: planet)
             case "Mars":
                 addMarsEffects(to: planetContainer, planetSize: size, planet: planet)
-            case "Moon":
+            case "Io":
+                addIoEffects(to: planetContainer, planetSize: size, planet: planet)
+            case "Moon", "Moon Base":
                 addMoonEffects(to: planetContainer, planetSize: size, planet: planet)
             case "EARTH":
                 addEarthFinalEffects(to: planetContainer, planetSize: size, planet: planet)
@@ -2093,7 +2101,7 @@ class MapSelectionScene: SKScene {
         }
         
         // Check if this is the final map and already completed - show celebration
-        if mapNumber == 10 && completedMaps.contains(10) {
+        if mapNumber == 12 && completedMaps.contains(12) {
             showFinalCelebration()
             return
         }
@@ -2539,6 +2547,63 @@ class MapSelectionScene: SKScene {
             SKAction.scale(to: 1.0, duration: 2)
         ])
         shield.run(SKAction.repeatForever(pulse))
+    }
+    
+    private func addIoEffects(to container: SKNode, planetSize: CGFloat, planet: SKShapeNode) {
+        // Io - Jupiter's volcanic moon
+        
+        // Volcanic eruptions
+        for _ in 0..<5 {
+            let volcano = SKShapeNode(circleOfRadius: planetSize * 0.15)
+            let angle = CGFloat.random(in: 0...(2 * .pi))
+            let distance = planetSize * CGFloat.random(in: 0.3...0.7)
+            volcano.position = CGPoint(x: cos(angle) * distance, y: sin(angle) * distance)
+            volcano.fillColor = SKColor(red: 1.0, green: 0.3, blue: 0.1, alpha: 0.8)
+            volcano.strokeColor = SKColor(red: 1.0, green: 0.5, blue: 0.2, alpha: 1.0)
+            volcano.lineWidth = 1
+            volcano.glowWidth = 3
+            planet.addChild(volcano)
+            
+            // Lava glow animation
+            let glow = SKAction.sequence([
+                SKAction.fadeAlpha(to: 0.5, duration: Double.random(in: 0.5...1.5)),
+                SKAction.fadeAlpha(to: 1.0, duration: Double.random(in: 0.5...1.5))
+            ])
+            volcano.run(SKAction.repeatForever(glow))
+        }
+        
+        // Sulfur deposits
+        for _ in 0..<8 {
+            let sulfur = SKShapeNode(ellipseOf: CGSize(
+                width: planetSize * CGFloat.random(in: 0.1...0.3),
+                height: planetSize * CGFloat.random(in: 0.1...0.2)
+            ))
+            sulfur.position = CGPoint(
+                x: CGFloat.random(in: -planetSize * 0.6...planetSize * 0.6),
+                y: CGFloat.random(in: -planetSize * 0.6...planetSize * 0.6)
+            )
+            sulfur.fillColor = SKColor(red: 0.9, green: 0.9, blue: 0.3, alpha: 0.6)
+            sulfur.strokeColor = .clear
+            sulfur.zRotation = CGFloat.random(in: 0...CGFloat.pi * 2)
+            sulfur.blendMode = .add
+            planet.addChild(sulfur)
+        }
+        
+        // Volcanic plume effect
+        let plume = SKShapeNode(circleOfRadius: planetSize * 1.2)
+        plume.fillColor = .clear
+        plume.strokeColor = SKColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 0.2)
+        plume.lineWidth = 2
+        plume.glowWidth = 8
+        plume.blendMode = .add
+        container.addChild(plume)
+        
+        // Animate plume
+        let plumeAnimation = SKAction.sequence([
+            SKAction.scale(to: 1.1, duration: 2.0),
+            SKAction.scale(to: 1.0, duration: 2.0)
+        ])
+        plume.run(SKAction.repeatForever(plumeAnimation))
     }
     
     private func addMoonEffects(to container: SKNode, planetSize: CGFloat, planet: SKShapeNode) {

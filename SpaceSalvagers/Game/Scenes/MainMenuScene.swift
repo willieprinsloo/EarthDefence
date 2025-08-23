@@ -229,180 +229,222 @@ class MainMenuScene: SKScene {
     }
     
     private func createPlanets() {
-        // Create stunning Earth with enhanced effects
+        // Map 11: Earth - FINAL STAND (center, large)
         let earthContainer = SKNode()
-        earthContainer.position = CGPoint(x: -size.width * 0.35, y: size.height * 0.1)
+        earthContainer.position = CGPoint(x: 0, y: 0)
         
-        // Earth planet with gradient-like effect
-        let earth = SKShapeNode(circleOfRadius: 80)
-        earth.fillColor = SKColor(red: 0.15, green: 0.35, blue: 0.65, alpha: 1.0)
-        earth.strokeColor = SKColor(red: 0.3, green: 0.5, blue: 0.8, alpha: 1.0)
-        earth.lineWidth = 2
-        earth.glowWidth = 12
-        earthContainer.addChild(earth)
-        
-        // Add realistic Earth continents
-        createEarthContinentsForMainMenu(on: earth)
-        
-        // Add cloud layer
-        let cloudLayer = SKNode()
-        for _ in 0..<8 {
-            let cloud = SKShapeNode(circleOfRadius: CGFloat.random(in: 8...15))
-            let angle = CGFloat.random(in: 0...(2 * .pi))
-            let radius = CGFloat.random(in: 50...75)
-            cloud.position = CGPoint(x: cos(angle) * radius, y: sin(angle) * radius)
-            cloud.fillColor = SKColor.white.withAlphaComponent(0.2)
-            cloud.strokeColor = .clear
-            cloud.blendMode = .add
-            cloudLayer.addChild(cloud)
+        if let _ = UIImage(named: "planet-earth") {
+            let earthTexture = SKTexture(imageNamed: "planet-earth")
+            let earth = SKSpriteNode(texture: earthTexture)
+            earth.size = CGSize(width: 180, height: 180)
+            earthContainer.addChild(earth)
+            
+            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 60)
+            earth.run(SKAction.repeatForever(rotate))
+            
+            let atmosphere = SKShapeNode(circleOfRadius: 92)
+            atmosphere.fillColor = .clear
+            atmosphere.strokeColor = SKColor(red: 0.3, green: 0.5, blue: 0.8, alpha: 0.15)
+            atmosphere.lineWidth = 1
+            atmosphere.glowWidth = 3
+            earthContainer.addChild(atmosphere)
         }
-        earth.addChild(cloudLayer)
-        
-        // Animate cloud layer rotation (faster than planet)
-        let rotateClouds = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 40)
-        cloudLayer.run(SKAction.repeatForever(rotateClouds))
-        
-        // Add shimmering atmosphere
-        let atmosphere = SKShapeNode(circleOfRadius: 90)
-        atmosphere.fillColor = .clear
-        atmosphere.strokeColor = SKColor(red: 0.5, green: 0.7, blue: 1.0, alpha: 0.4)
-        atmosphere.lineWidth = 6
-        atmosphere.glowWidth = 20
-        earth.addChild(atmosphere)
-        
-        // Animate atmosphere pulsing
-        let pulse = SKAction.sequence([
-            SKAction.fadeAlpha(to: 0.6, duration: 2.0),
-            SKAction.fadeAlpha(to: 0.3, duration: 2.0)
-        ])
-        atmosphere.run(SKAction.repeatForever(pulse))
-        
-        // Add Moon orbiting Earth
-        let moonOrbit = SKNode()
-        earthContainer.addChild(moonOrbit)
-        
-        let moon = SKShapeNode(circleOfRadius: 12)
-        moon.position = CGPoint(x: 120, y: 0)
-        moon.fillColor = SKColor(red: 0.8, green: 0.8, blue: 0.75, alpha: 0.9)
-        moon.strokeColor = SKColor(red: 0.9, green: 0.9, blue: 0.85, alpha: 1.0)
-        moon.lineWidth = 1
-        moon.glowWidth = 3
-        
-        // Add craters to moon
-        for _ in 0..<3 {
-            let crater = SKShapeNode(circleOfRadius: CGFloat.random(in: 2...4))
-            crater.position = CGPoint(
-                x: CGFloat.random(in: -8...8),
-                y: CGFloat.random(in: -8...8)
-            )
-            crater.fillColor = SKColor.darkGray.withAlphaComponent(0.5)
-            crater.strokeColor = .clear
-            moon.addChild(crater)
-        }
-        
-        moonOrbit.addChild(moon)
-        
-        // Animate moon orbit
-        let orbitMoon = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 20)
-        moonOrbit.run(SKAction.repeatForever(orbitMoon))
-        
-        // Add space station orbiting Earth
-        let stationOrbit = SKNode()
-        earthContainer.addChild(stationOrbit)
-        
-        let station = SKShapeNode(rectOf: CGSize(width: 8, height: 4))
-        station.position = CGPoint(x: 0, y: 100)
-        station.fillColor = SKColor(red: 0.7, green: 0.7, blue: 0.8, alpha: 0.8)
-        station.strokeColor = .cyan
-        station.lineWidth = 0.5
-        station.glowWidth = 2
-        
-        // Add blinking light to station
-        let light = SKShapeNode(circleOfRadius: 1)
-        light.fillColor = .red
-        light.strokeColor = .clear
-        light.glowWidth = 3
-        station.addChild(light)
-        
-        let blink = SKAction.sequence([
-            SKAction.fadeOut(withDuration: 0.5),
-            SKAction.fadeIn(withDuration: 0.5)
-        ])
-        light.run(SKAction.repeatForever(blink))
-        
-        stationOrbit.addChild(station)
-        
-        // Animate station orbit (faster than moon)
-        let orbitStation = SKAction.rotate(byAngle: -CGFloat.pi * 2, duration: 12)
-        stationOrbit.run(SKAction.repeatForever(orbitStation))
-        
         planetLayer.addChild(earthContainer)
         
-        // Slow rotation of Earth itself with wobble
-        let rotateEarth = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 60)
-        let wobble = SKAction.sequence([
-            SKAction.rotate(toAngle: 0.05, duration: 15),
-            SKAction.rotate(toAngle: -0.05, duration: 15)
-        ])
-        earth.run(SKAction.repeatForever(SKAction.group([rotateEarth, wobble])))
+        // Map 10: Moon Base
+        let moonContainer = SKNode()
+        moonContainer.position = CGPoint(x: 120, y: 80)
         
-        // Mars in the distance with dust storms
-        let marsContainer = SKNode()
-        marsContainer.position = CGPoint(x: size.width * 0.4, y: -size.height * 0.3)
-        
-        let mars = SKShapeNode(circleOfRadius: 35)
-        mars.fillColor = SKColor(red: 0.7, green: 0.3, blue: 0.2, alpha: 0.8)
-        mars.strokeColor = SKColor(red: 0.8, green: 0.4, blue: 0.3, alpha: 1.0)
-        mars.lineWidth = 1
-        mars.glowWidth = 5
-        marsContainer.addChild(mars)
-        
-        // Add dust storm effect
-        for _ in 0..<3 {
-            let storm = SKShapeNode(circleOfRadius: CGFloat.random(in: 10...15))
-            storm.position = CGPoint(
-                x: CGFloat.random(in: -20...20),
-                y: CGFloat.random(in: -20...20)
-            )
-            storm.fillColor = SKColor(red: 0.8, green: 0.5, blue: 0.3, alpha: 0.3)
-            storm.strokeColor = .clear
-            storm.blendMode = .alpha
+        if let _ = UIImage(named: "planet-moon") {
+            let moonTexture = SKTexture(imageNamed: "planet-moon")
+            let moon = SKSpriteNode(texture: moonTexture)
+            moon.size = CGSize(width: 50, height: 50)
+            moonContainer.addChild(moon)
             
-            let swirl = SKAction.sequence([
-                SKAction.moveBy(x: CGFloat.random(in: -10...10),
-                               y: CGFloat.random(in: -10...10),
-                               duration: Double.random(in: 3...5)),
-                SKAction.moveBy(x: CGFloat.random(in: -10...10),
-                               y: CGFloat.random(in: -10...10),
-                               duration: Double.random(in: 3...5))
-            ])
-            storm.run(SKAction.repeatForever(swirl))
-            mars.addChild(storm)
+            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 40)
+            moon.run(SKAction.repeatForever(rotate))
         }
+        planetLayer.addChild(moonContainer)
         
-        // Rotate Mars
-        let rotateMars = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 45)
-        mars.run(SKAction.repeatForever(rotateMars))
+        // Map 9: Mars
+        let marsContainer = SKNode()
+        marsContainer.position = CGPoint(x: -200, y: -100)
         
+        if let _ = UIImage(named: "planet-mars") {
+            let marsTexture = SKTexture(imageNamed: "planet-mars")
+            let mars = SKSpriteNode(texture: marsTexture)
+            mars.size = CGSize(width: 80, height: 80)
+            marsContainer.addChild(mars)
+            
+            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 45)
+            mars.run(SKAction.repeatForever(rotate))
+        }
         planetLayer.addChild(marsContainer)
         
-        // Add warning beacon on Mars
-        let beacon = SKShapeNode(circleOfRadius: 3)
-        beacon.fillColor = .red
-        beacon.glowWidth = 5
-        beacon.position = CGPoint(x: 0, y: 30)
-        mars.addChild(beacon)
+        // Map 8: Io (Jupiter's volcanic moon)
+        let ioContainer = SKNode()
+        ioContainer.position = CGPoint(x: 280, y: -80)
         
-        // Blinking beacon with pulse
-        let beaconBlink = SKAction.sequence([
-            SKAction.fadeOut(withDuration: 0.5),
-            SKAction.fadeIn(withDuration: 0.5)
-        ])
-        let beaconPulse = SKAction.sequence([
-            SKAction.scale(to: 1.5, duration: 0.5),
-            SKAction.scale(to: 1.0, duration: 0.5)
-        ])
-        beacon.run(SKAction.repeatForever(SKAction.group([beaconBlink, beaconPulse])))
+        if let _ = UIImage(named: "planet-io") {
+            let ioTexture = SKTexture(imageNamed: "planet-io")
+            let io = SKSpriteNode(texture: ioTexture)
+            io.size = CGSize(width: 45, height: 45)
+            ioContainer.addChild(io)
+            
+            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 30)
+            io.run(SKAction.repeatForever(rotate))
+        } else {
+            // Fallback to volcanic moon drawing
+            let io = SKShapeNode(circleOfRadius: 22)
+            io.fillColor = SKColor(red: 0.9, green: 0.8, blue: 0.4, alpha: 1.0)
+            io.strokeColor = SKColor(red: 1.0, green: 0.7, blue: 0.3, alpha: 1.0)
+            io.lineWidth = 2
+            io.glowWidth = 4
+            ioContainer.addChild(io)
+            
+            // Add volcanic spots
+            for _ in 0..<3 {
+                let volcano = SKShapeNode(circleOfRadius: CGFloat.random(in: 3...5))
+                volcano.position = CGPoint(
+                    x: CGFloat.random(in: -10...10),
+                    y: CGFloat.random(in: -10...10)
+                )
+                volcano.fillColor = SKColor(red: 1.0, green: 0.3, blue: 0.1, alpha: 0.8)
+                volcano.strokeColor = .clear
+                volcano.glowWidth = 2
+                io.addChild(volcano)
+            }
+        }
+        planetLayer.addChild(ioContainer)
+        
+        // Map 7: Jupiter
+        let jupiterContainer = SKNode()
+        jupiterContainer.position = CGPoint(x: 300, y: -150)
+        
+        if let _ = UIImage(named: "planet-jupiter") {
+            let jupiterTexture = SKTexture(imageNamed: "planet-jupiter")
+            let jupiter = SKSpriteNode(texture: jupiterTexture)
+            jupiter.size = CGSize(width: 120, height: 120)
+            jupiterContainer.addChild(jupiter)
+            
+            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 60)
+            jupiter.run(SKAction.repeatForever(rotate))
+        }
+        planetLayer.addChild(jupiterContainer)
+        
+        // Map 6: Saturn
+        let saturnContainer = SKNode()
+        saturnContainer.position = CGPoint(x: -320, y: 120)
+        
+        if let _ = UIImage(named: "planet-saturn") {
+            let saturnTexture = SKTexture(imageNamed: "planet-saturn")
+            let saturn = SKSpriteNode(texture: saturnTexture)
+            saturn.size = CGSize(width: 100, height: 70)
+            saturnContainer.addChild(saturn)
+            
+            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 70)
+            saturn.run(SKAction.repeatForever(rotate))
+        }
+        planetLayer.addChild(saturnContainer)
+        
+        // Map 5: Neptune
+        let neptuneContainer = SKNode()
+        neptuneContainer.position = CGPoint(x: 200, y: 180)
+        
+        if let _ = UIImage(named: "planet-neptune") {
+            let neptuneTexture = SKTexture(imageNamed: "planet-neptune")
+            let neptune = SKSpriteNode(texture: neptuneTexture)
+            neptune.size = CGSize(width: 70, height: 70)
+            neptuneContainer.addChild(neptune)
+            
+            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 50)
+            neptune.run(SKAction.repeatForever(rotate))
+        }
+        planetLayer.addChild(neptuneContainer)
+        
+        // Map 5: Pluto (moved to right side and made bigger)
+        let plutoContainer = SKNode()
+        plutoContainer.position = CGPoint(x: 350, y: 150)
+        
+        if let _ = UIImage(named: "planet-pluto") {
+            let plutoTexture = SKTexture(imageNamed: "planet-pluto")
+            let pluto = SKSpriteNode(texture: plutoTexture)
+            pluto.size = CGSize(width: 60, height: 60)
+            plutoContainer.addChild(pluto)
+            
+            let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 35)
+            pluto.run(SKAction.repeatForever(rotate))
+        } else {
+            // Fallback to icy dwarf planet drawing
+            let pluto = SKShapeNode(circleOfRadius: 30)
+            pluto.fillColor = SKColor(red: 0.7, green: 0.7, blue: 0.8, alpha: 1.0)
+            pluto.strokeColor = SKColor(red: 0.8, green: 0.8, blue: 0.9, alpha: 1.0)
+            pluto.lineWidth = 2
+            pluto.glowWidth = 3
+            plutoContainer.addChild(pluto)
+            
+            // Add icy patches
+            for _ in 0..<2 {
+                let ice = SKShapeNode(ellipseOf: CGSize(width: 8, height: 6))
+                ice.position = CGPoint(
+                    x: CGFloat.random(in: -8...8),
+                    y: CGFloat.random(in: -8...8)
+                )
+                ice.fillColor = SKColor(red: 0.9, green: 0.9, blue: 1.0, alpha: 0.6)
+                ice.strokeColor = .clear
+                pluto.addChild(ice)
+            }
+        }
+        planetLayer.addChild(plutoContainer)
+        
+        // Map 3: Kepler Station (space station)
+        let keplerStation = SKShapeNode(rectOf: CGSize(width: 15, height: 8))
+        keplerStation.position = CGPoint(x: 100, y: -200)
+        keplerStation.fillColor = SKColor(red: 0.7, green: 0.7, blue: 0.8, alpha: 0.9)
+        keplerStation.strokeColor = .cyan
+        keplerStation.lineWidth = 1
+        keplerStation.glowWidth = 3
+        planetLayer.addChild(keplerStation)
+        
+        // Map 4: Tau Ceti (binary star system)
+        let tauCetiContainer = SKNode()
+        tauCetiContainer.position = CGPoint(x: -150, y: -250)
+        
+        let tauCeti = SKShapeNode(circleOfRadius: 35)
+        tauCeti.fillColor = SKColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
+        tauCeti.strokeColor = SKColor(red: 0.5, green: 0.9, blue: 0.7, alpha: 1.0)
+        tauCeti.lineWidth = 2
+        tauCeti.glowWidth = 15
+        tauCetiContainer.addChild(tauCeti)
+        
+        // Secondary star companion
+        let companion = SKShapeNode(circleOfRadius: 20)
+        companion.position = CGPoint(x: 30, y: 0)
+        companion.fillColor = SKColor(red: 0.6, green: 0.9, blue: 0.7, alpha: 0.8)
+        companion.strokeColor = SKColor(red: 0.7, green: 1.0, blue: 0.8, alpha: 1.0)
+        companion.lineWidth = 1
+        companion.glowWidth = 8
+        tauCeti.addChild(companion)
+        
+        planetLayer.addChild(tauCetiContainer)
+        
+        // Map 2: Proxima B (exoplanet)
+        let proximaB = SKShapeNode(circleOfRadius: 35)
+        proximaB.position = CGPoint(x: -100, y: -200)
+        proximaB.fillColor = SKColor(red: 0.6, green: 0.3, blue: 0.5, alpha: 0.9)
+        proximaB.strokeColor = SKColor(red: 0.7, green: 0.4, blue: 0.6, alpha: 1.0)
+        proximaB.lineWidth = 2
+        proximaB.glowWidth = 5
+        planetLayer.addChild(proximaB)
+        
+        // Map 1: Alpha Centauri A (star)
+        let alphaCentauri = SKShapeNode(circleOfRadius: 25)
+        alphaCentauri.position = CGPoint(x: -350, y: -50)
+        alphaCentauri.fillColor = SKColor(red: 1.0, green: 0.9, blue: 0.6, alpha: 1.0)
+        alphaCentauri.strokeColor = SKColor(red: 1.0, green: 0.8, blue: 0.4, alpha: 1.0)
+        alphaCentauri.lineWidth = 3
+        alphaCentauri.glowWidth = 15
+        planetLayer.addChild(alphaCentauri)
         
         // Add distant alien ship
         createAlienShip()
