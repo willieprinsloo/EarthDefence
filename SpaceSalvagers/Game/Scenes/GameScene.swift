@@ -6116,10 +6116,41 @@ class GameScene: SKScene {
             body.lineWidth = 4
             body.fillColor = SKColor(red: 0.5, green: 0.0, blue: 0.0, alpha: 0.3)
             body.glowWidth = 15 // Maximum glow for boss enemies
-            body.setScale(1.8)  // Even BIGGER to match 250% difficulty!
+            body.setScale(2.0)  // Mini-boss - bigger than heavy tanks
             health = 126  // 320% increase! (was 30, then 105)
             speed = 0.7  // Slightly faster (was 0.6)
             salvageReward = 45  // Better reward to match difficulty (reduced from 60)
+            
+            // Add lightning particles around destroyer
+            for _ in 0..<4 {
+                let lightning = SKShapeNode()
+                let lightningPath = CGMutablePath()
+                lightningPath.move(to: CGPoint(x: 0, y: 0))
+                for i in 1...3 {
+                    lightningPath.addLine(to: CGPoint(
+                        x: CGFloat.random(in: -5...5) * CGFloat(i),
+                        y: CGFloat(i) * 10
+                    ))
+                }
+                lightning.path = lightningPath
+                lightning.strokeColor = SKColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 0.8)
+                lightning.lineWidth = 1.5
+                lightning.glowWidth = 4
+                lightning.blendMode = .add
+                lightning.position = CGPoint(
+                    x: CGFloat.random(in: -30...30),
+                    y: CGFloat.random(in: -30...30)
+                )
+                body.addChild(lightning)
+                
+                // Animate lightning
+                let flash = SKAction.sequence([
+                    SKAction.fadeAlpha(to: 0.0, duration: 0.1),
+                    SKAction.fadeAlpha(to: 1.0, duration: 0.05),
+                    SKAction.wait(forDuration: Double.random(in: 0.5...2.0))
+                ])
+                lightning.run(SKAction.repeatForever(flash))
+            }
             
             // SPECIAL ABILITY: Stronger shield that regenerates faster
             enemy.userData?["hasShield"] = true
@@ -6167,7 +6198,44 @@ class GameScene: SKScene {
             body.lineWidth = 5
             body.fillColor = .clear
             body.glowWidth = 20 // Maximum glow
-            body.setScale(2.0) // Make it MUCH bigger (was 1.5)
+            body.setScale(2.5) // Titan boss - second biggest
+            
+            // Add electric storm around Titan
+            for _ in 0..<6 {
+                let bolt = SKShapeNode()
+                let boltPath = CGMutablePath()
+                let startAngle = CGFloat.random(in: 0...(2 * .pi))
+                let startRadius = CGFloat.random(in: 40...60)
+                boltPath.move(to: CGPoint(
+                    x: cos(startAngle) * startRadius,
+                    y: sin(startAngle) * startRadius
+                ))
+                
+                // Create jagged lightning path
+                for i in 1...5 {
+                    let angle = startAngle + CGFloat.random(in: -0.3...0.3)
+                    let radius = startRadius - CGFloat(i * 8)
+                    boltPath.addLine(to: CGPoint(
+                        x: cos(angle) * radius + CGFloat.random(in: -10...10),
+                        y: sin(angle) * radius + CGFloat.random(in: -10...10)
+                    ))
+                }
+                
+                bolt.path = boltPath
+                bolt.strokeColor = SKColor(red: 0.8, green: 0.0, blue: 1.0, alpha: 0.9)  // Purple lightning
+                bolt.lineWidth = 2
+                bolt.glowWidth = 6
+                bolt.blendMode = .add
+                body.addChild(bolt)
+                
+                // Animate bolts
+                let flash = SKAction.sequence([
+                    SKAction.fadeOut(withDuration: 0.15),
+                    SKAction.wait(forDuration: Double.random(in: 0.3...1.5)),
+                    SKAction.fadeIn(withDuration: 0.05)
+                ])
+                bolt.run(SKAction.repeatForever(flash))
+            }
             
             // Add pulsing core
             let core = SKShapeNode(circleOfRadius: 20)  // Bigger core
@@ -6615,7 +6683,7 @@ class GameScene: SKScene {
             body.lineWidth = 5
             body.fillColor = SKColor(red: 0.8, green: 0.3, blue: 0.0, alpha: 0.2)
             body.glowWidth = 20
-            body.setScale(1.4)
+            body.setScale(1.3)  // Heavy tank - smaller than bosses
             health = 80  // Very high health
             speed = 0.3  // EXTREMELY slow
             salvageReward = 34  // Juggernaut (reduced from 45)
@@ -6695,7 +6763,7 @@ class GameScene: SKScene {
             body.lineWidth = 6
             body.fillColor = SKColor(red: 0.1, green: 0.4, blue: 0.6, alpha: 0.3)
             body.glowWidth = 25
-            body.setScale(1.6)
+            body.setScale(1.4)  // Fortress - slightly bigger than juggernaut
             health = 100  // Extremely high health
             speed = 0.35  // Very slow
             salvageReward = 41  // Goliath (reduced from 55)
@@ -6777,7 +6845,7 @@ class GameScene: SKScene {
             body.lineWidth = 7
             body.fillColor = SKColor(red: 0.6, green: 0.0, blue: 0.4, alpha: 0.2)
             body.glowWidth = 30
-            body.setScale(1.5)
+            body.setScale(1.35)  // Bio-tank - between juggernaut and goliath
             health = 90  // Very high health
             speed = 0.4  // Slow
             salvageReward = 38  // Behemoth (reduced from 50)
@@ -6905,10 +6973,78 @@ class GameScene: SKScene {
             body.lineWidth = 5
             body.fillColor = .clear
             body.glowWidth = 20
-            body.setScale(2.5)  // MASSIVE size increase
+            body.setScale(3.0)  // MEGA BOSS - THE BIGGEST!
             health = 480  // MEGA BOSS health! (20% increase from 400)
             speed = 0.5   // Faster than before (was 0.3)
-            salvageReward = 11  // Reduced from 15  // Reduced from 200  // Epic reward for defeating the mega boss
+            salvageReward = 150  // Epic reward for defeating the mega boss
+            
+            // Add massive electric field with rotating lightning
+            for i in 0..<8 {
+                let thunderField = SKNode()
+                let baseAngle = CGFloat(i) * .pi / 4
+                
+                // Create main lightning bolt
+                let mainBolt = SKShapeNode()
+                let mainPath = CGMutablePath()
+                mainPath.move(to: CGPoint.zero)
+                
+                // Generate complex lightning pattern
+                for j in 1...8 {
+                    let distance = CGFloat(j * 15)
+                    let offset = CGFloat.random(in: -15...15)
+                    mainPath.addLine(to: CGPoint(
+                        x: cos(baseAngle) * distance + sin(CGFloat(j)) * offset,
+                        y: sin(baseAngle) * distance + cos(CGFloat(j)) * offset
+                    ))
+                }
+                
+                mainBolt.path = mainPath
+                mainBolt.strokeColor = SKColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0)  // Yellow lightning
+                mainBolt.lineWidth = 3
+                mainBolt.glowWidth = 8
+                mainBolt.blendMode = .add
+                thunderField.addChild(mainBolt)
+                
+                // Add secondary branches
+                for k in 0..<3 {
+                    let branch = SKShapeNode()
+                    let branchPath = CGMutablePath()
+                    let startPoint = CGFloat(k + 2) * 15
+                    branchPath.move(to: CGPoint(
+                        x: cos(baseAngle) * startPoint,
+                        y: sin(baseAngle) * startPoint
+                    ))
+                    
+                    let branchAngle = baseAngle + CGFloat.random(in: -0.5...0.5)
+                    for l in 1...3 {
+                        branchPath.addLine(to: CGPoint(
+                            x: cos(branchAngle) * (startPoint + CGFloat(l * 8)),
+                            y: sin(branchAngle) * (startPoint + CGFloat(l * 8))
+                        ))
+                    }
+                    
+                    branch.path = branchPath
+                    branch.strokeColor = SKColor(red: 0.8, green: 0.8, blue: 1.0, alpha: 0.7)
+                    branch.lineWidth = 1
+                    branch.glowWidth = 3
+                    branch.blendMode = .add
+                    thunderField.addChild(branch)
+                }
+                
+                body.addChild(thunderField)
+                
+                // Animate the entire field
+                let rotate = SKAction.rotate(byAngle: .pi * 2, duration: 10.0)
+                thunderField.run(SKAction.repeatForever(rotate))
+                
+                // Flash animation
+                let flash = SKAction.sequence([
+                    SKAction.fadeAlpha(to: 0.3, duration: 0.2),
+                    SKAction.fadeAlpha(to: 1.0, duration: 0.1),
+                    SKAction.wait(forDuration: Double.random(in: 0.1...0.5))
+                ])
+                mainBolt.run(SKAction.repeatForever(flash))
+            }
             
             // SPECIAL ABILITIES: Multiple devastating abilities
             enemy.userData?["hasShield"] = true
