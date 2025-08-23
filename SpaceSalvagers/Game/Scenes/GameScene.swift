@@ -5649,11 +5649,11 @@ class GameScene: SKScene {
                 baseDelay = 1.1  // 45% faster spawning from wave 2 onwards!
             }
         } else if currentMap == 2 {
-            // Map 2: Much faster spawning from wave 2 onwards for 140% difficulty
+            // Map 2: Fast spawning from the start - 50% harder wave 1
             if currentWave == 1 {
-                baseDelay = 1.2  // Wave 1 is moderately fast
+                baseDelay = 0.95  // Wave 1 is now much faster (was 1.2)
             } else {
-                baseDelay = 0.85  // 40% faster from wave 2 onwards!
+                baseDelay = 0.85  // Wave 2+ remains very fast
             }
         } else if currentMap == 3 {
             baseDelay = 0.8  // 60% faster spawning for 150% harder difficulty - EARTH UNDER SIEGE!
@@ -5786,14 +5786,17 @@ class GameScene: SKScene {
                 else { return "stealth" }
             }
             
-        case 2:  // VENUS - 140% HARDER from Wave 2!
-            // Theme: Wave 1 is manageable, then it gets MUCH harder
+        case 2:  // VENUS - Much harder from the start!
+            // Theme: 50% harder Wave 1, then escalates further
             if currentWave == 1 {
-                // Wave 1: Still challenging but not insane (30% fighter, 30% armored, 40% fast)
-                let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "fighter" }
-                else if roll <= 6 { return "armored" }
-                else { return "fast" }
+                // Wave 1: 50% HARDER - Tough start (25% bomber, 25% shield, 25% armored, 25% fighter)
+                let roll = Int.random(in: 1...4)
+                switch roll {
+                case 1: return "bomber"   // Heavy enemy right away
+                case 2: return "shield"   // Shielded enemy
+                case 3: return "armored"  // Armored enemy
+                default: return "fighter"
+                }
             } else if currentWave == 2 {
                 // Wave 2: ONE guaranteed Juggernaut at position 5
                 // Check if this is the 5th enemy spawned in the wave
