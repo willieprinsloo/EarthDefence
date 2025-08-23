@@ -6573,28 +6573,69 @@ class GameScene: SKScene {
             }
             
         case "juggernaut":
-            // SLOW HEAVY TANK - New ultra-tough enemy
+            // SLOW HEAVY TANK - Stunning industrial war machine
             let jugPath = CGMutablePath()
             jugPath.addRoundedRect(in: CGRect(x: -25, y: -25, width: 50, height: 50), cornerWidth: 8, cornerHeight: 8)
             body = SKShapeNode(path: jugPath)
-            body.strokeColor = SKColor(red: 0.7, green: 0.3, blue: 0.0, alpha: 1.0) // Dark bronze
-            body.lineWidth = 4
-            body.fillColor = SKColor(red: 0.4, green: 0.2, blue: 0.0, alpha: 0.3)
-            body.glowWidth = 12
+            body.strokeColor = SKColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0) // Molten orange
+            body.lineWidth = 5
+            body.fillColor = SKColor(red: 0.8, green: 0.3, blue: 0.0, alpha: 0.2)
+            body.glowWidth = 20
             body.setScale(1.4)
             health = 80  // Very high health
             speed = 0.3  // EXTREMELY slow
-            salvageReward = 45
+            salvageReward = 34  // Juggernaut (reduced from 45)
             
-            // Heavy armor plating visual
+            // Heavy armor plating with animated glow
             for angle in stride(from: 0, to: CGFloat.pi * 2, by: CGFloat.pi / 4) {
-                let plate = SKShapeNode(rectOf: CGSize(width: 15, height: 8))
-                plate.strokeColor = SKColor(red: 0.5, green: 0.25, blue: 0.0, alpha: 0.7)
-                plate.lineWidth = 2
-                plate.fillColor = .clear
-                plate.position = CGPoint(x: cos(angle) * 20, y: sin(angle) * 20)
+                let plate = SKShapeNode(rectOf: CGSize(width: 18, height: 10))
+                plate.strokeColor = SKColor(red: 1.0, green: 0.6, blue: 0.1, alpha: 0.9)
+                plate.lineWidth = 3
+                plate.fillColor = SKColor(red: 0.6, green: 0.3, blue: 0.0, alpha: 0.4)
+                plate.glowWidth = 8
+                plate.position = CGPoint(x: cos(angle) * 22, y: sin(angle) * 22)
                 plate.zRotation = angle
                 body.addChild(plate)
+                
+                // Pulsing armor plates
+                let pulse = SKAction.sequence([
+                    SKAction.fadeAlpha(to: 0.6, duration: 0.8),
+                    SKAction.fadeAlpha(to: 1.0, duration: 0.8)
+                ])
+                plate.run(SKAction.repeatForever(pulse))
+            }
+            
+            // Add central power core
+            let core = SKShapeNode(circleOfRadius: 12)
+            core.strokeColor = SKColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0)
+            core.fillColor = SKColor(red: 1.0, green: 0.6, blue: 0.0, alpha: 0.8)
+            core.glowWidth = 15
+            core.blendMode = .add
+            body.addChild(core)
+            
+            // Core energy pulse
+            let corePulse = SKAction.sequence([
+                SKAction.scale(to: 1.2, duration: 0.5),
+                SKAction.scale(to: 0.9, duration: 0.5)
+            ])
+            core.run(SKAction.repeatForever(corePulse))
+            
+            // Add energy sparks
+            for _ in 0..<4 {
+                let spark = SKShapeNode(circleOfRadius: 2)
+                spark.fillColor = SKColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0)
+                spark.glowWidth = 4
+                spark.blendMode = .add
+                let angle = CGFloat.random(in: 0...(2 * .pi))
+                spark.position = CGPoint(x: cos(angle) * 15, y: sin(angle) * 15)
+                body.addChild(spark)
+                
+                // Orbiting sparks
+                let orbit = SKAction.sequence([
+                    SKAction.moveBy(x: CGFloat.random(in: -8...8), y: CGFloat.random(in: -8...8), duration: 1.0),
+                    SKAction.moveBy(x: CGFloat.random(in: -8...8), y: CGFloat.random(in: -8...8), duration: 1.0)
+                ])
+                spark.run(SKAction.repeatForever(orbit))
             }
             
             // Add damage reduction
@@ -6602,7 +6643,7 @@ class GameScene: SKScene {
             enemy.userData?["armor"] = 8
             
         case "goliath":
-            // MASSIVE SLOW FORTRESS - Another new enemy
+            // MASSIVE SLOW FORTRESS - Crystalline energy fortress
             let goliathPath = CGMutablePath()
             for i in 0..<8 {
                 let angle = CGFloat(i) * .pi / 4
@@ -6616,26 +6657,77 @@ class GameScene: SKScene {
             }
             goliathPath.closeSubpath()
             body = SKShapeNode(path: goliathPath)
-            body.strokeColor = SKColor(red: 0.4, green: 0.4, blue: 0.8, alpha: 1.0) // Steel blue
-            body.lineWidth = 5
-            body.fillColor = SKColor(red: 0.2, green: 0.2, blue: 0.4, alpha: 0.4)
-            body.glowWidth = 15
+            body.strokeColor = SKColor(red: 0.2, green: 0.8, blue: 1.0, alpha: 1.0) // Electric cyan
+            body.lineWidth = 6
+            body.fillColor = SKColor(red: 0.1, green: 0.4, blue: 0.6, alpha: 0.3)
+            body.glowWidth = 25
             body.setScale(1.6)
             health = 100  // Extremely high health
             speed = 0.35  // Very slow
-            salvageReward = 55
+            salvageReward = 41  // Goliath (reduced from 55)
             
-            // Shield generator visual
-            let shieldRing = SKShapeNode(circleOfRadius: 35)
-            shieldRing.strokeColor = SKColor.cyan.withAlphaComponent(0.3)
-            shieldRing.lineWidth = 2
-            shieldRing.fillColor = .clear
-            shieldRing.glowWidth = 5
-            body.addChild(shieldRing)
+            // Multiple shield layers for stunning effect
+            for i in 0..<3 {
+                let shieldRing = SKShapeNode(circleOfRadius: 35 + CGFloat(i * 8))
+                shieldRing.strokeColor = SKColor(red: 0.0, green: 0.8 - CGFloat(i) * 0.2, blue: 1.0, alpha: 0.4 - CGFloat(i) * 0.1)
+                shieldRing.lineWidth = 2 - CGFloat(i) * 0.5
+                shieldRing.fillColor = .clear
+                shieldRing.glowWidth = 8 - CGFloat(i * 2)
+                shieldRing.blendMode = .add
+                body.addChild(shieldRing)
+                
+                // Different rotation speeds for each ring
+                let rotate = SKAction.rotate(byAngle: .pi * 2, duration: TimeInterval(3 + i))
+                if i % 2 == 0 {
+                    shieldRing.run(SKAction.repeatForever(rotate))
+                } else {
+                    shieldRing.run(SKAction.repeatForever(rotate.reversed()))
+                }
+            }
             
-            // Rotating shield animation
-            let rotate = SKAction.rotate(byAngle: .pi * 2, duration: 4.0)
-            shieldRing.run(SKAction.repeatForever(rotate))
+            // Energy crystals at vertices
+            for i in 0..<8 {
+                let angle = CGFloat(i) * .pi / 4
+                let crystal = SKShapeNode()
+                let crystalPath = CGMutablePath()
+                crystalPath.move(to: CGPoint(x: 0, y: 6))
+                crystalPath.addLine(to: CGPoint(x: -4, y: 0))
+                crystalPath.addLine(to: CGPoint(x: 0, y: -6))
+                crystalPath.addLine(to: CGPoint(x: 4, y: 0))
+                crystalPath.closeSubpath()
+                crystal.path = crystalPath
+                crystal.strokeColor = SKColor(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                crystal.fillColor = SKColor(red: 0.0, green: 0.8, blue: 1.0, alpha: 0.6)
+                crystal.lineWidth = 1.5
+                crystal.glowWidth = 6
+                crystal.blendMode = .add
+                crystal.position = CGPoint(x: cos(angle) * 30, y: sin(angle) * 30)
+                crystal.zRotation = angle
+                body.addChild(crystal)
+                
+                // Crystal shimmer
+                let shimmer = SKAction.sequence([
+                    SKAction.fadeAlpha(to: 0.5, duration: Double.random(in: 0.5...1.0)),
+                    SKAction.fadeAlpha(to: 1.0, duration: Double.random(in: 0.5...1.0))
+                ])
+                crystal.run(SKAction.repeatForever(shimmer))
+            }
+            
+            // Central power node
+            let powerNode = SKShapeNode(circleOfRadius: 8)
+            powerNode.strokeColor = SKColor.white
+            powerNode.fillColor = SKColor(red: 0.0, green: 0.9, blue: 1.0, alpha: 0.9)
+            powerNode.lineWidth = 2
+            powerNode.glowWidth = 12
+            powerNode.blendMode = .add
+            body.addChild(powerNode)
+            
+            // Power node pulse
+            let nodePulse = SKAction.sequence([
+                SKAction.scale(to: 1.3, duration: 0.6),
+                SKAction.scale(to: 0.8, duration: 0.6)
+            ])
+            powerNode.run(SKAction.repeatForever(nodePulse))
             
             // Shield properties
             enemy.userData?["hasShield"] = true
@@ -6643,29 +6735,103 @@ class GameScene: SKScene {
             enemy.userData?["maxShieldHealth"] = 30
             
         case "behemoth":
-            // COLOSSAL ALIEN TANK - Third new enemy
+            // COLOSSAL ALIEN TANK - Bio-mechanical horror
             let behemothPath = CGMutablePath()
             behemothPath.addEllipse(in: CGRect(x: -28, y: -22, width: 56, height: 44))
             body = SKShapeNode(path: behemothPath)
-            body.strokeColor = SKColor(red: 0.6, green: 0.0, blue: 0.6, alpha: 1.0) // Deep purple
-            body.lineWidth = 6
-            body.fillColor = SKColor(red: 0.3, green: 0.0, blue: 0.3, alpha: 0.3)
-            body.glowWidth = 18
+            body.strokeColor = SKColor(red: 1.0, green: 0.0, blue: 0.8, alpha: 1.0) // Neon magenta
+            body.lineWidth = 7
+            body.fillColor = SKColor(red: 0.6, green: 0.0, blue: 0.4, alpha: 0.2)
+            body.glowWidth = 30
             body.setScale(1.5)
             health = 90  // Very high health
             speed = 0.4  // Slow
-            salvageReward = 50
+            salvageReward = 38  // Behemoth (reduced from 50)
             
-            // Organic armor scales
-            for i in 0..<12 {
-                let angle = CGFloat(i) * .pi / 6
-                let scale = SKShapeNode(ellipseOf: CGSize(width: 12, height: 8))
-                scale.strokeColor = SKColor(red: 0.7, green: 0.0, blue: 0.7, alpha: 0.6)
-                scale.lineWidth = 1.5
-                scale.fillColor = SKColor(red: 0.4, green: 0.0, blue: 0.4, alpha: 0.3)
-                scale.position = CGPoint(x: cos(angle) * 22, y: sin(angle) * 18)
+            // Organic armor scales with iridescent effect
+            for i in 0..<16 {
+                let angle = CGFloat(i) * .pi / 8
+                let scale = SKShapeNode(ellipseOf: CGSize(width: 14, height: 10))
+                
+                // Iridescent color shift based on position
+                let hue = CGFloat(i) / 16.0
+                scale.strokeColor = SKColor(hue: 0.8 + hue * 0.2, saturation: 1.0, brightness: 1.0, alpha: 0.9)
+                scale.lineWidth = 2
+                scale.fillColor = SKColor(hue: 0.75 + hue * 0.25, saturation: 0.8, brightness: 0.6, alpha: 0.4)
+                scale.glowWidth = 6
+                scale.position = CGPoint(x: cos(angle) * 24, y: sin(angle) * 19)
                 scale.zRotation = angle
+                scale.blendMode = .add
                 body.addChild(scale)
+                
+                // Breathing animation for scales
+                let breathe = SKAction.sequence([
+                    SKAction.scale(to: 1.1, duration: Double.random(in: 1.0...2.0)),
+                    SKAction.scale(to: 0.9, duration: Double.random(in: 1.0...2.0))
+                ])
+                scale.run(SKAction.repeatForever(breathe))
+            }
+            
+            // Bio-luminescent veins
+            for i in 0..<6 {
+                let vein = SKShapeNode()
+                let veinPath = CGMutablePath()
+                let startAngle = CGFloat(i) * .pi / 3
+                let endAngle = startAngle + .pi / 3
+                veinPath.move(to: CGPoint(x: cos(startAngle) * 10, y: sin(startAngle) * 8))
+                veinPath.addQuadCurve(
+                    to: CGPoint(x: cos(endAngle) * 20, y: sin(endAngle) * 16),
+                    control: CGPoint(x: cos(startAngle + .pi/6) * 15, y: sin(startAngle + .pi/6) * 12)
+                )
+                vein.path = veinPath
+                vein.strokeColor = SKColor(red: 1.0, green: 0.2, blue: 1.0, alpha: 0.8)
+                vein.lineWidth = 2
+                vein.glowWidth = 8
+                vein.blendMode = .add
+                body.addChild(vein)
+                
+                // Pulsing veins
+                let veinPulse = SKAction.sequence([
+                    SKAction.fadeAlpha(to: 0.4, duration: 1.5),
+                    SKAction.fadeAlpha(to: 1.0, duration: 1.5)
+                ])
+                vein.run(SKAction.repeatForever(veinPulse))
+            }
+            
+            // Central bio-core with particle effect
+            let bioCore = SKShapeNode(ellipseOf: CGSize(width: 20, height: 16))
+            bioCore.strokeColor = SKColor(red: 1.0, green: 0.0, blue: 0.6, alpha: 1.0)
+            bioCore.fillColor = SKColor(red: 0.8, green: 0.0, blue: 0.4, alpha: 0.8)
+            bioCore.lineWidth = 3
+            bioCore.glowWidth = 15
+            bioCore.blendMode = .add
+            body.addChild(bioCore)
+            
+            // Core mutation animation
+            let mutate = SKAction.sequence([
+                SKAction.scaleX(to: 1.2, y: 0.8, duration: 0.8),
+                SKAction.scaleX(to: 0.8, y: 1.2, duration: 0.8)
+            ])
+            bioCore.run(SKAction.repeatForever(mutate))
+            
+            // Floating spore particles
+            for _ in 0..<6 {
+                let spore = SKShapeNode(circleOfRadius: 3)
+                spore.fillColor = SKColor(red: 1.0, green: 0.0, blue: 0.8, alpha: 0.6)
+                spore.strokeColor = .clear
+                spore.glowWidth = 5
+                spore.blendMode = .add
+                
+                let angle = CGFloat.random(in: 0...(2 * .pi))
+                spore.position = CGPoint(x: cos(angle) * 15, y: sin(angle) * 12)
+                body.addChild(spore)
+                
+                // Floating spore animation
+                let float = SKAction.sequence([
+                    SKAction.moveBy(x: CGFloat.random(in: -10...10), y: CGFloat.random(in: -10...10), duration: 2.0),
+                    SKAction.moveBy(x: CGFloat.random(in: -10...10), y: CGFloat.random(in: -10...10), duration: 2.0)
+                ])
+                spore.run(SKAction.repeatForever(float))
             }
             
             // Regeneration ability
