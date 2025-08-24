@@ -1,0 +1,18 @@
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Systems/CombatSystem.swift":
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/CombatSystem.swiftdeps"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/CombatSystem.dia"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/CombatSystem.o"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/CombatSystem.d"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/CombatSystem.swiftconstvalues"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Scenes/SettingsScene.swift":
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SettingsScene.o"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SettingsScene.dia"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SettingsScene.swiftconstvalues"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SettingsScene.d"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SettingsScene.swiftdeps"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Systems/EconomySystem.swift":
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/EconomySystem.swiftdeps"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/EconomySystem.d"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/EconomySystem.o"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/EconomySystem.swiftconstvalues"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/EconomySystem.dia"

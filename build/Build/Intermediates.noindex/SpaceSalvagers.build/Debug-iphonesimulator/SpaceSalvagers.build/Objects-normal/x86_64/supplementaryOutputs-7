@@ -1,0 +1,18 @@
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/PathFollowComponent.swift":
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/PathFollowComponent.swiftconstvalues"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/PathFollowComponent.swiftdeps"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/PathFollowComponent.dia"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/PathFollowComponent.d"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/PathFollowComponent.o"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Entities/Projectile/Projectile.swift":
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/Projectile.d"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/Projectile.o"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/Projectile.swiftconstvalues"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/Projectile.dia"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/Projectile.swiftdeps"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/App/SceneDelegate.swift":
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SceneDelegate.dia"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SceneDelegate.o"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SceneDelegate.swiftconstvalues"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SceneDelegate.d"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SceneDelegate.swiftdeps"

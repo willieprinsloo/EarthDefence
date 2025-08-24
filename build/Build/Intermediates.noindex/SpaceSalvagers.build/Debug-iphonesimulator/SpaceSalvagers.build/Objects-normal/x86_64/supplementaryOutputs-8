@@ -1,0 +1,18 @@
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Core/Utilities/SeededRandom.swift":
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SeededRandom.d"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SeededRandom.swiftconstvalues"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SeededRandom.swiftdeps"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SeededRandom.o"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/SeededRandom.dia"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/StationCore.swift":
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/StationCore.dia"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/StationCore.d"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/StationCore.o"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/StationCore.swiftdeps"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/StationCore.swiftconstvalues"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/TargetingComponent.swift":
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/TargetingComponent.o"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/TargetingComponent.swiftdeps"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/TargetingComponent.d"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/TargetingComponent.swiftconstvalues"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/TargetingComponent.dia"

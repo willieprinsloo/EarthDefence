@@ -1,0 +1,18 @@
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Bot/GameTestBot.swift":
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameTestBot.swiftdeps"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameTestBot.swiftconstvalues"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameTestBot.o"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameTestBot.dia"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameTestBot.d"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/App/GameViewController.swift":
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameViewController.d"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameViewController.swiftdeps"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameViewController.o"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameViewController.swiftconstvalues"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/GameViewController.dia"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/HealthComponent.swift":
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/HealthComponent.swiftdeps"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/HealthComponent.o"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/HealthComponent.d"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/HealthComponent.swiftconstvalues"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/HealthComponent.dia"

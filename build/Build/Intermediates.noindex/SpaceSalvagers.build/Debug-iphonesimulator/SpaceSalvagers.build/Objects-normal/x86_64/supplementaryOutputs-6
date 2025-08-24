@@ -1,0 +1,18 @@
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/ParticleEffectsManager.swift":
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/ParticleEffectsManager.swiftconstvalues"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/ParticleEffectsManager.d"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/ParticleEffectsManager.o"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/ParticleEffectsManager.dia"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/ParticleEffectsManager.swiftdeps"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Components/MovementComponent.swift":
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MovementComponent.swiftconstvalues"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MovementComponent.o"
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MovementComponent.d"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MovementComponent.dia"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MovementComponent.swiftdeps"
+"/Users/wlprinsloo/Documents/Projects/Tower-game/SpaceSalvagers/Game/Scenes/MainMenuScene.swift":
+  dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MainMenuScene.d"
+  const-values: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MainMenuScene.swiftconstvalues"
+  swift-dependencies: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MainMenuScene.swiftdeps"
+  object: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MainMenuScene.o"
+  diagnostics: "/Users/wlprinsloo/Documents/Projects/Tower-game/build/Build/Intermediates.noindex/SpaceSalvagers.build/Debug-iphonesimulator/SpaceSalvagers.build/Objects-normal/x86_64/MainMenuScene.dia"

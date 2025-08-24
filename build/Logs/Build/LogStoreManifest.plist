@@ -6,48 +6,6 @@
 	<integer>11</integer>
 	<key>logs</key>
 	<dict>
-		<key>1FB9C288-C6A0-4959-BB95-43B3845933DE</key>
-		<dict>
-			<key>className</key>
-			<string>IDECommandLineBuildLog</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
-			<key>fileName</key>
-			<string>1FB9C288-C6A0-4959-BB95-43B3845933DE.xcactivitylog</string>
-			<key>hasPrimaryLog</key>
-			<true/>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>S</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>0</integer>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>SpaceSalvagers project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>SpaceSalvagers</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Cleaning project SpaceSalvagers with scheme SpaceSalvagers</string>
-			<key>timeStartedRecording</key>
-			<real>777396978.37586296</real>
-			<key>timeStoppedRecording</key>
-			<real>777396978.75444496</real>
-			<key>title</key>
-			<string>Cleaning project SpaceSalvagers with scheme SpaceSalvagers</string>
-			<key>uniqueIdentifier</key>
-			<string>1FB9C288-C6A0-4959-BB95-43B3845933DE</string>
-		</dict>
 		<key>46DA1571-ACAD-449C-A429-109D771B0B2F</key>
 		<dict>
 			<key>className</key>

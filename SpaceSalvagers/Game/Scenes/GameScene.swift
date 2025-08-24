@@ -2574,8 +2574,8 @@ class GameScene: SKScene {
         buttonBg.name = "buttonBg"
         screenClearButton!.addChild(buttonBg)
         
-        // Lightning bolt icon for screen clear
-        let icon = SKLabelNode(text: "⚡")
+        // Icon for screen clear (no lightning)
+        let icon = SKLabelNode(text: "💥")
         icon.fontSize = 24
         icon.fontColor = screenClearCharges > 0 ? .white : SKColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
         icon.verticalAlignmentMode = .center
@@ -5556,6 +5556,7 @@ class GameScene: SKScene {
     private var enemiesPerWave = 10
     private var enemiesDestroyed = 0
     private var bossSpawnedThisWave = false  // Track if boss already spawned this wave
+    private var bossSpawnedThisMap = false  // Track if boss already spawned this map (limit to 1 per map)
     private var stationHealth = 3  // Less health
     private var maxStationHealth = 3  // Harder game
     private var lastFireTime: [SKNode: TimeInterval] = [:]
@@ -5750,9 +5751,10 @@ class GameScene: SKScene {
         let isLastWave = currentWave >= wavesPerMap
         let isLastEnemy = enemiesSpawned == enemiesPerWave - 1
         
-        if isLastWave && isLastEnemy && !bossSpawnedThisWave {
-            // BOSS TIME! Different boss for each map - BUT ONLY ONE
-            bossSpawnedThisWave = true  // Mark that we spawned a boss
+        if isLastWave && isLastEnemy && !bossSpawnedThisMap {
+            // BOSS TIME! Different boss for each map - BUT ONLY ONE PER MAP
+            bossSpawnedThisMap = true  // Mark that we spawned a boss for this entire map
+            bossSpawnedThisWave = true  // Also mark for this wave
             switch currentMap {
             case 1...3: return "destroyer"    // Early maps get destroyer boss
             case 4...6: return "titan"         // Mid maps get titan boss
@@ -5852,7 +5854,8 @@ class GameScene: SKScene {
                 else { return "armored" }
             } else if currentWave == 2 {
                 // Wave 2: ONE destroyer at position 8, rest are tough enemies
-                if enemiesSpawned == 7 && !bossSpawnedThisWave {  // 8th enemy
+                if enemiesSpawned == 7 && !bossSpawnedThisMap {  // 8th enemy
+                    bossSpawnedThisMap = true  // Only ONE boss per entire map
                     bossSpawnedThisWave = true
                     return "destroyer"  // Only ONE destroyer
                 }
@@ -5864,7 +5867,8 @@ class GameScene: SKScene {
                 else { return "armored" }
             } else if currentWave == 3 {
                 // Wave 3: ONE destroyer at position 10
-                if enemiesSpawned == 9 && !bossSpawnedThisWave {  // 10th enemy
+                if enemiesSpawned == 9 && !bossSpawnedThisMap {  // 10th enemy
+                    bossSpawnedThisMap = true  // Only ONE boss per entire map
                     bossSpawnedThisWave = true
                     return "destroyer"  // Only ONE destroyer
                 }
@@ -5872,7 +5876,8 @@ class GameScene: SKScene {
                 return ["shield", "bomber", "stealth", "armored"].randomElement()!
             } else {
                 // Wave 4+: ONE destroyer at position 12
-                if enemiesSpawned == 11 && !bossSpawnedThisWave {  // 12th enemy
+                if enemiesSpawned == 11 && !bossSpawnedThisMap {  // 12th enemy
+                    bossSpawnedThisMap = true  // Only ONE boss per entire map
                     bossSpawnedThisWave = true
                     return "destroyer"  // Only ONE destroyer
                 }
@@ -5891,7 +5896,8 @@ class GameScene: SKScene {
             // Theme: EXTREME military assault with overwhelming firepower
             if currentWave == 1 {
                 // Wave 1: ONE destroyer at position 6
-                if enemiesSpawned == 5 && !bossSpawnedThisWave {  // 6th enemy
+                if enemiesSpawned == 5 && !bossSpawnedThisMap {  // 6th enemy
+                    bossSpawnedThisMap = true  // Only ONE boss per entire map
                     bossSpawnedThisWave = true
                     return "destroyer"  // Only ONE destroyer
                 }
@@ -5902,7 +5908,8 @@ class GameScene: SKScene {
                 else { return "armored" }
             } else if currentWave == 2 {
                 // Wave 2: ONE destroyer at position 8
-                if enemiesSpawned == 7 && !bossSpawnedThisWave {  // 8th enemy
+                if enemiesSpawned == 7 && !bossSpawnedThisMap {  // 8th enemy
+                    bossSpawnedThisMap = true  // Only ONE boss per entire map
                     bossSpawnedThisWave = true
                     return "destroyer"  // Only ONE destroyer
                 }
@@ -5919,7 +5926,8 @@ class GameScene: SKScene {
                 }
             } else {
                 // Wave 3+: ONE destroyer at position 10
-                if enemiesSpawned == 9 && !bossSpawnedThisWave {  // 10th enemy
+                if enemiesSpawned == 9 && !bossSpawnedThisMap {  // 10th enemy
+                    bossSpawnedThisMap = true  // Only ONE boss per entire map
                     bossSpawnedThisWave = true
                     return "destroyer"  // Only ONE destroyer
                 }
@@ -6162,35 +6170,26 @@ class GameScene: SKScene {
             speed = 0.7  // Slightly faster (was 0.6)
             salvageReward = 45  // Better reward to match difficulty (reduced from 60)
             
-            // Add lightning particles around destroyer
+            // Add energy orbs instead of lightning
             for _ in 0..<4 {
-                let lightning = SKShapeNode()
-                let lightningPath = CGMutablePath()
-                lightningPath.move(to: CGPoint(x: 0, y: 0))
-                for i in 1...3 {
-                    lightningPath.addLine(to: CGPoint(
-                        x: CGFloat.random(in: -5...5) * CGFloat(i),
-                        y: CGFloat(i) * 10
-                    ))
-                }
-                lightning.path = lightningPath
-                lightning.strokeColor = SKColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 0.8)
-                lightning.lineWidth = 1.5
-                lightning.glowWidth = 4
-                lightning.blendMode = .add
-                lightning.position = CGPoint(
+                let orb = SKShapeNode(circleOfRadius: 8)
+                orb.fillColor = SKColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 0.6)
+                orb.strokeColor = SKColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 0.8)
+                orb.lineWidth = 1
+                orb.glowWidth = 5
+                orb.blendMode = .add
+                orb.position = CGPoint(
                     x: CGFloat.random(in: -30...30),
                     y: CGFloat.random(in: -30...30)
                 )
-                body.addChild(lightning)
+                body.addChild(orb)
                 
-                // Animate lightning
-                let flash = SKAction.sequence([
-                    SKAction.fadeAlpha(to: 0.0, duration: 0.1),
-                    SKAction.fadeAlpha(to: 1.0, duration: 0.05),
-                    SKAction.wait(forDuration: Double.random(in: 0.5...2.0))
+                // Animate orb pulsing
+                let pulse = SKAction.sequence([
+                    SKAction.scale(to: 1.3, duration: 0.5),
+                    SKAction.scale(to: 0.7, duration: 0.5)
                 ])
-                lightning.run(SKAction.repeatForever(flash))
+                orb.run(SKAction.repeatForever(pulse))
             }
             
             // SPECIAL ABILITY: Stronger shield that regenerates faster
@@ -10239,7 +10238,7 @@ class GameScene: SKScene {
         let earthContainer = SKNode()
         earthContainer.name = "mapPlanet"
         earthContainer.position = CGPoint(x: -100, y: 100)  // Offset from center for visibility
-        earthContainer.zPosition = -10  // Behind everything else
+        earthContainer.zPosition = 1  // Above background but below gameplay
         
         // Use Earth texture if available, otherwise fall back to programmatic drawing
         // Check if the texture exists by trying to load it
@@ -13674,6 +13673,7 @@ class GameScene: SKScene {
         // Reset wave for new map
         currentWave = 1
         enemiesSpawned = 0
+        bossSpawnedThisMap = false  // Reset boss flag for new map
         enemiesDestroyed = 0
         enemiesPerWave = 10
         

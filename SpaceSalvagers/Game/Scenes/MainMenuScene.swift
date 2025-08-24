@@ -34,43 +34,125 @@ class MainMenuScene: SKScene {
     }
     
     private func createTitle() {
-        titleLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
-        titleLabel.text = "SPACE SALVAGERS"
-        titleLabel.fontSize = 56
-        titleLabel.fontColor = .white
-        titleLabel.position = CGPoint(x: 0, y: size.height * 0.25)
-        titleLabel.horizontalAlignmentMode = .center
-        titleLabel.zPosition = 100
+        // Create logo container for all elements
+        let logoContainer = SKNode()
+        logoContainer.position = CGPoint(x: 0, y: size.height * 0.25)
+        logoContainer.zPosition = 100
         
-        // Add multiple glow layers for epic effect
-        for i in 1...3 {
-            let glow = SKLabelNode(fontNamed: "Helvetica-Bold")
-            glow.text = "SPACE SALVAGERS"
-            glow.fontSize = 56
-            glow.fontColor = SKColor(red: 0.3, green: 0.6, blue: 1.0, alpha: 0.4 / CGFloat(i))
+        // Main title with metallic gradient effect
+        titleLabel = SKLabelNode(fontNamed: "AvenirNext-Heavy")
+        titleLabel.text = "STELLAR INVASION"
+        titleLabel.fontSize = 64
+        titleLabel.fontColor = SKColor(red: 1.0, green: 0.9, blue: 0.85, alpha: 1.0)
+        titleLabel.horizontalAlignmentMode = .center
+        
+        // Add metallic shine effect with red invasion tint
+        let shineLabel = SKLabelNode(fontNamed: "AvenirNext-Heavy")
+        shineLabel.text = "STELLAR INVASION"
+        shineLabel.fontSize = 64
+        shineLabel.fontColor = SKColor(red: 1.0, green: 0.7, blue: 0.5, alpha: 0.6)
+        shineLabel.position = CGPoint(x: -2, y: 2)
+        shineLabel.blendMode = .add
+        titleLabel.addChild(shineLabel)
+        
+        // Add deep space glow layers with invasion theme (red-orange)
+        for i in 1...4 {
+            let glow = SKLabelNode(fontNamed: "AvenirNext-Heavy")
+            glow.text = "STELLAR INVASION"
+            glow.fontSize = 64
+            let glowIntensity = 0.6 / CGFloat(i)
+            glow.fontColor = SKColor(red: 1.0, green: 0.4, blue: 0.2, alpha: glowIntensity)
             glow.position = .zero
-            glow.alpha = 1.0 / CGFloat(i)
             glow.blendMode = .add
-            glow.setScale(1.0 + (CGFloat(i) * 0.02))
+            glow.setScale(1.0 + (CGFloat(i) * 0.03))
+            glow.zPosition = -CGFloat(i)
             titleLabel.addChild(glow)
         }
         
-        // Add subtitle
-        let subtitle = SKLabelNode(fontNamed: "Helvetica")
-        subtitle.text = "DEFEND THE SOLAR SYSTEM"
-        subtitle.fontSize = 18
-        subtitle.fontColor = SKColor(red: 0.7, green: 0.8, blue: 0.9, alpha: 0.9)
-        subtitle.position = CGPoint(x: 0, y: -40)
-        titleLabel.addChild(subtitle)
+        // Add cosmic energy effect behind text
+        let energyRing = SKShapeNode(circleOfRadius: 180)
+        energyRing.strokeColor = SKColor(red: 0.3, green: 0.6, blue: 1.0, alpha: 0.3)
+        energyRing.lineWidth = 2
+        energyRing.glowWidth = 15
+        energyRing.position = CGPoint(x: 0, y: 10)
+        energyRing.zPosition = -10
+        energyRing.xScale = 2.0
+        energyRing.yScale = 0.4
+        logoContainer.addChild(energyRing)
         
-        // Animate title
+        // Add planet icon elements
+        let planetIcon = SKShapeNode(circleOfRadius: 25)
+        planetIcon.position = CGPoint(x: -240, y: 5)
+        planetIcon.fillColor = SKColor(red: 0.2, green: 0.4, blue: 0.8, alpha: 0.8)
+        planetIcon.strokeColor = SKColor(red: 0.4, green: 0.6, blue: 1.0, alpha: 1.0)
+        planetIcon.lineWidth = 2
+        planetIcon.glowWidth = 8
+        logoContainer.addChild(planetIcon)
+        
+        // Add ring around planet
+        let ring = SKShapeNode(ellipseOf: CGSize(width: 60, height: 20))
+        ring.position = planetIcon.position
+        ring.strokeColor = SKColor(red: 0.6, green: 0.7, blue: 0.9, alpha: 0.7)
+        ring.lineWidth = 1.5
+        ring.glowWidth = 3
+        ring.zRotation = -0.3
+        logoContainer.addChild(ring)
+        
+        // Mirror planet on right side
+        let planetIcon2 = planetIcon.copy() as! SKShapeNode
+        planetIcon2.position = CGPoint(x: 240, y: 5)
+        logoContainer.addChild(planetIcon2)
+        
+        let ring2 = ring.copy() as! SKShapeNode
+        ring2.position = planetIcon2.position
+        ring2.zRotation = 0.3
+        logoContainer.addChild(ring2)
+        
+        // Enhanced subtitle with better styling
+        let subtitle = SKLabelNode(fontNamed: "AvenirNext-DemiBold")
+        subtitle.text = "EARTH'S LAST DEFENSE"
+        subtitle.fontSize = 20
+        subtitle.fontColor = SKColor(red: 0.9, green: 0.85, blue: 0.8, alpha: 1.0)
+        subtitle.position = CGPoint(x: 0, y: -45)
+        
+        // Subtitle glow
+        let subtitleGlow = SKLabelNode(fontNamed: "AvenirNext-DemiBold")
+        subtitleGlow.text = "EARTH'S LAST DEFENSE"
+        subtitleGlow.fontSize = 20
+        subtitleGlow.fontColor = SKColor(red: 0.4, green: 0.7, blue: 1.0, alpha: 0.4)
+        subtitleGlow.position = .zero
+        subtitleGlow.blendMode = .add
+        subtitleGlow.setScale(1.05)
+        subtitle.addChild(subtitleGlow)
+        
+        logoContainer.addChild(titleLabel)
+        logoContainer.addChild(subtitle)
+        addChild(logoContainer)
+        
+        // Animate the entire logo
         let pulse = SKAction.sequence([
-            SKAction.scale(to: 1.05, duration: 3.0),
+            SKAction.scale(to: 1.02, duration: 3.0),
             SKAction.scale(to: 1.0, duration: 3.0)
         ])
-        titleLabel.run(SKAction.repeatForever(pulse))
+        logoContainer.run(SKAction.repeatForever(pulse))
         
-        addChild(titleLabel)
+        // Animate energy ring rotation
+        let rotateRing = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 30)
+        energyRing.run(SKAction.repeatForever(rotateRing))
+        
+        // Animate planet icons
+        let planetPulse = SKAction.sequence([
+            SKAction.scale(to: 1.2, duration: 2.0),
+            SKAction.scale(to: 1.0, duration: 2.0)
+        ])
+        planetIcon.run(SKAction.repeatForever(planetPulse))
+        planetIcon2.run(SKAction.repeatForever(planetPulse))
+        
+        // Rotate rings around planets
+        let rotateRings = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 8)
+        ring.run(SKAction.repeatForever(rotateRings))
+        let rotateRingsReverse = SKAction.rotate(byAngle: -CGFloat.pi * 2, duration: 8)
+        ring2.run(SKAction.repeatForever(rotateRingsReverse))
     }
     
     private func createButtons() {

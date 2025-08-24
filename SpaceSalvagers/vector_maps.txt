@@ -216,3 +216,65 @@ SPAWN: -320,-150
 CORE: 320,80
 CORE: 320,0
 CORE: 320,-80
+MAP 11
+NAME: Lunar Defense Perimeter
+DIFFICULTY: 11
+WAVES: 7
+COLOR: 0.8,0.8,0.9
+GLOW: 8
+WIDTH: 45
+# Moon base defense with crater formations
+PATH: -350,150 ~ -250,120 ~ -150,80 ~ -50,100 ~ 50,80 ~ 150,100 ~ 250,60 ~ 320,0
+PATH: -350,0 ~ -280,-20 ~ -200,0 ~ -100,-40 ~ 0,-20 ~ 100,-40 ~ 200,-20 ~ 280,0 ~ 320,0
+PATH: -350,-150 ~ -250,-120 ~ -150,-100 ~ -50,-120 ~ 50,-100 ~ 150,-80 ~ 250,-100 ~ 320,0
+# Tower zones forming lunar craters
+TOWER: -200,50,50
+TOWER: -100,0,45
+TOWER: 0,40,50
+TOWER: 100,20,45
+TOWER: 200,-60,50
+TOWER: -150,-60,45
+TOWER: 50,-60,45
+# Multiple spawn points
+SPAWN: -350,150
+SPAWN: -350,0
+SPAWN: -350,-150
+# Single core to defend
+CORE: 320,0
+
+MAP 12
+NAME: Earth - Final Stand
+DIFFICULTY: 12
+WAVES: 8
+COLOR: 0.2,0.5,0.8
+GLOW: 15
+WIDTH: 50
+# Earth's last defense - complex multi-path final battle
+# Northern hemisphere path
+PATH: -380,180 ~ -300,160 ~ -200,180 ~ -100,140 ~ 0,160 ~ 100,140 ~ 200,160 ~ 300,120 ~ 350,50
+# Equatorial paths
+PATH: -380,60 ~ -280,40 ~ -180,60 ~ -80,30 ~ 20,50 ~ 120,30 ~ 220,40 ~ 320,20 ~ 350,50
+PATH: -380,0 ~ -300,0 ~ -200,-20 ~ -100,0 ~ 0,-10 ~ 100,0 ~ 200,-20 ~ 300,0 ~ 350,50
+PATH: -380,-60 ~ -280,-40 ~ -180,-60 ~ -80,-30 ~ 20,-50 ~ 120,-30 ~ 220,-40 ~ 320,-20 ~ 350,50
+# Southern hemisphere path
+PATH: -380,-180 ~ -300,-160 ~ -200,-180 ~ -100,-140 ~ 0,-160 ~ 100,-140 ~ 200,-160 ~ 300,-120 ~ 350,50
+# Tower zones representing continental defenses
+TOWER: -250,100,55
+TOWER: -150,20,50
+TOWER: -50,80,55
+TOWER: 50,0,50
+TOWER: 150,60,55
+TOWER: 250,0,50
+TOWER: -200,-100,55
+TOWER: -100,-40,50
+TOWER: 0,-120,55
+TOWER: 100,-80,50
+TOWER: 200,-40,55
+# All paths spawn from left (space invasion)
+SPAWN: -380,180
+SPAWN: -380,60
+SPAWN: -380,0
+SPAWN: -380,-60
+SPAWN: -380,-180
+# Single Earth core to protect - all paths converge
+CORE: 350,50
