@@ -3238,13 +3238,13 @@ class GameScene: SKScene {
                         
                         // Get cost for this tower type
                         let costs: [String: Int] = [
-                            "machinegun": 75,
-                            "kinetic": 80,    // Cannon - basic tower
-                            "laser": 120,     // Laser - mid-tier
-                            "freeze": 200,    // Freeze - slowing support
-                            "plasma": 150,    // Plasma - buffed damage
-                            "missile": 250,   // Missile - reduced price
-                            "tesla": 350      // Tesla/EMP - reduced price
+                            "machinegun": 90,     // More expensive machine gun
+                            "kinetic": 110,       // Cannon - more expensive
+                            "laser": 160,         // Laser - more expensive
+                            "freeze": 280,        // Freeze - more expensive
+                            "plasma": 220,        // Plasma - more expensive
+                            "missile": 350,       // Missile - significantly more expensive
+                            "tesla": 500          // Tesla/EMP - very expensive
                         ]
                         let cost = costs[towerType] ?? 100
                         
@@ -4196,11 +4196,11 @@ class GameScene: SKScene {
     
     private func getTowerRange(type: String) -> CGFloat {
         switch type {
-        case "machinegun": return 100  // Short range
-        case "laser": return 150
-        case "plasma": return 120
-        case "missile": return 200
-        case "tesla": return 100
+        case "machinegun": return 80   // Reduced range - need better placement
+        case "laser": return 130       // Reduced range
+        case "plasma": return 100      // Reduced range
+        case "missile": return 170     // Reduced range
+        case "tesla": return 90        // Reduced range
         default: return 120
         }
     }
@@ -4219,11 +4219,11 @@ class GameScene: SKScene {
     private func getDamageMultiplier(type: String) -> Int {
         switch type {
         case "machinegun": return 1  // Low damage but very fast fire rate
-        case "kinetic": return 1  // Reduced by 30% (was implicitly 1, now explicitly lower damage per level)
-        case "laser": return 1
-        case "plasma": return 2
-        case "missile": return 3
-        case "tesla": return 2
+        case "kinetic": return 1  // Basic damage
+        case "laser": return 1        // Balanced damage
+        case "plasma": return 1       // Reduced from 2 - needs upgrades
+        case "missile": return 2      // Reduced from 3 - still good
+        case "tesla": return 1        // Reduced from 2 - area damage compensates
         default: return 1
         }
     }
@@ -4609,7 +4609,7 @@ class GameScene: SKScene {
         
         if currentLevel < 3 {
             // SIMPLIFIED UPGRADE BUTTON - LIGHTER BACKGROUND FOR TEXT VISIBILITY
-            let upgradeCost = Int(Double(baseCost) * 1.5)
+            let upgradeCost = Int(Double(baseCost) * 2.0)  // Much more expensive upgrades
             let canAfford = playerSalvage >= upgradeCost
             
             let upgradeButton = SKShapeNode(rectOf: CGSize(width: 120, height: 50), cornerRadius: 5)
@@ -5555,8 +5555,7 @@ class GameScene: SKScene {
     private var enemiesSpawned = 0
     private var enemiesPerWave = 10
     private var enemiesDestroyed = 0
-    private var bossSpawnedThisWave = false  // Track if boss already spawned this wave
-    private var bossSpawnedThisMap = false  // Track if boss already spawned this map (limit to 1 per map)
+    private var bossSpawnedThisWave = false  // Track if boss already spawned this wave - limit to 1 per wave
     private var stationHealth = 3  // Less health
     private var maxStationHealth = 3  // Harder game
     private var lastFireTime: [SKNode: TimeInterval] = [:]
@@ -5593,7 +5592,7 @@ class GameScene: SKScene {
         isWaveActive = true
         isCheckingWaveCompletion = false  // Reset the checking flag for new wave
         enemiesSpawned = 0
-        bossSpawnedThisWave = false  // Reset boss spawn flag for new wave
+        bossSpawnedThisWave = false  // Reset boss spawn flag for EACH new wave
         // ENHANCED ENEMY COUNT - More enemies per wave since fewer waves
         // Each wave gets progressively harder with more enemies
         switch currentMap {
@@ -5602,7 +5601,7 @@ class GameScene: SKScene {
         case 2:  // Venus (4 waves)
             enemiesPerWave = 12 + (currentWave * 5)  // W1: 17, W2: 22, W3: 27, W4: 32
         case 3:  // Earth Station (4 waves)
-            enemiesPerWave = 15 + (currentWave * 5)  // W1: 20, W2: 25, W3: 30, W4: 35
+            enemiesPerWave = 10 + (currentWave * 3)  // W1: 13, W2: 16, W3: 19, W4: 22 - Much more manageable
         case 4:  // Mars (5 waves)
             enemiesPerWave = 18 + (currentWave * 6)  // W1: 24, W2: 30, W3: 36, W4: 42, W5: 48
         case 5:  // Neptune (5 waves)
@@ -5661,7 +5660,7 @@ class GameScene: SKScene {
                 baseDelay = 0.85  // Wave 2+ remains very fast
             }
         } else if currentMap == 3 {
-            baseDelay = 0.8  // 60% faster spawning for 150% harder difficulty - EARTH UNDER SIEGE!
+            baseDelay = 1.2  // More reasonable spawn rate for Map 3
         } else if currentMap == 4 {
             baseDelay = 0.65  // 67.5% faster spawning for 200% harder difficulty - MARS INVASION!
         }
@@ -5751,10 +5750,9 @@ class GameScene: SKScene {
         let isLastWave = currentWave >= wavesPerMap
         let isLastEnemy = enemiesSpawned == enemiesPerWave - 1
         
-        if isLastWave && isLastEnemy && !bossSpawnedThisMap {
-            // BOSS TIME! Different boss for each map - BUT ONLY ONE PER MAP
-            bossSpawnedThisMap = true  // Mark that we spawned a boss for this entire map
-            bossSpawnedThisWave = true  // Also mark for this wave
+        if isLastWave && isLastEnemy && !bossSpawnedThisWave {
+            // BOSS TIME! Different boss for each map - BUT ONLY ONE PER WAVE
+            bossSpawnedThisWave = true  // Mark that we spawned a boss for this wave
             switch currentMap {
             case 1...3: return "destroyer"    // Early maps get destroyer boss
             case 4...6: return "titan"         // Mid maps get titan boss
@@ -5843,50 +5841,42 @@ class GameScene: SKScene {
                 }
             }
             
-        case 3:  // EARTH - Defend Home - 150% HARDER!
-            // Theme: EXTREME DIFFICULTY - Earth's last stand against overwhelming forces
+        case 3:  // EARTH Station - Balanced difficulty
+            // Theme: Progressive difficulty with reasonable challenge
             if currentWave == 1 {
-                // Wave 1: No more easy start! (30% bombers, 30% fighters, 20% shield, 20% armored)
+                // Wave 1: Easier start (50% scouts, 30% fighters, 20% fast)
                 let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "bomber" }
-                else if roll <= 6 { return "fighter" }
-                else if roll <= 8 { return "shield" }
-                else { return "armored" }
+                if roll <= 5 { return "scout" }
+                else if roll <= 8 { return "fighter" }
+                else { return "fast" }
             } else if currentWave == 2 {
-                // Wave 2: ONE destroyer at position 8, rest are tough enemies
-                if enemiesSpawned == 7 && !bossSpawnedThisMap {  // 8th enemy
-                    bossSpawnedThisMap = true  // Only ONE boss per entire map
-                    bossSpawnedThisWave = true
-                    return "destroyer"  // Only ONE destroyer
-                }
-                // Rest: shield, bomber, stealth, armored
+                // Wave 2: Moderate difficulty (no destroyer yet)
+                // Mix of fighters, bombers, and some armored
                 let roll = Int.random(in: 1...10)
-                if roll <= 4 { return "shield" }
+                if roll <= 4 { return "fighter" }
                 else if roll <= 7 { return "bomber" }
-                else if roll <= 9 { return "stealth" }
+                else if roll <= 9 { return "fast" }
                 else { return "armored" }
             } else if currentWave == 3 {
-                // Wave 3: ONE destroyer at position 10
-                if enemiesSpawned == 9 && !bossSpawnedThisMap {  // 10th enemy
-                    bossSpawnedThisMap = true  // Only ONE boss per entire map
+                // Wave 3: Introduce shields and one mini-boss
+                if enemiesSpawned == 12 && !bossSpawnedThisWave {  // 13th enemy - later in wave
                     bossSpawnedThisWave = true
-                    return "destroyer"  // Only ONE destroyer
+                    return "juggernaut"  // Mini-boss, not destroyer
                 }
-                // Rest: tough mix without destroyer
-                return ["shield", "bomber", "stealth", "armored"].randomElement()!
+                // Rest: moderate mix
+                return ["shield", "bomber", "fighter", "armored"].randomElement()!
             } else {
-                // Wave 4+: ONE destroyer at position 12
-                if enemiesSpawned == 11 && !bossSpawnedThisMap {  // 12th enemy
-                    bossSpawnedThisMap = true  // Only ONE boss per entire map
+                // Wave 4: Final wave with ONE destroyer at the end
+                if enemiesSpawned == 18 && !bossSpawnedThisWave {  // Near end of wave
                     bossSpawnedThisWave = true
-                    return "destroyer"  // Only ONE destroyer
+                    return "destroyer"  // Only ONE destroyer as final boss
                 }
-                // Rest: challenging mix
+                // Rest: balanced mix
                 let roll = Int.random(in: 1...5)
                 switch roll {
                 case 1: return "shield"
                 case 2: return "bomber"
-                case 3: return "stealth"
+                case 3: return "armored"
                 case 4: return "armored"
                 default: return "fighter"
                 }
@@ -5896,9 +5886,8 @@ class GameScene: SKScene {
             // Theme: EXTREME military assault with overwhelming firepower
             if currentWave == 1 {
                 // Wave 1: ONE destroyer at position 6
-                if enemiesSpawned == 5 && !bossSpawnedThisMap {  // 6th enemy
-                    bossSpawnedThisMap = true  // Only ONE boss per entire map
-                    bossSpawnedThisWave = true
+                if enemiesSpawned == 5 && !bossSpawnedThisWave {  // 6th enemy
+                    bossSpawnedThisWave = true  // Only ONE boss per wave
                     return "destroyer"  // Only ONE destroyer
                 }
                 // Rest: bomber, shield, armored
@@ -5908,9 +5897,8 @@ class GameScene: SKScene {
                 else { return "armored" }
             } else if currentWave == 2 {
                 // Wave 2: ONE destroyer at position 8
-                if enemiesSpawned == 7 && !bossSpawnedThisMap {  // 8th enemy
-                    bossSpawnedThisMap = true  // Only ONE boss per entire map
-                    bossSpawnedThisWave = true
+                if enemiesSpawned == 7 && !bossSpawnedThisWave {  // 8th enemy
+                    bossSpawnedThisWave = true  // Only ONE boss per wave
                     return "destroyer"  // Only ONE destroyer
                 }
                 // Rest: ONE goliath at position 12
@@ -5926,9 +5914,8 @@ class GameScene: SKScene {
                 }
             } else {
                 // Wave 3+: ONE destroyer at position 10
-                if enemiesSpawned == 9 && !bossSpawnedThisMap {  // 10th enemy
-                    bossSpawnedThisMap = true  // Only ONE boss per entire map
-                    bossSpawnedThisWave = true
+                if enemiesSpawned == 9 && !bossSpawnedThisWave {  // 10th enemy
+                    bossSpawnedThisWave = true  // Only ONE boss per wave
                     return "destroyer"  // Only ONE destroyer
                 }
                 // Rest: heavy tanks and tough enemies (but not god creatures)
@@ -5947,11 +5934,11 @@ class GameScene: SKScene {
                 else if roll <= 8 { return "bomber" }
                 else { return "stealth" }
             } else {
-                // Wave 3+: Swarms with heavies (40% swarms, 30% destroyers, 30% shields)
+                // Wave 3+: Swarms with heavies (40% swarms, 30% shields, 30% bombers)
                 let roll = Int.random(in: 1...10)
                 if roll <= 4 { return "swarm" }
-                else if roll <= 7 { return "destroyer" }
-                else { return "shield" }
+                else if roll <= 7 { return "shield" }  // Changed from destroyer
+                else { return "bomber" }  // Changed from shield
             }
             
         case 6:  // JUPITER - Gas Giant
@@ -5960,15 +5947,24 @@ class GameScene: SKScene {
                 // Wave 1: Heavy units (50% bombers, 50% shields)
                 return Int.random(in: 1...2) == 1 ? "bomber" : "shield"
             } else if currentWave == 2 {
-                // Wave 2: Destroyers and new tanks arrive (30% destroyers, 20% juggernaut, 25% shields, 25% bombers)
+                // Wave 2: ONE destroyer at position 10, rest are tanks and shields
+                if enemiesSpawned == 9 && !bossSpawnedThisWave {  // 10th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: new tanks arrive (30% juggernaut, 35% shields, 35% bombers)
                 let roll = Int.random(in: 1...10)
-                if roll <= 3 { return "destroyer" }
-                else if roll <= 5 { return "juggernaut" }  // New slow tank
-                else if roll <= 7 { return "shield" }
+                if roll <= 3 { return "juggernaut" }  // New slow tank
+                else if roll <= 6 { return "shield" }
                 else { return "bomber" }
             } else {
-                // Wave 3+: Elite mix with new enemies (destroyer, shield, stealth, bomber, juggernaut, goliath)
-                return ["destroyer", "shield", "stealth", "bomber", "juggernaut", "goliath"].randomElement()!
+                // Wave 3+: ONE destroyer at position 12, rest are elite mix
+                if enemiesSpawned == 11 && !bossSpawnedThisWave {  // 12th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: Elite mix without destroyer (shield, stealth, bomber, juggernaut, goliath)
+                return ["shield", "stealth", "bomber", "juggernaut", "goliath"].randomElement()!
             }
             
         case 7:  // SATURN - Ring Defense
@@ -5977,74 +5973,112 @@ class GameScene: SKScene {
                 // Wave 1: Diverse mix (Equal chances of fighter, bomber, stealth)
                 return ["fighter", "bomber", "stealth"].randomElement()!
             } else if currentWave == 2 {
-                // Wave 2: Advanced units (Equal chances of shield, destroyer, stealth, bomber)
-                return ["shield", "destroyer", "stealth", "bomber"].randomElement()!
+                // Wave 2: ONE destroyer at position 8, rest are advanced units
+                if enemiesSpawned == 7 && !bossSpawnedThisWave {  // 8th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: Advanced units without destroyer (shield, stealth, bomber)
+                return ["shield", "stealth", "bomber"].randomElement()!
             } else {
-                // Wave 3+: Full variety with new heavy enemies
-                let roll = Int.random(in: 1...12)
-                if roll <= 3 { return "destroyer" }
-                else if roll <= 5 { return "shield" }
-                else if roll <= 7 { return "stealth" }
-                else if roll <= 9 { return "bomber" }
-                else if roll == 10 { return "behemoth" }  // New slow tank
-                else if roll == 11 { return "goliath" }    // New fortress
+                // Wave 3+: ONE destroyer at position 10, rest are variety
+                if enemiesSpawned == 9 && !bossSpawnedThisWave {  // 10th enemy
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: Full variety without destroyer
+                let roll = Int.random(in: 1...10)
+                if roll <= 3 { return "shield" }
+                else if roll <= 5 { return "stealth" }
+                else if roll <= 7 { return "bomber" }
+                else if roll == 8 { return "behemoth" }  // New slow tank
+                else if roll == 9 { return "goliath" }    // New fortress
                 else { return "swarm" }
             }
             
         case 8:  // URANUS - Ice World
             // Theme: Slow but extremely durable enemies with new tanks
-            return ["shield", "destroyer", "bomber", "juggernaut", "goliath", "behemoth"].randomElement()!
+            // ONE destroyer at position 15 for all waves
+            if enemiesSpawned == 14 && !bossSpawnedThisWave {  // 15th enemy
+                bossSpawnedThisWave = true
+                return "destroyer"  // Only ONE destroyer per wave
+            }
+            // Rest: Heavy tanks without destroyer
+            return ["shield", "bomber", "juggernaut", "goliath", "behemoth"].randomElement()!
             
-        case 9:  // NEPTUNE - Deep Space
-            // Theme: Elite enemy compositions
+        case 9:  // Mars
+            // Theme: Elite enemy compositions with ONE destroyer per wave
             if currentWave <= 2 {
-                return ["destroyer", "shield", "bomber"].randomElement()!
-            } else {
-                // Later waves: 50% destroyers, 50% other elites
-                return Int.random(in: 1...2) == 1 ? "destroyer" : 
-                       ["shield", "stealth", "bomber"].randomElement()!
-            }
-            
-        case 10:  // PLUTO - Dwarf Planet
-            // Theme: Extreme challenge with mostly elite units and TITANS
-            let roll = Int.random(in: 1...10)
-            if roll == 1 && currentWave >= 2 {
-                return "titan"  // 10% chance of TITAN after wave 1
-            } else {
-                return ["destroyer", "shield", "destroyer", "stealth"].randomElement()!
-            }
-            
-        case 11:  // ERIS - Chaos World
-            // Theme: Unpredictable mix of all enemy types including TITANS
-            let roll = Int.random(in: 1...10)
-            if roll <= 2 && currentWave >= 2 {
-                return "titan"  // 20% chance of TITAN
-            } else {
-                return ["fighter", "bomber", "destroyer", "shield", "stealth", "swarm"].randomElement()!
-            }
-            
-        case 12:  // MAKEMAKE - Final Challenge
-            // Theme: Ultimate test with MULTIPLE TITANS
-            if currentWave == 1 {
-                return ["destroyer", "shield"].randomElement()!
-            } else if currentWave >= 3 {
-                // Wave 3+: TITAN INVASION
-                let roll = Int.random(in: 1...10)
-                if roll <= 3 {
-                    return "titan"  // 30% chance of TITAN in final waves!
-                } else {
-                    return ["destroyer", "shield"].randomElement()!
+                // Wave 1-2: ONE destroyer at position 12
+                if enemiesSpawned == 11 && !bossSpawnedThisWave {
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
                 }
+                return ["shield", "bomber", "armored"].randomElement()!
             } else {
-                // Wave 2: Build up with destroyers
-                return Int.random(in: 1...10) <= 7 ? 
-                       ["destroyer", "shield"].randomElement()! :
-                       ["bomber", "stealth"].randomElement()!
+                // Later waves: ONE destroyer at position 15
+                if enemiesSpawned == 14 && !bossSpawnedThisWave {
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                return ["shield", "stealth", "bomber", "armored"].randomElement()!
+            }
+            
+        case 10:  // Moon Base  
+            // Theme: Extreme challenge with ONE destroyer per wave
+            // ONE destroyer at position 18 for all waves
+            if enemiesSpawned == 17 && !bossSpawnedThisWave {
+                bossSpawnedThisWave = true
+                return "destroyer"  // Only ONE destroyer per wave
+            }
+            // Rest: Elite mix without destroyer
+            return ["shield", "bomber", "stealth", "armored", "juggernaut"].randomElement()!
+            
+        case 11:  // Moon Base
+            // Theme: Unpredictable mix with ONE destroyer per wave
+            // ONE destroyer at position 20 for all waves
+            if enemiesSpawned == 19 && !bossSpawnedThisWave {
+                bossSpawnedThisWave = true
+                return "destroyer"  // Only ONE destroyer per wave
+            }
+            // Rest: Varied mix without destroyer
+            return ["fighter", "bomber", "shield", "stealth", "swarm", "armored"].randomElement()!
+            
+        case 12:  // Earth - FINAL STAND
+            // Theme: Ultimate test with ONE destroyer per wave
+            if currentWave == 1 {
+                // Wave 1: ONE destroyer at position 15
+                if enemiesSpawned == 14 && !bossSpawnedThisWave {
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                return ["shield", "bomber", "armored"].randomElement()!
+            } else if currentWave >= 3 {
+                // Wave 3+: ONE destroyer at position 25
+                if enemiesSpawned == 24 && !bossSpawnedThisWave {
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: Ultimate challenge mix
+                return ["shield", "bomber", "stealth", "juggernaut", "goliath"].randomElement()!
+            } else {
+                // Wave 2: ONE destroyer at position 20
+                if enemiesSpawned == 19 && !bossSpawnedThisWave {
+                    bossSpawnedThisWave = true
+                    return "destroyer"  // Only ONE destroyer
+                }
+                // Rest: Build up with tough enemies
+                return ["shield", "bomber", "armored", "stealth"].randomElement()!
             }
             
         default:
-            // Fallback for any additional maps
-            return ["destroyer", "shield", "bomber", "stealth"].randomElement()!
+            // Fallback for any additional maps - ONE destroyer at position 20
+            if enemiesSpawned == 19 && !bossSpawnedThisWave {
+                bossSpawnedThisWave = true
+                return "destroyer"  // Only ONE destroyer per wave
+            }
+            // Rest: Mix without destroyer
+            return ["shield", "bomber", "stealth", "armored"].randomElement()!
         }
     }
     
@@ -6074,8 +6108,8 @@ class GameScene: SKScene {
             body.fillColor = .clear // Outline only
             body.glowWidth = 6 // Increased glow
             health = 2  // Fast but fragile as specified
-            speed = 1.2
-            salvageReward = 4  // Scout reward (reduced from 5)
+            speed = 1.5  // Much faster scouts - hard to catch
+            salvageReward = 3  // Less scout reward for economy balance
             
             // Add engine trail with particles
             let trail = SKShapeNode(circleOfRadius: 3)
@@ -6099,8 +6133,8 @@ class GameScene: SKScene {
             body.fillColor = .clear
             body.glowWidth = 6
             health = 4  // Balanced fighter
-            speed = 1.0
-            salvageReward = 9  // Fighter reward (reduced from 12)
+            speed = 1.3  // Faster fighters - more dangerous
+            salvageReward = 6  // Less fighter reward
             
             // Add weapon ports
             for x in [-8, 8] {
@@ -6133,8 +6167,8 @@ class GameScene: SKScene {
             body.fillColor = .clear
             body.glowWidth = 8 // Extra glow for bombers
             health = 10  // Tanky bomber as specified
-            speed = 0.8
-            salvageReward = 11  // Bomber reward (reduced from 15)
+            speed = 1.0  // Faster bombers - harder to stop
+            salvageReward = 8  // Less bomber reward
             
             // Add rotating core
             let core = SKShapeNode(circleOfRadius: 5)
@@ -6302,9 +6336,9 @@ class GameScene: SKScene {
                 body.addChild(tentacle)
             }
             
-            health = 360  // TITAN LEVEL health! (20% increase from 300)
-            speed = 0.4   // Slightly faster but still slow (was 0.3)
-            salvageReward = 120  // Massive reward to match the challenge
+            health = 500  // Much tougher titan boss for real challenge
+            speed = 0.5   // Still slow but more threatening
+            salvageReward = 80  // Reduced reward for economy balance
             
             // SPECIAL ABILITIES: Health regeneration AND damage resistance
             enemy.userData?["hasRegeneration"] = true
@@ -6368,8 +6402,8 @@ class GameScene: SKScene {
             body.fillColor = .clear
             body.glowWidth = 4
             health = 1  // Dies in one hit
-            speed = 2.5  // SUPER FAST! (was 1.8)
-            salvageReward = 7  // Swarm reward
+            speed = 3.0  // INSANELY FAST swarm - very hard to hit!
+            salvageReward = 5  // Less swarm reward
             
         case "shield":
             // Shielded tank with regeneration
@@ -6381,8 +6415,8 @@ class GameScene: SKScene {
             body.fillColor = .clear
             body.glowWidth = 10
             health = 15  // High health
-            speed = 0.7  // Slow
-            salvageReward = 11  // Reduced from 15  // Shield tank reward
+            speed = 0.9  // Faster shield tanks - more threatening
+            salvageReward = 8  // Less shield tank reward
             
             // Add shield effect
             let shield = SKShapeNode(circleOfRadius: 20)
@@ -6408,8 +6442,8 @@ class GameScene: SKScene {
             body.fillColor = .clear
             body.glowWidth = 2
             health = 3  // Fragile
-            speed = 1.4  // Fast
-            salvageReward = 10  // Stealth reward
+            speed = 1.8  // Very fast stealth units - hard to detect and stop
+            salvageReward = 7  // Less stealth reward
             
         case "swarmer":
             // Small pack enemy with bonus when grouped
@@ -6419,8 +6453,8 @@ class GameScene: SKScene {
             body.fillColor = .clear
             body.glowWidth = 4
             health = 4  // More health than swarm
-            speed = 1.2  // Fast but not super fast
-            salvageReward = 6  // Pack enemy reward
+            speed = 1.5  // Faster pack enemies - swarm tactics
+            salvageReward = 4  // Less pack reward
             
             // Add pack indicator
             let dot = SKShapeNode(circleOfRadius: 2)
@@ -9780,18 +9814,19 @@ class GameScene: SKScene {
     private func updateWavesPerMap() {
         // Set wave counts - 3-8 waves max
         switch currentMap {
-        case 1: wavesPerMap = 3    // Tutorial - 3 waves
-        case 2: wavesPerMap = 4    // Venus - 4 waves
-        case 3: wavesPerMap = 4    // Earth Station - 4 waves
-        case 4: wavesPerMap = 5    // Mars - 5 waves
-        case 5: wavesPerMap = 5    // Neptune - 5 waves
-        case 6: wavesPerMap = 6    // Saturn - 6 waves
-        case 7: wavesPerMap = 6    // Jupiter - 6 waves
-        case 8: wavesPerMap = 7    // Mars Command - 7 waves
-        case 9: wavesPerMap = 7    // Lunar Defense - 7 waves
-        case 10: wavesPerMap = 6   // Io Volcanic Moon - 6 waves
-        case 11: wavesPerMap = 8   // Earth Final Stand - 8 waves
-        default: wavesPerMap = 5
+        case 1: wavesPerMap = 4    // Tutorial - 4 waves (more practice)
+        case 2: wavesPerMap = 5    // Venus - 5 waves
+        case 3: wavesPerMap = 4    // Earth Station - 4 waves (reduced from 5)
+        case 4: wavesPerMap = 6    // Mars - 6 waves
+        case 5: wavesPerMap = 6    // Neptune - 6 waves
+        case 6: wavesPerMap = 7    // Saturn - 7 waves
+        case 7: wavesPerMap = 7    // Jupiter - 7 waves
+        case 8: wavesPerMap = 8    // Mars Command - 8 waves
+        case 9: wavesPerMap = 8    // Lunar Defense - 8 waves
+        case 10: wavesPerMap = 7   // Io Volcanic Moon - 7 waves
+        case 11: wavesPerMap = 9   // Moon Base - 9 waves
+        case 12: wavesPerMap = 10  // Earth Final Stand - 10 waves!
+        default: wavesPerMap = 8
         }
         print("Map \(currentMap) set to \(wavesPerMap) waves")
     }
@@ -11005,7 +11040,18 @@ class GameScene: SKScene {
     }
     
     private func addIoBackground() {
-        print("🌋 Adding Io volcanic moon background")
+        print("🌋 Adding Io volcanic moon background (Map 9 - labeled as Mars)")
+        
+        // Clean up any existing debris or stations first
+        backgroundLayer.enumerateChildNodes(withName: "debris") { node, _ in
+            node.removeFromParent()
+        }
+        backgroundLayer.enumerateChildNodes(withName: "station") { node, _ in
+            node.removeFromParent()
+        }
+        backgroundLayer.enumerateChildNodes(withName: "ship") { node, _ in
+            node.removeFromParent()
+        }
         
         // Create Io in the background with Jupiter visible
         let ioContainer = SKNode()
@@ -11177,6 +11223,20 @@ class GameScene: SKScene {
             node.removeFromParent()
         }
         gameplayLayer.enumerateChildNodes(withName: "enemyPath") { node, _ in
+            node.removeFromParent()
+        }
+        
+        // Also clear any floating debris, ships, or stations that shouldn't be there
+        backgroundLayer.enumerateChildNodes(withName: "debris") { node, _ in
+            node.removeFromParent()
+        }
+        backgroundLayer.enumerateChildNodes(withName: "station") { node, _ in
+            node.removeFromParent()
+        }
+        backgroundLayer.enumerateChildNodes(withName: "ship") { node, _ in
+            node.removeFromParent()
+        }
+        backgroundLayer.enumerateChildNodes(withName: "portal") { node, _ in
             node.removeFromParent()
         }
     }
@@ -13500,6 +13560,7 @@ class GameScene: SKScene {
     private func createDestroyedShip(at position: CGPoint) {
         // Main hull
         let hull = SKShapeNode(rectOf: CGSize(width: 40, height: 15))
+        hull.name = "ship"  // Add name for cleanup
         hull.position = position
         hull.fillColor = SKColor.darkGray.withAlphaComponent(0.5)
         hull.strokeColor = SKColor.gray
@@ -13533,6 +13594,7 @@ class GameScene: SKScene {
     private func createBrokenStation(at position: CGPoint) {
         // Station core
         let core = SKShapeNode(circleOfRadius: 20)
+        core.name = "station"  // Add name for cleanup
         core.position = position
         core.fillColor = .clear
         core.strokeColor = SKColor.gray.withAlphaComponent(0.5)
@@ -13596,6 +13658,7 @@ class GameScene: SKScene {
     private func createAlienPortal(at position: CGPoint) {
         // Portal effect
         let portal = SKShapeNode(circleOfRadius: 25)
+        portal.name = "portal"  // Add name for cleanup
         portal.position = position
         portal.fillColor = .clear
         portal.strokeColor = SKColor.purple.withAlphaComponent(0.5)
@@ -13673,7 +13736,6 @@ class GameScene: SKScene {
         // Reset wave for new map
         currentWave = 1
         enemiesSpawned = 0
-        bossSpawnedThisMap = false  // Reset boss flag for new map
         enemiesDestroyed = 0
         enemiesPerWave = 10
         
@@ -13692,8 +13754,8 @@ class GameScene: SKScene {
         addMapSpecificBackground()
         
         // Give starting salvage for new map (scales with map number)
-        // More generous starting salvage for better upgrades early on
-        let startingSalvage = 250 + ((currentMap - 1) * 75)  // 250 for map 1, 325 for map 2, 400 for map 3, etc.
+        // Special bonus for Map 3 to help with difficulty
+        let startingSalvage = currentMap == 3 ? 350 : 150 + ((currentMap - 1) * 50)  // Extra salvage for Map 3
         playerSalvage = startingSalvage
         print("Starting map \(currentMap) with \(startingSalvage) salvage")
         showMessage("Starting salvage: \(startingSalvage)", at: CGPoint(x: 0, y: -50), color: .green)
