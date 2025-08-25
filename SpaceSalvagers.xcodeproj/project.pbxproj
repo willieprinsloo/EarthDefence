@@ -10,6 +10,7 @@
 		00643DE3F4A448B98835ADAC /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00643DE2F4A448B98835ADAC /* SoundManager.swift */; };
 		00643DE5F4A448B98835ADAE /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00643DE4F4A448B98835ADAD /* SettingsScene.swift */; };
 		014385112719BC4F6AB1CE7B /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207CA8CE7C82E7D4A5D2C49E /* MovementComponent.swift */; };
+		03023B7A54090FB87D398DD2 /* BadgeViewerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC756C22A5757B15A2BDA9 /* BadgeViewerScene.swift */; };
 		03328C608BAEB2FB0AF01427 /* EconomySystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C12D505B2ED4B3B8F8A15A /* EconomySystem.swift */; };
 		0B955884CD8657D863E90C11 /* TransformComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C68C0EE6D8A3C54F78054E /* TransformComponent.swift */; };
 		127215DC4B71CAA8154293DA /* GameConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC96AEC0474F1FEF1CD1DD82 /* GameConfiguration.swift */; };
@@ -37,6 +38,7 @@
 		ASSETS18D44E4D38784A2EA4C48216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ASSETS0F68480751A74DA6AA750D1A /* Assets.xcassets */; };
 		B166A1ED721AF278540BCBF3 /* ParticleEffectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C9A5063318BEEB269005E /* ParticleEffectsManager.swift */; };
 		B71EAC7BC8CE1F792FDAA46D /* VISUAL_ASSETS_README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F81ED6A9BC78A7F18A1AF14 /* VISUAL_ASSETS_README.md */; };
+		B96AFE232B7635F326927544 /* vector_maps.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A8A8D502C6783241F08D5 /* vector_maps.txt */; };
 		BE0CDC4123BE0CECCAEDA779 /* ProceduralSoundGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAD141AB5DA8C0E143F4F28 /* ProceduralSoundGenerator.swift */; };
 		C20B10234DABFB964C173A14 /* AudioKitSoundGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8036DAA395AFA117B769DDED /* AudioKitSoundGenerator.swift */; };
 		C4729BA836DC5D5DF0136489 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10392819F941F12C5CE33034 /* AppDelegate.swift */; };
@@ -44,6 +46,7 @@
 		C9ECE3C5C3F02CEE40474214 /* TargetingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE63E009D49D15BF92EE50CC /* TargetingComponent.swift */; };
 		CB82CB24CF02997D07AB604C /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBE4421EC23A96A28C381E6 /* Enemy.swift */; };
 		CE69AC72632BB8D82F850E43 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96805BBA656465853F79C45 /* AssetManager.swift */; };
+		DB28CDAF7700ADA5FD02F74A /* SimpleVectorMapLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432BDA2FF35CFE573F05AE43 /* SimpleVectorMapLoader.swift */; };
 		EE77183A3968A5B6FD3CEC3F /* GameTestBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB61518E74AEDCC99424E8D /* GameTestBot.swift */; };
 		EEC408F2A447E4FC2E12E443 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EB35098DB0EF57CE2C544C /* GameEngine.swift */; };
 		FC0E1FCB6A7A07F6CFE3BCC4 /* HealthComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5D4F5EA62C85FCE4332A8 /* HealthComponent.swift */; };
@@ -64,6 +67,8 @@
 		2EA45C6768D3C069D4AC27BB /* StationCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCore.swift; sourceTree = "<group>"; };
 		37B8BBE055241004781C65A8 /* CombatSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatSystem.swift; sourceTree = "<group>"; };
 		3A1FAACBE73613983F01BC73 /* TowerSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerSystem.swift; sourceTree = "<group>"; };
+		3A4A8A8D502C6783241F08D5 /* vector_maps.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = vector_maps.txt; sourceTree = "<group>"; };
+		432BDA2FF35CFE573F05AE43 /* SimpleVectorMapLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SimpleVectorMapLoader.swift; sourceTree = "<group>"; };
 		45C68C0EE6D8A3C54F78054E /* TransformComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformComponent.swift; sourceTree = "<group>"; };
 		4C1A49456980E7DF6DDBE40C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5386253FB70671B8F341F75B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 		7AAF92AFFA270FD439D87FAA /* WaveSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveSystem.swift; sourceTree = "<group>"; };
 		7F81ED6A9BC78A7F18A1AF14 /* VISUAL_ASSETS_README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = VISUAL_ASSETS_README.md; sourceTree = "<group>"; };
 		7FAAF8678ECBA463C500298C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7FCC756C22A5757B15A2BDA9 /* BadgeViewerScene.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BadgeViewerScene.swift; path = SpaceSalvagers/Game/Scenes/BadgeViewerScene.swift; sourceTree = "<group>"; };
 		8036DAA395AFA117B769DDED /* AudioKitSoundGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AudioKitSoundGenerator.swift; sourceTree = "<group>"; };
 		89EC8D66F7419F4C14AC6119 /* PathFollowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathFollowComponent.swift; sourceTree = "<group>"; };
 		9D00B3559E8229B016458475 /* MapSelectionScene.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MapSelectionScene.swift; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 			children = (
 				2A7D5B51A71173EFE36EAE7C /* SimpleVectorMapLoader.swift */,
 				00643DE2F4A448B98835ADAC /* SoundManager.swift */,
+				432BDA2FF35CFE573F05AE43 /* SimpleVectorMapLoader.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -198,6 +205,7 @@
 				701AADE245518518DB207968 /* vector_maps.txt */,
 				CAAD141AB5DA8C0E143F4F28 /* ProceduralSoundGenerator.swift */,
 				8036DAA395AFA117B769DDED /* AudioKitSoundGenerator.swift */,
+				3A4A8A8D502C6783241F08D5 /* vector_maps.txt */,
 			);
 			path = SpaceSalvagers;
 			sourceTree = "<group>";
@@ -233,6 +241,7 @@
 				5E5A26603AE1573B4D6A4AA6 /* MainMenuScene.swift */,
 				9D00B3559E8229B016458475 /* MapSelectionScene.swift */,
 				00643DE4F4A448B98835ADAD /* SettingsScene.swift */,
+				7FCC756C22A5757B15A2BDA9 /* BadgeViewerScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -380,6 +389,7 @@
 				ASSETS18D44E4D38784A2EA4C48216 /* Assets.xcassets in Resources */,
 				LAUNCH37D7B00AEB794F408B88 /* LaunchScreen.storyboard in Resources */,
 				9504F14F0A6602A104DCE837 /* vector_maps.txt in Resources */,
+				B96AFE232B7635F326927544 /* vector_maps.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +432,8 @@
 				8C257A4FAD0A550611A5B0AB /* MapSelectionScene.swift in Sources */,
 				BE0CDC4123BE0CECCAEDA779 /* ProceduralSoundGenerator.swift in Sources */,
 				C20B10234DABFB964C173A14 /* AudioKitSoundGenerator.swift in Sources */,
+				03023B7A54090FB87D398DD2 /* BadgeViewerScene.swift in Sources */,
+				DB28CDAF7700ADA5FD02F74A /* SimpleVectorMapLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

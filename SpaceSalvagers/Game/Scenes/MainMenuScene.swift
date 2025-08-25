@@ -4,6 +4,7 @@ class MainMenuScene: SKScene {
     
     private var playButton: SKShapeNode!
     private var settingsButton: SKShapeNode!
+    private var badgesButton: SKShapeNode!
     private var titleLabel: SKLabelNode!
     
     // Background layers
@@ -161,10 +162,48 @@ class MainMenuScene: SKScene {
         playButton.name = "playButton"
         addChild(playButton)
         
+        // Badges Button
+        badgesButton = createButton(text: "BADGES", position: CGPoint(x: 0, y: -size.height * 0.2))
+        badgesButton.name = "badgesButton"
+        addChild(badgesButton)
+        
+        // Add badge count indicator
+        let earnedBadges = countEarnedBadges()
+        if earnedBadges > 0 {
+            let badgeIndicator = SKShapeNode(circleOfRadius: 12)
+            badgeIndicator.fillColor = SKColor(red: 1.0, green: 0.8, blue: 0.2, alpha: 1.0)
+            badgeIndicator.strokeColor = .white
+            badgeIndicator.lineWidth = 2
+            badgeIndicator.position = CGPoint(x: 85, y: 15)
+            badgeIndicator.zPosition = 1
+            badgesButton.addChild(badgeIndicator)
+            
+            let countLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
+            countLabel.text = "\(earnedBadges)"
+            countLabel.fontSize = 14
+            countLabel.fontColor = .black
+            countLabel.verticalAlignmentMode = .center
+            badgeIndicator.addChild(countLabel)
+        }
+        
         // Settings Button
-        settingsButton = createButton(text: "SETTINGS", position: CGPoint(x: 0, y: -size.height * 0.25))
+        settingsButton = createButton(text: "SETTINGS", position: CGPoint(x: 0, y: -size.height * 0.3))
         settingsButton.name = "settingsButton"
         addChild(settingsButton)
+    }
+    
+    private func countEarnedBadges() -> Int {
+        // Count earned badges from UserDefaults
+        let badges = [
+            "badge_solar_defender",
+            "badge_mars_guardian",
+            "badge_earth_hero",
+            "badge_perfect_defender",
+            "badge_tower_master",
+            "badge_salvage_king"
+        ]
+        
+        return badges.filter { UserDefaults.standard.bool(forKey: $0) }.count
     }
     
     private func createAlienShip() {
@@ -771,6 +810,12 @@ class MainMenuScene: SKScene {
                 animateButtonPress(playButton) {
                     self.startGame()
                 }
+            } else if node.name == "badgesButton" || node.parent?.name == "badgesButton" {
+                SoundManager.shared.playSound(.buttonTap)
+                SoundManager.shared.playHaptic(.light)
+                animateButtonPress(badgesButton) {
+                    self.showBadges()
+                }
             } else if node.name == "settingsButton" || node.parent?.name == "settingsButton" {
                 SoundManager.shared.playSound(.buttonTap)
                 SoundManager.shared.playHaptic(.light)
@@ -806,6 +851,15 @@ class MainMenuScene: SKScene {
         // FASTER: Instant transition
         let transition = SKTransition.fade(withDuration: 0.2)
         view.presentScene(mapScene, transition: transition)
+    }
+    
+    private func showBadges() {
+        guard let view = self.view else { return }
+        let badgeScene = BadgeViewerScene(size: view.bounds.size)
+        badgeScene.scaleMode = .aspectFill
+        
+        let transition = SKTransition.fade(withDuration: 0.5)
+        view.presentScene(badgeScene, transition: transition)
     }
     
     private func showSettings() {
