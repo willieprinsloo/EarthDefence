@@ -2394,10 +2394,14 @@ class GameScene: SKScene {
         // Clear any existing HUD elements first
         uiLayer.children.forEach { node in
             if node.name == "salvageLabel" || node.name == "waveLabel" || node.name == "hpLabel" || 
-               node.name == "hudBg" || node.name == "scoreLabel" || node.name == "scoreGlow" || node.name == "salvageIcon" {
+               node.name == "hudBg" || node.name == "scoreLabel" || node.name == "scoreGlow" || node.name == "salvageIcon" ||
+               node.name == "badgeDisplay" {
                 node.removeFromParent()
             }
         }
+        
+        // Create badge display
+        createBadgeDisplay()
         
         // Get the actual visible area based on screen size
         let screenHeight = size.height / 2  // Half height since anchor is 0.5
@@ -13689,6 +13693,18 @@ class GameScene: SKScene {
     }
     
     private func advanceToNextMap() {
+        // Check if we're about to enter a milestone map
+        let nextMap = currentMap + 1
+        if nextMap == 5 {
+            // About to enter Solar System (Pluto)
+            showSolarSystemEntryTransition()
+            return
+        } else if nextMap == 9 {
+            // About to enter Inner Solar System (Mars)
+            showInnerSolarSystemTransition()
+            return
+        }
+        
         // Stop current activities and reset wave state completely
         isWaveActive = false
         isCheckingWaveCompletion = false  // Reset completion check flag
@@ -14783,5 +14799,583 @@ class GameScene: SKScene {
             SKColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0)
         ]
         return colors.randomElement() ?? .white
+    }
+    
+    // MARK: - Solar System Milestone Transitions
+    
+    private func showSolarSystemEntryTransition() {
+        // Create epic transition screen for entering Solar System
+        let transitionContainer = SKNode()
+        transitionContainer.position = CGPoint(x: size.width/2, y: size.height/2)
+        transitionContainer.zPosition = 5000
+        addChild(transitionContainer)
+        
+        // Full screen black background
+        let background = SKShapeNode(rectOf: CGSize(width: size.width * 2, height: size.height * 2))
+        background.fillColor = SKColor.black
+        background.strokeColor = .clear
+        background.alpha = 0
+        transitionContainer.addChild(background)
+        
+        // Fade in background
+        background.run(SKAction.fadeIn(withDuration: 0.5))
+        
+        // Create starfield effect
+        for _ in 0..<100 {
+            let star = SKShapeNode(circleOfRadius: CGFloat.random(in: 0.5...2))
+            star.position = CGPoint(
+                x: CGFloat.random(in: -size.width/2...size.width/2),
+                y: CGFloat.random(in: -size.height/2...size.height/2)
+            )
+            star.fillColor = .white
+            star.alpha = CGFloat.random(in: 0.3...1.0)
+            star.setScale(0)
+            transitionContainer.addChild(star)
+            
+            star.run(SKAction.sequence([
+                SKAction.wait(forDuration: Double.random(in: 0...0.5)),
+                SKAction.group([
+                    SKAction.scale(to: 1.0, duration: 0.5),
+                    SKAction.fadeIn(withDuration: 0.5)
+                ])
+            ]))
+        }
+        
+        // Main title
+        let titleLabel = SKLabelNode(fontNamed: "AvenirNext-Heavy")
+        titleLabel.text = "SOLAR SYSTEM PERIMETER REACHED"
+        titleLabel.fontSize = 42
+        titleLabel.fontColor = SKColor(red: 0.5, green: 0.8, blue: 1.0, alpha: 1.0)
+        titleLabel.position = CGPoint(x: 0, y: 100)
+        titleLabel.alpha = 0
+        titleLabel.setScale(0.5)
+        transitionContainer.addChild(titleLabel)
+        
+        // Subtitle
+        let subtitleLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        subtitleLabel.text = "THE BATTLE FOR OUR SOLAR SYSTEM BEGINS"
+        subtitleLabel.fontSize = 28
+        subtitleLabel.fontColor = .white
+        subtitleLabel.position = CGPoint(x: 0, y: 50)
+        subtitleLabel.alpha = 0
+        transitionContainer.addChild(subtitleLabel)
+        
+        // Pluto visual with icy particle effects
+        let plutoContainer = SKNode()
+        plutoContainer.position = CGPoint(x: 0, y: -50)
+        plutoContainer.alpha = 0
+        plutoContainer.setScale(0.5)
+        transitionContainer.addChild(plutoContainer)
+        
+        let pluto = SKShapeNode(circleOfRadius: 40)
+        pluto.fillColor = SKColor(red: 0.8, green: 0.75, blue: 0.7, alpha: 1.0)
+        pluto.strokeColor = SKColor(red: 0.9, green: 0.85, blue: 0.8, alpha: 1.0)
+        pluto.lineWidth = 2
+        pluto.glowWidth = 10
+        plutoContainer.addChild(pluto)
+        
+        // Add orbiting ice crystals
+        for i in 0..<20 {
+            let crystal = SKShapeNode(circleOfRadius: CGFloat.random(in: 1...2))
+            crystal.fillColor = SKColor(red: 0.9, green: 0.95, blue: 1.0, alpha: 0.7)
+            crystal.strokeColor = .clear
+            crystal.glowWidth = 2
+            let angle = CGFloat(i) * (2 * .pi / 20) + CGFloat.random(in: -0.2...0.2)
+            let radius = CGFloat.random(in: 45...60)
+            crystal.position = CGPoint(x: cos(angle) * radius, y: sin(angle) * radius)
+            plutoContainer.addChild(crystal)
+            
+            // Orbital motion
+            let orbit = SKAction.repeatForever(SKAction.sequence([
+                SKAction.run {
+                    let currentAngle = atan2(crystal.position.y, crystal.position.x) + 0.02
+                    let currentRadius = sqrt(pow(crystal.position.x, 2) + pow(crystal.position.y, 2))
+                    crystal.position = CGPoint(x: cos(currentAngle) * currentRadius, y: sin(currentAngle) * currentRadius)
+                },
+                SKAction.wait(forDuration: 0.05)
+            ]))
+            crystal.run(orbit)
+        }
+        
+        // Badge container
+        let badgeContainer = SKNode()
+        badgeContainer.position = CGPoint(x: 0, y: -150)
+        badgeContainer.alpha = 0
+        badgeContainer.setScale(0)
+        transitionContainer.addChild(badgeContainer)
+        
+        // Badge background
+        let badgeBg = SKShapeNode(circleOfRadius: 35)
+        badgeBg.fillColor = SKColor(red: 0.1, green: 0.2, blue: 0.4, alpha: 1.0)
+        badgeBg.strokeColor = SKColor(red: 0.3, green: 0.6, blue: 0.9, alpha: 1.0)
+        badgeBg.lineWidth = 3
+        badgeBg.glowWidth = 8
+        badgeContainer.addChild(badgeBg)
+        
+        // Badge icon (shield)
+        let shieldPath = CGMutablePath()
+        shieldPath.move(to: CGPoint(x: 0, y: 20))
+        shieldPath.addLine(to: CGPoint(x: -15, y: 10))
+        shieldPath.addLine(to: CGPoint(x: -15, y: -5))
+        shieldPath.addCurve(to: CGPoint(x: 0, y: -20),
+                           control1: CGPoint(x: -15, y: -15),
+                           control2: CGPoint(x: -8, y: -20))
+        shieldPath.addCurve(to: CGPoint(x: 15, y: -5),
+                           control1: CGPoint(x: 8, y: -20),
+                           control2: CGPoint(x: 15, y: -15))
+        shieldPath.addLine(to: CGPoint(x: 15, y: 10))
+        shieldPath.closeSubpath()
+        
+        let shield = SKShapeNode(path: shieldPath)
+        shield.fillColor = SKColor(red: 0.9, green: 0.8, blue: 0.3, alpha: 1.0)
+        shield.strokeColor = SKColor(red: 1.0, green: 0.9, blue: 0.4, alpha: 1.0)
+        shield.lineWidth = 2
+        badgeContainer.addChild(shield)
+        
+        // Badge text
+        let badgeLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        badgeLabel.text = "SOLAR DEFENDER"
+        badgeLabel.fontSize = 16
+        badgeLabel.fontColor = SKColor(red: 1.0, green: 0.9, blue: 0.3, alpha: 1.0)
+        badgeLabel.position = CGPoint(x: 0, y: -60)
+        badgeContainer.addChild(badgeLabel)
+        
+        // Bonus text
+        let bonusLabel = SKLabelNode(fontNamed: "AvenirNext-Regular")
+        bonusLabel.text = "+500 Salvage Bonus • +1 Extra Life"
+        bonusLabel.fontSize = 18
+        bonusLabel.fontColor = SKColor(red: 0.3, green: 1.0, blue: 0.3, alpha: 1.0)
+        bonusLabel.position = CGPoint(x: 0, y: -220)
+        bonusLabel.alpha = 0
+        transitionContainer.addChild(bonusLabel)
+        
+        // Animate everything
+        titleLabel.run(SKAction.sequence([
+            SKAction.wait(forDuration: 0.8),
+            SKAction.group([
+                SKAction.fadeIn(withDuration: 0.6),
+                SKAction.scale(to: 1.0, duration: 0.6)
+            ])
+        ]))
+        
+        subtitleLabel.run(SKAction.sequence([
+            SKAction.wait(forDuration: 1.2),
+            SKAction.fadeIn(withDuration: 0.6)
+        ]))
+        
+        plutoContainer.run(SKAction.sequence([
+            SKAction.wait(forDuration: 1.6),
+            SKAction.group([
+                SKAction.fadeIn(withDuration: 0.8),
+                SKAction.scale(to: 1.0, duration: 0.8)
+            ])
+        ]))
+        
+        // Badge unlock animation
+        badgeContainer.run(SKAction.sequence([
+            SKAction.wait(forDuration: 2.5),
+            SKAction.group([
+                SKAction.fadeIn(withDuration: 0.3),
+                SKAction.scale(to: 1.5, duration: 0.3)
+            ]),
+            SKAction.scale(to: 1.0, duration: 0.2)
+        ]))
+        
+        bonusLabel.run(SKAction.sequence([
+            SKAction.wait(forDuration: 3.0),
+            SKAction.fadeIn(withDuration: 0.5)
+        ]))
+        
+        // Apply bonuses
+        run(SKAction.sequence([
+            SKAction.wait(forDuration: 3.5),
+            SKAction.run {
+                // Apply Solar System entry bonuses
+                self.playerSalvage += 500
+                self.stationHealth += 1
+                self.maxStationHealth += 1
+                
+                // Save badge achievement
+                UserDefaults.standard.set(true, forKey: "badge_solar_defender")
+                
+                // Show HUD update
+                self.updateHUD()
+            }
+        ]))
+        
+        // Continue to next map after transition
+        transitionContainer.run(SKAction.sequence([
+            SKAction.wait(forDuration: 5.0),
+            SKAction.fadeOut(withDuration: 1.0),
+            SKAction.run {
+                transitionContainer.removeFromParent()
+                // Now actually advance to the next map
+                self.currentMap += 1
+                self.loadNextMap()
+            }
+        ]))
+    }
+    
+    private func showInnerSolarSystemTransition() {
+        // Create epic transition screen for entering Inner Solar System
+        let transitionContainer = SKNode()
+        transitionContainer.position = CGPoint(x: size.width/2, y: size.height/2)
+        transitionContainer.zPosition = 5000
+        addChild(transitionContainer)
+        
+        // Full screen dark red background
+        let background = SKShapeNode(rectOf: CGSize(width: size.width * 2, height: size.height * 2))
+        background.fillColor = SKColor(red: 0.2, green: 0, blue: 0, alpha: 1.0)
+        background.strokeColor = .clear
+        background.alpha = 0
+        transitionContainer.addChild(background)
+        
+        // Fade in background
+        background.run(SKAction.fadeIn(withDuration: 0.5))
+        
+        // Red alert strobe effect
+        let alertOverlay = SKShapeNode(rectOf: CGSize(width: size.width * 2, height: size.height * 2))
+        alertOverlay.fillColor = SKColor.red
+        alertOverlay.strokeColor = .clear
+        alertOverlay.alpha = 0
+        alertOverlay.blendMode = .add
+        transitionContainer.addChild(alertOverlay)
+        
+        alertOverlay.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.fadeAlpha(to: 0.2, duration: 0.3),
+            SKAction.fadeAlpha(to: 0, duration: 0.3)
+        ])))
+        
+        // Main title
+        let titleLabel = SKLabelNode(fontNamed: "AvenirNext-Heavy")
+        titleLabel.text = "INNER SOLAR SYSTEM BREACHED"
+        titleLabel.fontSize = 42
+        titleLabel.fontColor = SKColor(red: 1.0, green: 0.3, blue: 0.2, alpha: 1.0)
+        titleLabel.position = CGPoint(x: 0, y: 100)
+        titleLabel.alpha = 0
+        titleLabel.setScale(0.5)
+        transitionContainer.addChild(titleLabel)
+        
+        // Subtitle
+        let subtitleLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        subtitleLabel.text = "THE BATTLE FOR EARTH'S DOORSTEP"
+        subtitleLabel.fontSize = 28
+        subtitleLabel.fontColor = .white
+        subtitleLabel.position = CGPoint(x: 0, y: 50)
+        subtitleLabel.alpha = 0
+        transitionContainer.addChild(subtitleLabel)
+        
+        // Mars visual
+        let marsContainer = SKNode()
+        marsContainer.position = CGPoint(x: 0, y: -50)
+        marsContainer.alpha = 0
+        marsContainer.setScale(0.5)
+        transitionContainer.addChild(marsContainer)
+        
+        let mars = SKShapeNode(circleOfRadius: 45)
+        mars.fillColor = SKColor(red: 0.75, green: 0.35, blue: 0.25, alpha: 1.0)
+        mars.strokeColor = SKColor(red: 0.85, green: 0.4, blue: 0.3, alpha: 1.0)
+        mars.lineWidth = 3
+        mars.glowWidth = 15
+        marsContainer.addChild(mars)
+        
+        // Add dramatic dust storm effect to Mars
+        for i in 0..<25 {
+            let dustParticle = SKShapeNode(circleOfRadius: CGFloat.random(in: 2...4))
+            dustParticle.fillColor = SKColor(red: 0.95, green: 0.65, blue: 0.4, alpha: CGFloat.random(in: 0.2...0.4))
+            dustParticle.strokeColor = .clear
+            dustParticle.blendMode = .add
+            let angle = CGFloat(i) * (2 * .pi / 25) + CGFloat.random(in: -0.2...0.2)
+            let radius = CGFloat.random(in: 50...75)
+            dustParticle.position = CGPoint(x: cos(angle) * radius, y: sin(angle) * radius)
+            marsContainer.addChild(dustParticle)
+            
+            // Swirling animation
+            let swirl = SKAction.repeatForever(SKAction.sequence([
+                SKAction.run {
+                    let currentAngle = atan2(dustParticle.position.y, dustParticle.position.x) + 0.04
+                    let currentRadius = sqrt(pow(dustParticle.position.x, 2) + pow(dustParticle.position.y, 2))
+                    dustParticle.position = CGPoint(x: cos(currentAngle) * currentRadius, y: sin(currentAngle) * currentRadius)
+                },
+                SKAction.wait(forDuration: 0.03)
+            ]))
+            dustParticle.run(swirl)
+        }
+        
+        // Add main storm band
+        let storm = SKShapeNode(ellipseOf: CGSize(width: 50, height: 25))
+        storm.fillColor = SKColor(red: 0.95, green: 0.75, blue: 0.5, alpha: 0.3)
+        storm.strokeColor = .clear
+        storm.blendMode = .add
+        mars.addChild(storm)
+        
+        // Animate the storm band
+        let rotate = SKAction.repeatForever(SKAction.rotate(byAngle: .pi * 2, duration: 8))
+        storm.run(rotate)
+        
+        // Badge container
+        let badgeContainer = SKNode()
+        badgeContainer.position = CGPoint(x: 0, y: -150)
+        badgeContainer.alpha = 0
+        badgeContainer.setScale(0)
+        transitionContainer.addChild(badgeContainer)
+        
+        // Badge background
+        let badgeBg = SKShapeNode(circleOfRadius: 35)
+        badgeBg.fillColor = SKColor(red: 0.4, green: 0.1, blue: 0.1, alpha: 1.0)
+        badgeBg.strokeColor = SKColor(red: 0.9, green: 0.3, blue: 0.2, alpha: 1.0)
+        badgeBg.lineWidth = 3
+        badgeBg.glowWidth = 10
+        badgeContainer.addChild(badgeBg)
+        
+        // Badge icon (sword)
+        let swordPath = CGMutablePath()
+        swordPath.move(to: CGPoint(x: 0, y: 25))
+        swordPath.addLine(to: CGPoint(x: -3, y: -15))
+        swordPath.addLine(to: CGPoint(x: 0, y: -20))
+        swordPath.addLine(to: CGPoint(x: 3, y: -15))
+        swordPath.closeSubpath()
+        
+        let sword = SKShapeNode(path: swordPath)
+        sword.fillColor = SKColor(red: 0.9, green: 0.9, blue: 1.0, alpha: 1.0)
+        sword.strokeColor = .white
+        sword.lineWidth = 2
+        badgeContainer.addChild(sword)
+        
+        // Crossguard
+        let crossguard = SKShapeNode(rectOf: CGSize(width: 20, height: 4))
+        crossguard.position = CGPoint(x: 0, y: -15)
+        crossguard.fillColor = SKColor(red: 0.7, green: 0.7, blue: 0.8, alpha: 1.0)
+        crossguard.strokeColor = .white
+        crossguard.lineWidth = 1
+        badgeContainer.addChild(crossguard)
+        
+        // Badge text
+        let badgeLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        badgeLabel.text = "MARS GUARDIAN"
+        badgeLabel.fontSize = 16
+        badgeLabel.fontColor = SKColor(red: 1.0, green: 0.5, blue: 0.3, alpha: 1.0)
+        badgeLabel.position = CGPoint(x: 0, y: -60)
+        badgeContainer.addChild(badgeLabel)
+        
+        // Bonus text
+        let bonusLabel = SKLabelNode(fontNamed: "AvenirNext-Regular")
+        bonusLabel.text = "+750 Salvage • +10% Tower Damage • Screen Clear"
+        bonusLabel.fontSize = 18
+        bonusLabel.fontColor = SKColor(red: 0.3, green: 1.0, blue: 0.3, alpha: 1.0)
+        bonusLabel.position = CGPoint(x: 0, y: -220)
+        bonusLabel.alpha = 0
+        transitionContainer.addChild(bonusLabel)
+        
+        // Warning text
+        let warningLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        warningLabel.text = "⚠️ MARS: HUMANITY'S LAST FORTRESS ⚠️"
+        warningLabel.fontSize = 20
+        warningLabel.fontColor = SKColor.orange
+        warningLabel.position = CGPoint(x: 0, y: -260)
+        warningLabel.alpha = 0
+        transitionContainer.addChild(warningLabel)
+        
+        // Animate everything
+        titleLabel.run(SKAction.sequence([
+            SKAction.wait(forDuration: 0.8),
+            SKAction.group([
+                SKAction.fadeIn(withDuration: 0.6),
+                SKAction.scale(to: 1.0, duration: 0.6)
+            ])
+        ]))
+        
+        subtitleLabel.run(SKAction.sequence([
+            SKAction.wait(forDuration: 1.2),
+            SKAction.fadeIn(withDuration: 0.6)
+        ]))
+        
+        marsContainer.run(SKAction.sequence([
+            SKAction.wait(forDuration: 1.6),
+            SKAction.group([
+                SKAction.fadeIn(withDuration: 0.8),
+                SKAction.scale(to: 1.0, duration: 0.8),
+                SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 3.0)
+            ])
+        ]))
+        
+        // Badge unlock animation
+        badgeContainer.run(SKAction.sequence([
+            SKAction.wait(forDuration: 2.5),
+            SKAction.group([
+                SKAction.fadeIn(withDuration: 0.3),
+                SKAction.scale(to: 1.5, duration: 0.3)
+            ]),
+            SKAction.scale(to: 1.0, duration: 0.2)
+        ]))
+        
+        bonusLabel.run(SKAction.sequence([
+            SKAction.wait(forDuration: 3.0),
+            SKAction.fadeIn(withDuration: 0.5)
+        ]))
+        
+        warningLabel.run(SKAction.sequence([
+            SKAction.wait(forDuration: 3.5),
+            SKAction.fadeIn(withDuration: 0.5)
+        ]))
+        
+        // Apply bonuses
+        run(SKAction.sequence([
+            SKAction.wait(forDuration: 3.5),
+            SKAction.run {
+                // Apply Inner Solar System bonuses
+                self.playerSalvage += 750
+                self.screenClearCharges += 1
+                
+                // Add tower damage boost (store as user data)
+                if self.userData == nil {
+                    self.userData = NSMutableDictionary()
+                }
+                self.userData?["innerSolarBonus"] = true
+                
+                // Save badge achievement
+                UserDefaults.standard.set(true, forKey: "badge_mars_guardian")
+                
+                // Show HUD update
+                self.updateHUD()
+            }
+        ]))
+        
+        // Continue to next map after transition
+        transitionContainer.run(SKAction.sequence([
+            SKAction.wait(forDuration: 6.0),
+            SKAction.fadeOut(withDuration: 1.0),
+            SKAction.run {
+                transitionContainer.removeFromParent()
+                // Now actually advance to the next map
+                self.currentMap += 1
+                self.loadNextMap()
+            }
+        ]))
+    }
+    
+    private func createBadgeDisplay() {
+        // Badge display container in top-left corner
+        let badgeDisplayContainer = SKNode()
+        badgeDisplayContainer.name = "badgeDisplay"
+        badgeDisplayContainer.position = CGPoint(x: -size.width/2 + 100, y: size.height/2 - 90)
+        badgeDisplayContainer.zPosition = 45
+        uiLayer.addChild(badgeDisplayContainer)
+        
+        // Check for unlocked badges
+        let hasSolarDefender = UserDefaults.standard.bool(forKey: "badge_solar_defender")
+        let hasMarsGuardian = UserDefaults.standard.bool(forKey: "badge_mars_guardian")
+        
+        var xOffset: CGFloat = 0
+        
+        // Solar Defender Badge
+        if hasSolarDefender {
+            let solarBadge = createMiniatureBadge(
+                color: SKColor(red: 0.3, green: 0.6, blue: 0.9, alpha: 1.0),
+                glowColor: SKColor(red: 0.4, green: 0.7, blue: 1.0, alpha: 1.0),
+                icon: "shield"
+            )
+            solarBadge.position = CGPoint(x: xOffset, y: 0)
+            badgeDisplayContainer.addChild(solarBadge)
+            
+            // Add label
+            let label = SKLabelNode(fontNamed: "AvenirNext-Medium")
+            label.text = "Solar"
+            label.fontSize = 8
+            label.fontColor = SKColor(red: 0.4, green: 0.7, blue: 1.0, alpha: 1.0)
+            label.position = CGPoint(x: xOffset, y: -22)
+            badgeDisplayContainer.addChild(label)
+            
+            xOffset += 45
+        }
+        
+        // Mars Guardian Badge
+        if hasMarsGuardian {
+            let marsBadge = createMiniatureBadge(
+                color: SKColor(red: 0.9, green: 0.3, blue: 0.2, alpha: 1.0),
+                glowColor: SKColor(red: 1.0, green: 0.5, blue: 0.3, alpha: 1.0),
+                icon: "sword"
+            )
+            marsBadge.position = CGPoint(x: xOffset, y: 0)
+            badgeDisplayContainer.addChild(marsBadge)
+            
+            // Add label
+            let label = SKLabelNode(fontNamed: "AvenirNext-Medium")
+            label.text = "Mars"
+            label.fontSize = 8
+            label.fontColor = SKColor(red: 1.0, green: 0.5, blue: 0.3, alpha: 1.0)
+            label.position = CGPoint(x: xOffset, y: -22)
+            badgeDisplayContainer.addChild(label)
+            
+            xOffset += 45
+        }
+        
+        // Add subtle pulse animation to badges
+        if hasSolarDefender || hasMarsGuardian {
+            let pulse = SKAction.sequence([
+                SKAction.scale(to: 1.05, duration: 2.0),
+                SKAction.scale(to: 1.0, duration: 2.0)
+            ])
+            badgeDisplayContainer.run(SKAction.repeatForever(pulse))
+        }
+    }
+    
+    private func createMiniatureBadge(color: SKColor, glowColor: SKColor, icon: String) -> SKNode {
+        let badge = SKNode()
+        
+        // Badge background circle
+        let bg = SKShapeNode(circleOfRadius: 15)
+        bg.fillColor = color.withAlphaComponent(0.3)
+        bg.strokeColor = color
+        bg.lineWidth = 1.5
+        bg.glowWidth = 3
+        badge.addChild(bg)
+        
+        // Create icon based on type
+        if icon == "shield" {
+            let shieldPath = CGMutablePath()
+            shieldPath.move(to: CGPoint(x: 0, y: 8))
+            shieldPath.addCurve(to: CGPoint(x: -8, y: 2),
+                               control1: CGPoint(x: -6, y: 8),
+                               control2: CGPoint(x: -8, y: 5))
+            shieldPath.addLine(to: CGPoint(x: -8, y: -3))
+            shieldPath.addCurve(to: CGPoint(x: 0, y: -10),
+                               control1: CGPoint(x: -8, y: -7),
+                               control2: CGPoint(x: -4, y: -10))
+            shieldPath.addCurve(to: CGPoint(x: 8, y: -3),
+                               control1: CGPoint(x: 4, y: -10),
+                               control2: CGPoint(x: 8, y: -7))
+            shieldPath.addLine(to: CGPoint(x: 8, y: 2))
+            shieldPath.addCurve(to: CGPoint(x: 0, y: 8),
+                               control1: CGPoint(x: 8, y: 5),
+                               control2: CGPoint(x: 6, y: 8))
+            shieldPath.closeSubpath()
+            
+            let shield = SKShapeNode(path: shieldPath)
+            shield.fillColor = glowColor
+            shield.strokeColor = .clear
+            shield.setScale(0.8)
+            badge.addChild(shield)
+        } else if icon == "sword" {
+            let swordPath = CGMutablePath()
+            swordPath.move(to: CGPoint(x: 0, y: 10))
+            swordPath.addLine(to: CGPoint(x: 0, y: -8))
+            swordPath.addLine(to: CGPoint(x: -2, y: -10))
+            swordPath.addLine(to: CGPoint(x: 0, y: -8))
+            swordPath.addLine(to: CGPoint(x: 2, y: -10))
+            
+            let sword = SKShapeNode(path: swordPath)
+            sword.strokeColor = glowColor
+            sword.lineWidth = 1.5
+            badge.addChild(sword)
+            
+            // Add crossguard
+            let crossguard = SKShapeNode(rect: CGRect(x: -6, y: -3, width: 12, height: 2))
+            crossguard.fillColor = glowColor
+            crossguard.strokeColor = .clear
+            badge.addChild(crossguard)
+        }
+        
+        return badge
     }
 }
