@@ -14810,36 +14810,165 @@ class GameScene: SKScene {
         transitionContainer.zPosition = 5000
         addChild(transitionContainer)
         
-        // Full screen black background
+        // Full screen gradient background - deep space
         let background = SKShapeNode(rectOf: CGSize(width: size.width * 2, height: size.height * 2))
-        background.fillColor = SKColor.black
+        background.fillColor = SKColor(red: 0.02, green: 0.02, blue: 0.08, alpha: 1.0)
         background.strokeColor = .clear
         background.alpha = 0
         transitionContainer.addChild(background)
         
-        // Fade in background
-        background.run(SKAction.fadeIn(withDuration: 0.5))
+        // Purple nebula overlay
+        let nebulaOverlay = SKShapeNode(rectOf: CGSize(width: size.width * 2, height: size.height * 2))
+        nebulaOverlay.fillColor = SKColor(red: 0.15, green: 0.05, blue: 0.25, alpha: 0.3)
+        nebulaOverlay.strokeColor = .clear
+        nebulaOverlay.blendMode = .add
+        nebulaOverlay.alpha = 0
+        transitionContainer.addChild(nebulaOverlay)
         
-        // Create starfield effect
-        for _ in 0..<100 {
-            let star = SKShapeNode(circleOfRadius: CGFloat.random(in: 0.5...2))
-            star.position = CGPoint(
+        // Fade in backgrounds with timing
+        background.run(SKAction.fadeIn(withDuration: 0.5))
+        nebulaOverlay.run(SKAction.sequence([
+            SKAction.wait(forDuration: 0.3),
+            SKAction.fadeIn(withDuration: 0.8)
+        ]))
+        
+        // Create stunning nebula clouds
+        for i in 0..<5 {
+            let nebula = SKShapeNode(circleOfRadius: CGFloat.random(in: 120...250))
+            nebula.position = CGPoint(
                 x: CGFloat.random(in: -size.width/2...size.width/2),
-                y: CGFloat.random(in: -size.height/2...size.height/2)
+                y: CGFloat.random(in: -size.height/3...size.height/3)
             )
-            star.fillColor = .white
-            star.alpha = CGFloat.random(in: 0.3...1.0)
-            star.setScale(0)
-            transitionContainer.addChild(star)
+            let colors = [
+                SKColor(red: 0.3, green: 0.1, blue: 0.6, alpha: 0.08),
+                SKColor(red: 0.1, green: 0.3, blue: 0.8, alpha: 0.08),
+                SKColor(red: 0.5, green: 0.1, blue: 0.7, alpha: 0.08),
+                SKColor(red: 0.2, green: 0.4, blue: 0.9, alpha: 0.08),
+                SKColor(red: 0.4, green: 0.2, blue: 0.8, alpha: 0.08)
+            ]
+            nebula.fillColor = colors[i]
+            nebula.strokeColor = .clear
+            nebula.blendMode = .add
+            nebula.setScale(0)
+            nebula.zPosition = -20 + CGFloat(i)
+            transitionContainer.addChild(nebula)
             
-            star.run(SKAction.sequence([
-                SKAction.wait(forDuration: Double.random(in: 0...0.5)),
+            // Animate nebula expansion and rotation
+            nebula.run(SKAction.sequence([
+                SKAction.wait(forDuration: Double(i) * 0.15),
                 SKAction.group([
-                    SKAction.scale(to: 1.0, duration: 0.5),
-                    SKAction.fadeIn(withDuration: 0.5)
+                    SKAction.scale(to: CGFloat.random(in: 2.0...3.0), duration: 4.0),
+                    SKAction.fadeAlpha(to: 0.4, duration: 2.0),
+                    SKAction.repeatForever(SKAction.rotate(byAngle: i % 2 == 0 ? .pi * 2 : -.pi * 2, duration: 25.0 + Double(i * 5)))
                 ])
             ]))
         }
+        
+        // Create multi-layered starfield with parallax
+        for layer in 0..<4 {
+            let layerNode = SKNode()
+            layerNode.zPosition = CGFloat(15 - layer * 2)
+            transitionContainer.addChild(layerNode)
+            
+            for _ in 0..<(80 - layer * 15) {
+                let star = SKShapeNode(circleOfRadius: CGFloat.random(in: 0.3...2.5) - CGFloat(layer) * 0.3)
+                star.position = CGPoint(
+                    x: CGFloat.random(in: -size.width...size.width),
+                    y: CGFloat.random(in: -size.height...size.height)
+                )
+                
+                // Varied star colors for realism
+                let starColors = [
+                    SKColor.white,
+                    SKColor(red: 1.0, green: 0.95, blue: 0.7, alpha: 1.0),
+                    SKColor(red: 0.7, green: 0.8, blue: 1.0, alpha: 1.0),
+                    SKColor(red: 0.95, green: 0.95, blue: 1.0, alpha: 1.0)
+                ]
+                star.fillColor = starColors.randomElement()!
+                star.strokeColor = star.fillColor.withAlphaComponent(0.3)
+                star.lineWidth = 0.5
+                star.glowWidth = CGFloat(4 - layer)
+                star.alpha = CGFloat.random(in: 0.2...1.0) - CGFloat(layer) * 0.1
+                star.setScale(0)
+                layerNode.addChild(star)
+                
+                // Staggered star appearance
+                star.run(SKAction.sequence([
+                    SKAction.wait(forDuration: Double.random(in: 0...1.2)),
+                    SKAction.group([
+                        SKAction.scale(to: 1.0, duration: 0.3),
+                        SKAction.fadeIn(withDuration: 0.3)
+                    ]),
+                    SKAction.repeatForever(SKAction.sequence([
+                        SKAction.wait(forDuration: Double.random(in: 3...8)),
+                        SKAction.fadeAlpha(to: 0.2, duration: 0.3),
+                        SKAction.fadeAlpha(to: star.alpha, duration: 0.3)
+                    ]))
+                ]))
+                
+                // Parallax movement for depth
+                if layer < 2 {
+                    let speed = 15.0 * CGFloat(3 - layer)
+                    let drift = SKAction.repeatForever(SKAction.sequence([
+                        SKAction.moveBy(x: CGFloat.random(in: -speed...speed),
+                                       y: CGFloat.random(in: -speed/2...speed/2),
+                                       duration: Double.random(in: 10...15))
+                    ]))
+                    star.run(drift)
+                }
+            }
+        }
+        
+        // Add cosmic ray beams
+        for i in 0..<10 {
+            let ray = SKShapeNode()
+            let path = CGMutablePath()
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: 0, y: 500))
+            ray.path = path
+            ray.strokeColor = SKColor(red: 0.4, green: 0.7, blue: 1.0, alpha: 0.15)
+            ray.lineWidth = CGFloat.random(in: 0.5...3)
+            ray.glowWidth = 25
+            ray.position = CGPoint(
+                x: CGFloat.random(in: -size.width...size.width),
+                y: -size.height
+            )
+            ray.alpha = 0
+            ray.zPosition = 20
+            ray.blendMode = .add
+            transitionContainer.addChild(ray)
+            
+            ray.run(SKAction.sequence([
+                SKAction.wait(forDuration: Double(i) * 0.1 + Double.random(in: 0...0.5)),
+                SKAction.group([
+                    SKAction.fadeAlpha(to: 0.7, duration: 0.2),
+                    SKAction.moveBy(x: 0, y: size.height * 2.5, duration: 1.0),
+                    SKAction.sequence([
+                        SKAction.wait(forDuration: 0.6),
+                        SKAction.fadeOut(withDuration: 0.4)
+                    ])
+                ]),
+                SKAction.removeFromParent()
+            ]))
+        }
+        
+        // Add aurora-like effect at the top
+        let aurora = SKShapeNode(rectOf: CGSize(width: size.width * 2, height: 200))
+        aurora.position = CGPoint(x: 0, y: size.height/2 - 100)
+        aurora.fillColor = SKColor(red: 0.2, green: 0.8, blue: 0.6, alpha: 0.05)
+        aurora.strokeColor = .clear
+        aurora.blendMode = .add
+        aurora.alpha = 0
+        aurora.zPosition = 25
+        transitionContainer.addChild(aurora)
+        
+        aurora.run(SKAction.sequence([
+            SKAction.wait(forDuration: 1.0),
+            SKAction.repeatForever(SKAction.sequence([
+                SKAction.fadeAlpha(to: 0.15, duration: 2.0),
+                SKAction.fadeAlpha(to: 0.05, duration: 2.0)
+            ]))
+        ]))
         
         // Main title
         let titleLabel = SKLabelNode(fontNamed: "AvenirNext-Heavy")
